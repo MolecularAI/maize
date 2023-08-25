@@ -1,0 +1,690 @@
+"""Utilities to execute external software."""
+
+from collections.abc import Callable, Sequence
+from dataclasses import dataclass, field
+from datetime import timedelta
+import logging
+from multiprocessing import get_context
+from pathlib import Path
+from queue import Queue
+import shlex
+import subprocess
+import sys
+from tempfile import mkdtemp
+import time
+from typing import TYPE_CHECKING, Any, Literal, cast
+from typing_extensions import Self
+
+from psij import Job, JobAttributes, JobExecutor, JobSpec, JobStatus, ResourceSpecV1
+
+from maize.utilities.utilities import make_list, unique_id
+
+if TYPE_CHECKING:
+    from maize.utilities.validation import Validator
+
+
+log = logging.getLogger("run")
+
+
+class ProcessError(Exception):
+    """Error called for failed commands."""
+
+
+# This is currently set to 'spawn' to avoid a bug in exaworks PSI/J.
+# Master versions of the latter have a fix now.
+DEFAULT_CONTEXT = "fork"
+
+
+def _format_command(result: subprocess.CompletedProcess[bytes] | subprocess.Popen[bytes]) -> str:
+    """Format a command from a completed process or ``Popen`` instance."""
+    return " ".join(cast(list[str], result.args))
+
+
+def _log_command_output(stdout: bytes | None, stderr: bytes | None) -> str:
+    """Write any command output to the log."""
+    msg = "Command output:\n"
+    if stdout is not None and len(stdout) > 0:
+        msg += "---------------- STDOUT ----------------\n"
+        msg += stdout.decode(errors="ignore") + "\n"
+        msg += "---------------- STDOUT ----------------\n"
+    if stderr is not None and len(stderr) > 0:
+        msg += "---------------- STDERR ----------------\n"
+        msg += stderr.decode(errors="ignore") + "\n"
+        msg += "---------------- STDERR ----------------\n"
+    return msg
+
+
+def _simple_run(command: list[str] | str) -> subprocess.CompletedProcess[bytes]:
+    """Run a command and return a `subprocess.CompletedProcess` instance."""
+    if isinstance(command, str):
+        command = shlex.split(command)
+
+    return subprocess.run(command, check=False, capture_output=True)
+
+
+def check_executable(command: list[str] | str) -> bool:
+    """Checks if a command can be run."""
+    exe = make_list(command)
+    try:
+        # We cannot use `CommandRunner` here, as initializing the Exaworks PSI/J job executor in
+        # the main process (where this code will be run, as we're checking if the nodes have all
+        # the required tools to start) will cause the single process reaper to lock up all child
+        # jobs. See this related bug: https://github.com/ExaWorks/psij-python/issues/387
+        res = _simple_run(exe)
+        res.check_returncode()
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        return False
+    return True
+
+
+def check_returncode(
+    result: subprocess.CompletedProcess[bytes],
+    raise_on_failure: bool = True,
+) -> None:
+    """Check the returncode of the process and raise or log a warning."""
+
+    # Raise the expected FileNotFoundError if the command couldn't be found (to mimic subprocess)
+    if result.returncode in (2, 127):
+        msg = f"Command {result.args[0]} not found"
+        if raise_on_failure:
+            raise FileNotFoundError(msg)
+        log.warning(msg)
+    elif result.returncode != 0:
+        msg = f"Command {_format_command(result)} failed with returncode {result.returncode}"
+        log.warning(_log_command_output(result.stdout, result.stderr))
+        if raise_on_failure:
+            raise ProcessError(msg)
+        log.warning(msg)
+
+
+def _split_multi(string: str, chars: str) -> list[str]:
+    """
+    Split string on multiple characters
+
+    Parameters
+    ----------
+    string
+        String to split
+    chars
+        Characters to split on
+
+    Returns
+    -------
+    list[str]
+        List of string splitting results
+
+    """
+    if not chars:
+        return [string]
+    splits = []
+    for chunk in string.split(chars[0]):
+        splits.extend(_split_multi(chunk, chars[1:]))
+    return splits
+
+
+def _parse_slurm_walltime(time_str: str) -> timedelta:
+    """
+    Parses a SLURM walltime string
+
+    Parameters
+    ----------
+    time_str
+        String with the `SLURM time format <https://slurm.schedmd.com/sbatch.html#OPT_time>`_.
+
+    Returns
+    -------
+    timedelta
+        Timedelta object with the parsed time interval
+
+    """
+    match _split_multi(time_str, "-:"):
+        case [days, hours, minutes, seconds]:
+            delta = timedelta(
+                days=int(days), hours=int(hours), minutes=int(minutes), seconds=int(seconds)
+            )
+        case [days, hours, minutes] if "-" in time_str:
+            delta = timedelta(days=int(days), hours=int(hours), minutes=int(minutes))
+        case [days, hours] if "-" in time_str:
+            delta = timedelta(days=int(days), hours=int(hours))
+        case [hours, minutes, seconds]:
+            delta = timedelta(hours=int(hours), minutes=int(minutes), seconds=int(seconds))
+        case [minutes, seconds]:
+            delta = timedelta(minutes=int(minutes), seconds=int(seconds))
+        case [minutes]:
+            delta = timedelta(minutes=int(minutes))
+    return delta
+
+
+# This would normally be part of `run_single_process`, but
+# pickling restrictions force us to place it at the top level
+def _wrapper(
+    func: Callable[[], Any], error_queue: "Queue[Exception]", *args: Any, **kwargs: Any
+) -> None:
+    try:
+        func(*args, **kwargs)
+    except Exception as err:  # pylint: disable=broad-except
+        error_queue.put(err)
+
+
+def run_single_process(
+    func: Callable[[], Any], name: str | None = None, executable: Path | None = None
+) -> None:
+    """
+    Runs a function in a separate process.
+
+    Parameters
+    ----------
+    func
+        Function to call in a separate process
+    name
+        Optional name of the function
+    executable
+        Optional python executable to use
+    """
+    ctx = get_context(DEFAULT_CONTEXT)
+
+    # In some cases we might need to change python environments to get the dependencies
+    exec_path = sys.executable if executable is None else executable.as_posix()
+    ctx.set_executable(exec_path)
+
+    # The only way to reliably get raised exceptions in the main process
+    # is by passing them through a shared queue and re-raising. So we just
+    # wrap the function of interest to catch any exceptions and pass them on
+    queue: "Queue[Exception]" = ctx.Queue()
+
+    proc = ctx.Process(  # type: ignore
+        target=_wrapper,
+        name=name,
+        args=(
+            func,
+            queue,
+        ),
+    )
+    proc.start()
+
+    # # Switch back to our regular python executable
+    # set_executable(current_exec)
+    proc.join(timeout=2.0)
+    if proc.is_alive():
+        proc.terminate()
+    while not queue.empty():
+        raise queue.get_nowait()
+
+
+@dataclass
+class ResourceManagerConfig:
+    """Configuration for job resource managers"""
+
+    system: Literal["slurm", "rp", "pbspro", "lsf", "flux", "cobalt", "local"] = "local"
+    max_jobs: int = 100
+    queue: str | None = None
+    project: str | None = None
+    launcher: str | None = None
+    walltime: str = "24:00:00"
+
+
+@dataclass
+class JobResourceConfig:
+    """Configuration for job resources"""
+
+    nodes: int | None = None
+    processes_per_node: int | None = None
+    processes: int | None = None
+    cores_per_process: int | None = None
+    gpus_per_process: int | None = None
+    exclusive_use: bool = True
+    walltime: str | None = None
+    custom_attributes: dict[str, Any] = field(default_factory=dict)
+
+
+class _JobCounterSemaphore:
+    def __init__(self, val: int = 0) -> None:
+        self.val = val
+
+
+class _JobHandler:
+    """Handles safe job cancellation in case something goes wrong"""
+
+    def __init__(self) -> None:
+        self._jobs: dict[str, Job] = {}
+
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(self, *args: Any) -> None:
+        while self._jobs:
+            _, job = self._jobs.popitem()
+            if not job.status.final:
+                job.cancel()
+
+    def add(self, job: Job) -> None:
+        """Register a job with the handler"""
+        self._jobs[job.id] = job
+
+
+class CommandRunnerPSIJ:
+    """
+    Command running utility based on PSI/J.
+
+    Instantiate with preferred options and use a `run` method with your command.
+
+    .. danger::
+       Due to a bug in Exaworks PSI/J, you should not instantiate this class in
+       the main process, as any child process job executions will hang. This is
+       due to all processes sharing a reaping thread, causing conflicts, see the
+       bug report `here <https://github.com/ExaWorks/psij-python/issues/387>`_.
+
+    Parameters
+    ----------
+    raise_on_failure
+        Whether to raise an exception on failure, or whether to just return `False`.
+    working_dir
+        The working directory to use for execution, will use the current one by default.
+    validators
+        One or more `Validator` instances that will be called on the result of the command.
+    prefer_batch
+        Whether to prefer running on a batch submission system such as SLURM, if available
+    rm_config
+        Configuration of the resource manager
+
+    """
+
+    @staticmethod
+    def _make_callback(count: _JobCounterSemaphore) -> Callable[[Job, JobStatus], None]:
+        def _callback(_: Job, status: JobStatus) -> None:
+            if status.final:
+                count.val -= 1
+
+        return _callback
+
+    @staticmethod
+    def _job_to_completed_process(job: Job) -> subprocess.CompletedProcess[bytes]:
+        """Converts a finished PSI/J job to a `CompletedProcess` instance"""
+
+        # Basically just for mypy
+        if (
+            job.spec is None
+            or job.spec.stderr_path is None
+            or job.spec.stdout_path is None
+            or job.spec.executable is None
+            or job.spec.arguments is None
+        ):
+            raise ProcessError("Job was not initialized correctly")
+
+        command = [job.spec.executable, *job.spec.arguments]
+        with job.spec.stdout_path.open("rb") as out, job.spec.stderr_path.open("rb") as err:
+            res = subprocess.CompletedProcess(
+                command,
+                # Exit code is 130 if we cancelled due to timeout
+                returncode=job.status.exit_code if job.status.exit_code is not None else 130,
+                stdout=out.read(),
+                stderr=err.read(),
+            )
+        return res
+
+    def __init__(
+        self,
+        raise_on_failure: bool = True,
+        working_dir: Path | None = None,
+        validators: Sequence["Validator"] | None = None,
+        prefer_batch: bool = False,
+        rm_config: ResourceManagerConfig | None = None,
+    ) -> None:
+        self.raise_on_failure = raise_on_failure
+        self.working_dir = working_dir if working_dir is not None else Path.cwd()
+        self.validators = validators or []
+        self.config = ResourceManagerConfig() if rm_config is None else rm_config
+
+        # We're going to be doing local execution most of the time,
+        # most jobs we run are going to be relatively short, and we'll
+        # already have a reservation for the main maize workflow job
+        system = "local"
+        if prefer_batch:
+            # FIXME check for any submission system
+            if check_executable("sinfo"):
+                system = self.config.system
+            elif self.config.system != "local":
+                log.warning(
+                    "'%s' was not found on your system, running locally", self.config.system
+                )
+        self._executor = JobExecutor.get_instance(system)
+
+    def validate(self, result: subprocess.CompletedProcess[bytes]) -> None:
+        """
+        Validate a process result.
+
+        Parameters
+        ----------
+        result
+            Process result to validate
+
+        Raises
+        ------
+        ProcessError
+            If any of the validators failed or the returncode was not zero
+
+        """
+
+        for validator in self.validators:
+            if not validator(result):
+                msg = (
+                    f"Validation failure for command '{_format_command(result)}' "
+                    f"with validator '{validator}'"
+                )
+                log.warning(_log_command_output(result.stdout, result.stderr))
+                if self.raise_on_failure:
+                    raise ProcessError(msg)
+                log.warning(msg)
+
+    def run_only(
+        self,
+        command: list[str] | str,
+        verbose: bool = False,
+        working_dir: Path | None = None,
+        command_input: str | None = None,
+        config: JobResourceConfig | None = None,
+        pre_execution: list[str] | str | None = None,
+        timeout: float | None = None,
+    ) -> subprocess.CompletedProcess[bytes]:
+        """
+        Run a command locally and block.
+
+        Parameters
+        ----------
+        command
+            Command to run as a single string, or a list of strings
+        verbose
+            If ``True`` will also log any STDOUT or STDERR output
+        working_dir
+            Optional working directory
+        command_input
+            Text string used as input for command
+        config
+            Resource configuration for jobs
+        pre_execution
+            Command to run directly before the main one
+        timeout
+            Maximum runtime for the command in seconds, or unlimited if ``None``
+
+        Returns
+        -------
+        subprocess.CompletedProcess[bytes]
+            Result of the execution, including STDOUT and STDERR
+
+        Raises
+        ------
+        ProcessError
+            If the returncode was not zero
+
+        """
+
+        job = self._create_job(
+            command,
+            working_dir=working_dir,
+            verbose=verbose,
+            command_input=command_input,
+            config=config,
+            pre_execution=pre_execution,
+        )
+
+        with _JobHandler() as hand:
+            self._executor.submit(job)
+            hand.add(job)
+            job.wait(timeout=timedelta(seconds=timeout) if timeout is not None else None)
+
+        result = self._job_to_completed_process(job)
+
+        check_returncode(result, raise_on_failure=self.raise_on_failure)
+        if verbose:
+            log.debug(_log_command_output(result.stdout, result.stderr))
+
+        return result
+
+    def run_validate(
+        self,
+        command: list[str] | str,
+        verbose: bool = False,
+        working_dir: Path | None = None,
+        command_input: str | None = None,
+        config: JobResourceConfig | None = None,
+        pre_execution: list[str] | str | None = None,
+        timeout: float | None = None,
+    ) -> subprocess.CompletedProcess[bytes]:
+        """
+        Run a command and validate.
+
+        Parameters
+        ----------
+        command
+            Command to run as a single string, or a list of strings
+        verbose
+            If ``True`` will also log any STDOUT or STDERR output
+        working_dir
+            Optional working directory
+        command_input
+            Text string used as input for command
+        config
+            Resource configuration for jobs
+        pre_execution
+            Command to run directly before the main one
+        timeout
+            Maximum runtime for the command in seconds, or unlimited if ``None``
+
+        Returns
+        -------
+        subprocess.CompletedProcess[bytes]
+            Result of the execution, including STDOUT and STDERR
+
+        Raises
+        ------
+        ProcessError
+            If any of the validators failed or the returncode was not zero
+
+        """
+
+        result = self.run_only(
+            command=command,
+            verbose=verbose,
+            working_dir=working_dir,
+            command_input=command_input,
+            config=config,
+            pre_execution=pre_execution,
+            timeout=timeout,
+        )
+        self.validate(result=result)
+        return result
+
+    # Convenience alias for simple calls to `run_validate`
+    run = run_validate
+
+    def run_parallel(
+        self,
+        commands: Sequence[list[str] | str],
+        verbose: bool = False,
+        n_jobs: int = 1,
+        validate: bool = False,
+        working_dirs: Sequence[Path | None] | None = None,
+        config: JobResourceConfig | None = None,
+        pre_execution: list[str] | str | None = None,
+        timeout: float | None = None,
+    ) -> list[subprocess.CompletedProcess[bytes]]:
+        """
+        Run multiple commands locally in parallel and block.
+
+        Parameters
+        ----------
+        commands
+            Commands to run as a list of single strings, or a list of lists
+        verbose
+            If ``True`` will also log any STDOUT or STDERR output
+        n_jobs
+            Number of processes to spawn at once
+        validate
+            Whether to validate the command execution
+        working_dirs
+            Directories to execute each command in
+        config
+            Resource configuration for jobs
+        pre_execution
+            Command to run directly before the main one
+        timeout
+            Maximum runtime for the command in seconds, or unlimited if ``None``
+
+        Returns
+        -------
+        list[subprocess.CompletedProcess[bytes]]
+            Result of the execution, including STDOUT and STDERR
+
+        Raises
+        ------
+        ProcessError
+            If the returncode was not zero
+
+        """
+        # Keeps track of completed jobs via a callback and a counter,
+        # and thus avoids using a blocking call to `wait` (or threads)
+        counter = _JobCounterSemaphore()
+        callback = self._make_callback(counter)
+        self._executor.set_job_status_callback(callback)
+
+        queue: Queue[tuple[list[str] | str, Path | None]] = Queue()
+        if working_dirs is None:
+            working_dirs = [None for _ in commands]
+        for command, work_dir in zip(commands, working_dirs):
+            queue.put((command, work_dir))
+
+        # If we're using a batch system we can submit as many jobs as we like,
+        # up to a reasonable maximum set in the system config
+        n_jobs = (
+            max(self.config.max_jobs, len(commands)) if self.config.system != "local" else n_jobs
+        )
+
+        jobs: list[Job] = []
+        with _JobHandler() as hand:
+            while not queue.empty():
+                current_batch: list[Job] = []
+                for _ in range(n_jobs):
+                    if queue.empty():
+                        break
+                    command, work_dir = queue.get()
+
+                    # We increment the counter for every submitted job,
+                    # the callback decrements it for each completed one
+                    counter.val += 1
+                    job = self._create_job(
+                        command,
+                        working_dir=work_dir,
+                        verbose=verbose,
+                        config=config,
+                        pre_execution=pre_execution,
+                    )
+                    hand.add(job)
+                    self._executor.submit(job)
+                    jobs.append(job)
+                    current_batch.append(job)
+
+                # Wait for this batch of jobs to complete
+                start = time.time()
+                while counter.val > 0:
+                    time.sleep(0.1)
+                    if timeout is not None and (time.time() - start) >= timeout:
+                        for job in current_batch:
+                            job.cancel()
+                            job.wait()
+                        break
+
+        # Collect all results
+        results: list[subprocess.CompletedProcess[bytes]] = []
+        for job in jobs:
+            result = self._job_to_completed_process(job)
+            check_returncode(result, raise_on_failure=self.raise_on_failure)
+            if verbose:
+                log.debug(_log_command_output(result.stdout, result.stderr))
+
+            if validate:
+                self.validate(result)
+            results.append(result)
+        return results
+
+    def _create_job(
+        self,
+        command: list[str] | str,
+        working_dir: Path | None = None,
+        verbose: bool = False,
+        command_input: str | None = None,
+        config: JobResourceConfig | None = None,
+        pre_execution: list[str] | str | None = None,
+    ) -> Job:
+        """Creates a PSI/J job description"""
+
+        # We can't fully rely on `subprocess.run()` here, so we split it ourselves
+        if isinstance(command, str):
+            command = shlex.split(command)
+
+        if verbose:
+            log.debug("Running command: %s", " ".join(command))
+
+        exe, *arguments = command
+
+        # General resource manager options, options that shouldn't change much from job to job
+        delta = _parse_slurm_walltime(self.config.walltime)
+        job_attr = JobAttributes(
+            queue_name=self.config.queue,
+            project_name=self.config.project,
+            duration=delta
+            if config is None or config.walltime is None
+            else _parse_slurm_walltime(config.walltime),
+            custom_attributes=None if config is None else config.custom_attributes,
+        )
+
+        # Resource configuration
+        if config is not None:
+            resource_attr = ResourceSpecV1(
+                node_count=config.nodes,
+                processes_per_node=config.processes_per_node,
+                process_count=config.processes,
+                cpu_cores_per_process=config.cores_per_process,
+                gpu_cores_per_process=config.gpus_per_process,
+                exclusive_node_use=config.exclusive_use,
+            )
+        else:
+            resource_attr = None
+
+        # Annoyingly, we can't access STDOUT / STDERR directly when
+        # using PSI/J, so we always have to create temporary files
+        base = Path(mkdtemp()) / f"job-{unique_id()}"
+        stdout = base.with_name(base.name + "-out")
+        stderr = base.with_name(base.name + "-err")
+
+        # Similarly, command inputs need to be written to a file and cannot be piped
+        stdin = None
+        if command_input is not None:
+            stdin = base.with_name(base.name + "-in")
+            with stdin.open("wb") as inp:
+                inp.write(command_input.encode())
+
+        # Pre-execution script, we generally avoid this but in some cases it can be required
+        pre_script = base.with_name(base.name + "-pre")
+        if pre_execution is not None:
+            if isinstance(pre_execution, str):
+                pre_execution = shlex.split(pre_execution)
+            with pre_script.open("w") as pre:
+                pre.write("#!/bin/bash\n")
+                pre.write(" ".join(pre_execution))
+
+        spec = JobSpec(
+            executable=exe,
+            arguments=arguments,
+            directory=working_dir,
+            stderr_path=stderr,
+            stdout_path=stdout,
+            stdin_path=stdin,
+            attributes=job_attr,
+            launcher=self.config.launcher,
+            resources=resource_attr,
+            pre_launch=pre_script if pre_execution is not None else None,
+        )
+        return Job(spec)
+
+
+CommandRunner = CommandRunnerPSIJ

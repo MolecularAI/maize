@@ -1,0 +1,23 @@
+level = 20
+name = "None"
+parameters = []
+[[nodes]]
+name = "a"
+fail_ok = false
+n_attempts = 1
+type = "A"
+status = "READY"
+
+[[nodes]]
+name = "term"
+fail_ok = false
+n_attempts = 1
+type = "Return"
+status = "READY"
+
+[[channels]]
+
+[channels.sending]
+a = "out"
+[channels.receiving]
+term = "input"

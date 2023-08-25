@@ -1,0 +1,18 @@
+name: maize
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.10
+  - toml>=0.10.2
+  - yaml>=0.2.5
+  - dill>=0.3.6
+  - networkx>=3.1
+  - mypy>=1.2.0
+  - graphviz>=8.0.3
+  - beartype>=0.13.1
+  - pip>=20.0
+  - pip:
+    - psij-python>=0.9.0
+    - graphviz>=8.0.3
+    - git+ssh://git@github.com/molecularai/maize.git
