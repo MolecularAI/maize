@@ -12,7 +12,17 @@ not be used directly.
 import logging
 from multiprocessing import get_context
 from pathlib import Path
-from typing import TYPE_CHECKING, Optional, Any, ClassVar, TypeAlias, Union, cast
+from typing import (
+    TYPE_CHECKING,
+    Optional,
+    Any,
+    ClassVar,
+    TypeAlias,
+    Union,
+    Literal,
+    cast,
+    get_origin,
+)
 from typing_extensions import TypedDict
 
 from maize.core.interface import (
@@ -27,6 +37,7 @@ from maize.core.interface import (
     Parameter,
     MultiPort,
 )
+import maize.core.interface as _in
 from maize.core.runtime import Status, StatusHandler, StatusUpdate
 from maize.utilities.execution import DEFAULT_CONTEXT
 from maize.utilities.resources import Resources, cpu_count, gpu_count
@@ -152,6 +163,50 @@ class Component:
                 if line:
                     return line.lstrip()
         return ""
+
+    @classmethod
+    def get_interfaces(
+        cls, kind: Literal["input", "output", "parameter"] | None = None
+    ) -> set[str]:
+        """
+        Returns all interfaces available to the node.
+
+        Parameters
+        ----------
+        kind
+            Kind of interface to retrieve
+
+        Returns
+        -------
+        set[str]
+            Interface names
+
+        """
+        inter = set()
+        for name, attr in (cls.__dict__ | cls.__annotations__).items():
+            match get_origin(attr), kind:
+                case (_in.Input | _in.MultiInput), "input" | None:
+                    inter.add(name)
+                case (_in.Output | _in.MultiOutput), "output" | None:
+                    inter.add(name)
+                case (_in.Parameter | _in.MultiParameter | _in.FileParameter), "parameter" | None:
+                    inter.add(name)
+        return inter
+
+    @classmethod
+    def get_inputs(cls) -> set[str]:
+        """Returns all inputs available to the node."""
+        return cls.get_interfaces(kind="input")
+
+    @classmethod
+    def get_outputs(cls) -> set[str]:
+        """Returns all outputs available to the node."""
+        return cls.get_interfaces(kind="output")
+
+    @classmethod
+    def get_parameters(cls) -> set[str]:
+        """Returns all parameters available to the node."""
+        return cls.get_interfaces(kind="parameter")
 
     @staticmethod
     def get_available_nodes() -> set[type["Component"]]:
