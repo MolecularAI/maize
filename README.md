@@ -19,15 +19,15 @@ from maize.core.workflow import Workflow
 
 # Define the nodes
 class Example(Node):
-    data = Parameter[str](default="Hello")
-    out = Output[str]()
+    data: Parameter[str] = Parameter(default="Hello")
+    out: Output[str] = Output()
 
     def run(self) -> None:
         self.out.send(self.data.value)
 
 
 class ConcatAndPrint(Node):
-    inp = MultiInput[str]()
+    inp: MultiInput[str] = MultiInput()
 
     def run(self) -> None:
         result = " ".join(inp.receive() for inp in self.inp)
