@@ -36,8 +36,8 @@ This is the documentation for *maize* |version|.
    :maxdepth: 1
    :caption: External
 
-   Steps <https://molecularai.github.io/maize-contrib/doc/steps/index.html>
-   Utilities <https://molecularai.github.io/maize-contrib/doc/utilities.html>
+   Steps <https://molecularai.github.io/maize-contrib/steps/index.html>
+   Utilities <https://molecularai.github.io/maize-contrib/utilities.html>
 
 Installation
 ------------

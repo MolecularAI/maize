@@ -3,7 +3,7 @@ Quickstart
 
 Installation
 ------------
-If you plan on using `maize-contrib <https://github.com/MolecularAI/maize-contrib>`_, then you should just follow the `installation instructions <https://molecularai.github.io/maize-contrib/doc/index.html#installation>`_ for the latter. Maize will be installed automatically as a dependency.
+If you plan on using `maize-contrib <https://github.com/MolecularAI/maize-contrib>`_, then you should just follow the `installation instructions <https://molecularai.github.io/maize-contrib/index.html#installation>`_ for the latter. Maize will be installed automatically as a dependency.
 
 Note that `maize-contrib <https://github.com/MolecularAI/maize-contrib>`_ requires several additional domain-specific packages, and you should use its own environment file instead if you plan on using these extensions.
 
