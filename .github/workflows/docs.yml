@@ -15,7 +15,7 @@ jobs:
             bash -s -- --batch
         conda env create -f env-dev.yml
         conda run --name maize-dev pip install .
-        conda run --name maize-dev sphinx-build -b html . _build/html
+        conda run --name maize-dev sphinx-build -b html -c docs/conf.py docs docs/_build/html
     - name: deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
