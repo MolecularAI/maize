@@ -30,8 +30,10 @@ class ProcessError(Exception):
     """Error called for failed commands."""
 
 
-# This is currently set to 'spawn' to avoid a bug in exaworks PSI/J.
-# Master versions of the latter have a fix now.
+# Maize can in theory use either 'fork' or 'spawn' for process handling. However some external
+# dependencies (notably PSI/J) can cause subtle problems when changing this setting due to their
+# own use of threading / multiprocessing. See this issue for more details:
+# https://github.com/ExaWorks/psij-python/issues/387
 DEFAULT_CONTEXT = "fork"
 
 
@@ -63,12 +65,25 @@ def _simple_run(command: list[str] | str) -> subprocess.CompletedProcess[bytes]:
 
 
 def check_executable(command: list[str] | str) -> bool:
-    """Checks if a command can be run."""
+    """
+    Checks if a command can be run.
+
+    Parameters
+    ----------
+    command
+        Command to execute
+
+    Returns
+    -------
+    bool
+        ``True`` if running the command was successfull, ``False`` otherwise
+
+    """
     exe = make_list(command)
     try:
         # We cannot use `CommandRunner` here, as initializing the Exaworks PSI/J job executor in
         # the main process (where this code will be run, as we're checking if the nodes have all
-        # the required tools to start) will cause the single process reaper to lock up all child
+        # the required tools to start) may cause the single process reaper to lock up all child
         # jobs. See this related bug: https://github.com/ExaWorks/psij-python/issues/387
         res = _simple_run(exe)
         res.check_returncode()
@@ -81,11 +96,21 @@ def check_returncode(
     result: subprocess.CompletedProcess[bytes],
     raise_on_failure: bool = True,
 ) -> None:
-    """Check the returncode of the process and raise or log a warning."""
+    """
+    Check the returncode of the process and raise or log a warning.
+
+    Parameters
+    ----------
+    result
+        Completed process to check
+    raise_on_failure
+        Whether to raise an exception on failure
+
+    """
 
     # Raise the expected FileNotFoundError if the command couldn't be found (to mimic subprocess)
-    if result.returncode in (2, 127):
-        msg = f"Command {result.args[0]} not found"
+    if result.returncode == 127:
+        msg = f"Command {result.args[0]} not found (returncode {result.returncode})"
         if raise_on_failure:
             raise FileNotFoundError(msg)
         log.warning(msg)
@@ -190,7 +215,7 @@ def run_single_process(
     # The only way to reliably get raised exceptions in the main process
     # is by passing them through a shared queue and re-raising. So we just
     # wrap the function of interest to catch any exceptions and pass them on
-    queue: "Queue[Exception]" = ctx.Queue()
+    queue = ctx.Queue()
 
     proc = ctx.Process(  # type: ignore
         target=_wrapper,
@@ -202,8 +227,6 @@ def run_single_process(
     )
     proc.start()
 
-    # # Switch back to our regular python executable
-    # set_executable(current_exec)
     proc.join(timeout=2.0)
     if proc.is_alive():
         proc.terminate()
@@ -232,7 +255,7 @@ class JobResourceConfig:
     processes: int | None = None
     cores_per_process: int | None = None
     gpus_per_process: int | None = None
-    exclusive_use: bool = True
+    exclusive_use: bool = False
     walltime: str | None = None
     custom_attributes: dict[str, Any] = field(default_factory=dict)
 
@@ -269,10 +292,10 @@ class CommandRunnerPSIJ:
     Instantiate with preferred options and use a `run` method with your command.
 
     .. danger::
-       Due to a bug in Exaworks PSI/J, you should not instantiate this class in
-       the main process, as any child process job executions will hang. This is
-       due to all processes sharing a reaping thread, causing conflicts, see the
-       bug report `here <https://github.com/ExaWorks/psij-python/issues/387>`_.
+       It is not recommended to instantiate this class in the main process
+       (i.e. outside of your nodes ``run()`` and ``prepare()`` methods).  This is due to
+       `possible subtle threading problems <https://github.com/ExaWorks/psij-python/issues/387>`_
+       from the interplay of maize and PSI/J.
 
     Parameters
     ----------
@@ -504,6 +527,7 @@ class CommandRunnerPSIJ:
         n_jobs: int = 1,
         validate: bool = False,
         working_dirs: Sequence[Path | None] | None = None,
+        command_inputs: Sequence[str | None] | None = None,
         config: JobResourceConfig | None = None,
         pre_execution: list[str] | str | None = None,
         timeout: float | None = None,
@@ -523,6 +547,8 @@ class CommandRunnerPSIJ:
             Whether to validate the command execution
         working_dirs
             Directories to execute each command in
+        command_input
+            Text string used as input for each command, or ``None``
         config
             Resource configuration for jobs
         pre_execution
@@ -547,11 +573,13 @@ class CommandRunnerPSIJ:
         callback = self._make_callback(counter)
         self._executor.set_job_status_callback(callback)
 
-        queue: Queue[tuple[list[str] | str, Path | None]] = Queue()
+        queue: Queue[tuple[list[str] | str, Path | None, str | None]] = Queue()
         if working_dirs is None:
             working_dirs = [None for _ in commands]
-        for command, work_dir in zip(commands, working_dirs):
-            queue.put((command, work_dir))
+        if command_inputs is None:
+            command_inputs = [None for _ in commands]
+        for command, work_dir, cmd_input in zip(commands, working_dirs, command_inputs):
+            queue.put((command, work_dir, cmd_input))
 
         # If we're using a batch system we can submit as many jobs as we like,
         # up to a reasonable maximum set in the system config
@@ -566,7 +594,7 @@ class CommandRunnerPSIJ:
                 for _ in range(n_jobs):
                     if queue.empty():
                         break
-                    command, work_dir = queue.get()
+                    command, work_dir, cmd_input = queue.get()
 
                     # We increment the counter for every submitted job,
                     # the callback decrements it for each completed one
@@ -575,11 +603,14 @@ class CommandRunnerPSIJ:
                         command,
                         working_dir=work_dir,
                         verbose=verbose,
+                        command_input=cmd_input,
                         config=config,
                         pre_execution=pre_execution,
                     )
                     hand.add(job)
                     self._executor.submit(job)
+                    if self._executor.name != "local":
+                        log.info("Submitted job %s", job)
                     jobs.append(job)
                     current_batch.append(job)
 

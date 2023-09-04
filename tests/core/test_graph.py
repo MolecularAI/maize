@@ -141,7 +141,7 @@ class Test_Graph_init:
         assert nested_graph.nodes.keys() == graph.nodes.keys()
         assert nested_graph.channels.keys() == graph.channels.keys()
 
-    @pytest.mark.parametrize("suffix,length", [("json", 49), ("yml", 45), ("toml", 33)])
+    @pytest.mark.parametrize("suffix,length", [("json", 49), ("yml", 48), ("toml", 33)])
     def test_to_file(self, two_node_graph, tmp_path, suffix, length):
         file = tmp_path / f"two-node.{suffix}"
         two_node_graph.to_file(file)
@@ -181,7 +181,7 @@ class Test_Graph_init:
         file = tmp_path / "checkpoint-nested.yaml"
         nested_graph.to_checkpoint(file)
         assert file.exists()
-        assert len(file.read_text().split("\n")) == 103
+        assert len(file.read_text().split("\n")) == 106
 
     def test_from_checkpoint_nested(
         self, shared_datadir, example_a, example_b, subgraph, subsubgraph):
@@ -403,6 +403,21 @@ class Test_Graph_build:
         g.connect(a.out, t.inp)
         g.combine_parameters(a.val, name="val")
         assert "val" in g.parameters
+
+    def test_map_subgraph(self, subsubgraph):
+        g = Workflow()
+        a = g.add(subsubgraph, "a")
+        t = g.add(Return[int], "t")
+        g.connect(a.out, t.inp)
+        g.combine_parameters(a.val, name="val")
+        assert "val" in g.parameters
+
+    def test_map_subgraph_multi(self, subgraph_multi):
+        g = Workflow()
+        a = g.add(subgraph_multi, "a")
+        t = g.add(Return[int], "t")
+        g.connect(a.out, t.inp)
+        assert "out" in a.outputs
 
     def test_build(self, newgraph, newgraph2):
         g = Workflow()

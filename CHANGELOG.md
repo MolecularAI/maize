@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## Version 0.4.1
+### Features
+- Added command inputs to node `run_multi` method
+- `FileChannel` can now send and receive dicts of files
+
+### Changes
+- Changed `exclusive_use` for batch submission to `False` by default
+- Changed required Python to 3.10 to avoid odd beartype behaviour
+- Documentation cleanup
+
+### Fixes
+- Fixed missing documentation propagation for inherited nodes
+- Fixed `MultiPort` not being mapped properly in subgraphs
+- Removed weird error code check
+- Added missing `default` property to MultiInput
+- Fixed misbehaving subgraph looping test
+
 ## Version 0.4.0
 ### Breaking changes
 - Refactored looping system, only way to loop a node now is to use `loop=True`

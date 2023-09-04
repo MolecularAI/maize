@@ -26,7 +26,8 @@ def parallel(
     **kwargs: Any,
 ) -> type[Graph]:
     """
-    Workflow macro to parallelize a node.
+    Workflow macro to parallelize a node. The created subgraph
+    will have the exact same interface as the wrapped node.
 
     Parameters
     ----------
@@ -139,6 +140,11 @@ def lambda_node(func: Callable[[Any], Any]) -> type[Node]:
     type[Node]
         Custom lambda wrapper node
 
+    Examples
+    --------
+    >>> lam = flow.add(lambda_node(lambda x: 2 * x))
+    >>> flow.connect_all((first.out, lam.inp), (lam.out, last.inp))
+
     """
     new_name = f"lambda-{unique_id()}"
 
@@ -209,7 +215,8 @@ def function_to_node(func: Callable[..., Any]) -> type[Node]:
 
     def run(self: Node) -> None:
         assert hasattr(self, "out")
-        args = [inp.receive() for inp in self.inputs.values()]
+        # Inputs will not contain MultiInput in this context, so this is safe
+        args = [inp.receive() for inp in self.inputs.values()]  # type: ignore
         kwargs = {
             name: param.value
             for name, param in self.parameters.items()

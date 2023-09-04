@@ -7,7 +7,7 @@ maize is a graph-based workflow manager for computational chemistry pipelines.
 
 # pylint: disable=import-outside-toplevel, unused-import
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 import argparse
 from contextlib import suppress

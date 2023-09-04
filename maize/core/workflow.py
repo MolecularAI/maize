@@ -66,7 +66,6 @@ if TYPE_CHECKING:
 TIME_STEP_SEC = 0.1
 CHECKPOINT_INTERVAL_MIN = 15
 STATUS_INTERVAL_MIN = 0.5
-_CALLABLE_TYPES = int | float | complex | str | bytes
 
 T = TypeVar("T")
 
@@ -309,12 +308,10 @@ class Workflow(Graph, register=False):
         ----------
         file
             File in JSON, YAML, or TOML format
-        config_file
-            Optional path to a maize configuration file
 
         Returns
         -------
-        Graph
+        Workflow
             The complete graph with all connections
 
         Raises
@@ -534,14 +531,26 @@ class Workflow(Graph, register=False):
 
     def add_arguments(self, parser: _A) -> _A:
         """
-        Create a customized argument parser for
-        the workflow and any exposed parameters.
+        Adds custom arguments to an existing parser for workflow parameters
+
+        Parameters
+        ----------
+        parser
+            Pre-initialized parser or group
 
         Returns
         -------
-        argparse.ArgumentParser
+        argparse.ArgumentParser | argparse._ArgumentGroup
             An parser instance that can be used to read additional
             commandline arguments specific to the workflow
+
+        See Also
+        --------
+        Workflow.update_with_args
+            Sets up a parser for the workflow, uses `add_arguments` to update it,
+            and parses all arguments with updated parameters for the workflow
+        Workflow.update_settings_with_args
+            Updates the workflow with non-parameter settings
 
         """
         for name, param in self.all_parameters.items():
@@ -614,6 +623,8 @@ class Workflow(Graph, register=False):
         ----------
         extra_options
             List of option strings, i.e. the output of ``parse_args``
+        parser
+            Optional parser to reuse
 
         Raises
         ------
@@ -676,8 +687,9 @@ class Workflow(Graph, register=False):
         logging process and general message queue and then starts the `execute`
         methods of all nodes. Any node may at some point signal for the full graph
         to be shut down, for example after a failure. Normal termination of a node
-        is however signalled by an `run.ExecutionSummary` instance. Any exceptions raised
-        in a node are passed through the message queue and re-raised as a `run.NodeException`.
+        is however signalled by an `runtime.StatusUpdate` instance with finished
+        status. Any exceptions raised in a node are passed through the message queue
+        and re-raised as a `runtime.NodeException`.
 
         Raises
         ------
@@ -686,7 +698,7 @@ class Workflow(Graph, register=False):
 
         """
         # Import version here to avoid circular import
-        from maize.maize import __version__
+        from maize.maize import __version__  # pylint: disable=import-outside-toplevel
 
         timer = Timer()
         # We only know about the logfile now, so we can set all node

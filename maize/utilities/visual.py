@@ -139,7 +139,7 @@ def nested_graphviz(
             _dot.node(unique_name, label=name, color=color)
 
     for (*out_path, out_port_name), (*inp_path, inp_port_name) in flow.channels:
-        root = cast("Graph", flow.root)
+        root = flow.root
         out = root.get_port(*out_path, out_port_name)
         inp = root.get_port(*inp_path, inp_port_name)
         dtype_label = _pprint_dtype(out.datatype)

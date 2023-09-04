@@ -1,10 +1,10 @@
 """
 Node
 ----
-Nodes are the individual components of workflow graphs and encapsulate arbitrary
+Nodes are the individual atomic components of workflow graphs and encapsulate arbitrary
 computational behaviour. They communicate with other nodes and the environment
 only through ports, and expose parameters to the user. Custom behaviour is
-implemented by subclassing and defining the `Node.build` and `Node.run` methods.
+implemented by subclassing and defining the `Node.run` method.
 
 """
 
@@ -20,7 +20,7 @@ import subprocess
 import sys
 import time
 import traceback
-from typing import Any
+from typing import Any, Optional, TYPE_CHECKING
 
 from maize.core.component import Component
 from maize.core.interface import (
@@ -48,6 +48,9 @@ from maize.utilities.utilities import (
     set_environment,
 )
 from maize.utilities.validation import Validator
+
+if TYPE_CHECKING:
+    from maize.core.graph import Graph
 
 
 log = logging.getLogger("build")
@@ -77,6 +80,18 @@ class Node(Component, Runnable, register=False):
         Number of attempts at executing the `run()` method
     level
         Logging level, if not given or ``None`` will use the parent logging level
+    cleanup_temp
+        Whether to remove any temporary directories after completion
+    resume
+        Whether to resume from a previous checkpoint
+    logfile
+        File to output all log messages to, defaults to STDOUT
+    max_cpus
+        Maximum number of CPUs to use, defaults to the number of available cores in the system
+    max_gpus
+        Maximum number of GPUs to use, defaults to the number of available GPUs in the system
+    loop
+        Whether to run the `run` method in a loop, as opposed to a single time
     initial_status
         The initial status of the node, will be ``NOT_READY`` by default, but
         can be set otherwise to indicate that the node should not be run.
@@ -96,8 +111,7 @@ class Node(Component, Runnable, register=False):
     Subclassing can be done the following way:
 
     >>> class Foo(Node):
-    ...     def build(self):
-    ...         self.out = self.add_output("out", description="Example output")
+    ...     out: Output[int] = Output()
     ...
     ...     def run(self):
     ...         self.out.send(42)
@@ -132,11 +146,35 @@ class Node(Component, Runnable, register=False):
 
     def __init__(
         self,
+        parent: Optional["Graph"] = None,
+        name: str | None = None,
+        description: str | None = None,
+        fail_ok: bool = False,
+        n_attempts: int = 1,
+        level: int | str | None = None,
+        cleanup_temp: bool = True,
+        resume: bool = False,
+        logfile: Path | None = None,
+        max_cpus: int | None = None,
+        max_gpus: int | None = None,
+        loop: bool | None = None,
         max_loops: int = -1,
         initial_status: Status = Status.NOT_READY,
-        **kwargs: Any,
-    ):
-        super().__init__(**kwargs)
+    ) -> None:
+        super().__init__(
+            parent=parent,
+            name=name,
+            description=description,
+            fail_ok=fail_ok,
+            n_attempts=n_attempts,
+            level=level,
+            cleanup_temp=cleanup_temp,
+            resume=resume,
+            logfile=logfile,
+            max_cpus=max_cpus,
+            max_gpus=max_gpus,
+            loop=loop,
+        )
         self.status = initial_status
 
         # Run loops a maximum number of times, mostly to simplify testing
@@ -165,11 +203,6 @@ class Node(Component, Runnable, register=False):
         """
         Builds the node by instantiating all interfaces from descriptions.
 
-        If the user wishes to override the method to implement more custom
-        build logic they can use the `add_input` and `add_output` commands
-        to create named input and output ports, as well as `add_parameter`
-        to add custom parameters.
-
         Examples
         --------
         >>> class Foo(Node):
@@ -194,7 +227,7 @@ class Node(Component, Runnable, register=False):
         Raises
         ------
         NodeBuildException
-            If `build` didn't declare at least one port
+            If the node didn't declare at least one port
 
         """
         if len(self.inputs) == 0 and len(self.outputs) == 0:
@@ -204,12 +237,30 @@ class Node(Component, Runnable, register=False):
             self.status = Status.READY
 
     def check_dependencies(self) -> None:
-        """Check if all node dependencies are met"""
+        """
+        Check if all node dependencies are met by running the `prepare` method
+
+        Raises
+        ------
+        NodeBuildException
+            If required callables were not found
+        ImportError
+            If required python packages were not found
+
+        """
         log.debug("Checking if required dependencies are available for '%s'...", self.name)
         run_single_process(self.prepare, name=self.name, executable=self.python.filepath)
 
     def check_parameters(self) -> None:
-        """Check if all required node parameters are set"""
+        """
+        Check if all required node parameters are set
+
+        Raises
+        ------
+        NodeBuildException
+            If parameters were not set
+
+        """
         for name, param in self.parameters.items():
             if not param.is_set and not param.optional:
                 raise NodeBuildException(
@@ -261,6 +312,16 @@ class Node(Component, Runnable, register=False):
         ProcessError
             If any of the validators failed or the returncode was not zero
 
+        Examples
+        --------
+        To run a single command:
+
+        >>> self.run_command("echo foo", validators=[SuccessValidator("foo")])
+
+        To run on a batch system, if configured:
+
+        >>> self.run_command("echo foo", batch_options=JobResourceConfig(nodes=1))
+
         """
         self.status = Status.WAITING_FOR_COMMAND
         cmd = CommandRunner(
@@ -288,6 +349,7 @@ class Node(Component, Runnable, register=False):
         self,
         commands: Sequence[str | list[str]],
         working_dirs: Sequence[Path] | None = None,
+        command_inputs: Sequence[str | None] | None = None,
         validators: Sequence[Validator] | None = None,
         verbose: bool = False,
         raise_on_failure: bool = True,
@@ -303,11 +365,13 @@ class Node(Component, Runnable, register=False):
         ----------
         commands
             Commands to run as a list of strings, or a nested list of strings
+        working_dirs
+            Working directories for each command
+        command_inputs
+            Text string used as input for each command
         validators
             One or more `Validator` instances that will
             be called on the result of the command.
-        working_dirs
-            Working directories for each command
         verbose
             If ``True`` will also log any STDOUT or STDERR output
         raise_on_failure
@@ -333,6 +397,16 @@ class Node(Component, Runnable, register=False):
         ProcessError
             If any of the validators failed or a returncode was not zero
 
+        Examples
+        --------
+        To run multiple commands, but only two at a time:
+
+        >>> self.run_multi(["echo foo", "echo bar", "echo baz"], n_jobs=2)
+
+        To run on a batch system, if configured (note that batch settings are per-command):
+
+        >>> self.run_command(["echo foo", "echo bar"], batch_options=JobResourceConfig(nodes=1))
+
         """
         self.status = Status.WAITING_FOR_COMMAND
         batch = batch_options is not None or self.batch_options.is_set
@@ -354,6 +428,7 @@ class Node(Component, Runnable, register=False):
             res = cmd.run_parallel(
                 commands=commands,
                 working_dirs=working_dirs,
+                command_inputs=command_inputs,
                 verbose=verbose,
                 n_jobs=n_jobs,
                 validate=True,
@@ -366,8 +441,16 @@ class Node(Component, Runnable, register=False):
 
     def prepare(self) -> None:
         """
-        Prepares the execution environment by loading appropriate
-        modules and setting environment variables.
+        Prepares the execution environment for `run`.
+
+        Performs the following:
+
+        * Changing the python environment, if required
+        * Setting of environment variables
+        * Setting of parameters from the config
+        * Loading LMOD modules
+        * Importing python packages listed in `required_packages`
+        * Checking if software in `required_callables` is available
 
         """
         # Change environment based on python executable set by `RunPool`
@@ -428,11 +511,6 @@ class Node(Component, Runnable, register=False):
     def execute(self) -> None:
         """
         This is the main entrypoint for node execution.
-
-        Can be overridden by the user, but it needs to handle logging,
-        and most importantly clean process and channel shutdown. If you
-        don't know what you're doing you shouldn't touch this and override
-        the higher-level `run` instead, which gets called by this function.
 
         Raises
         ------
@@ -526,8 +604,7 @@ class Node(Component, Runnable, register=False):
 
         It should be overridden by the user to provide custom node functionality,
         and should return normally at completion. Exception handling, log message passing,
-        and channel management are handled by the wrapping `execute` method. If you need
-        to mess with those (not recommended), you will need to override `execute`.
+        and channel management are handled by the wrapping `execute` method.
 
         Examples
         --------
@@ -541,9 +618,10 @@ class Node(Component, Runnable, register=False):
 
     def _loop(self, step: float = 0.5) -> Generator[None, None, None]:
         """
-        Allows continuous looping of the main routine. Use this function
-        in a while loop, it handles graceful shutdown of the node
-        and checks for changes in the run conditions.
+        Allows continuous looping of the main routine, it handles graceful
+        shutdown of the node and checks for changes in the run conditions.
+        Do not use this function directly, instead pass ``loop=True`` to
+        the component constructor.
 
         Parameters
         ----------
@@ -554,18 +632,6 @@ class Node(Component, Runnable, register=False):
         -------
         Generator[None, None, None]
             Generator allowing infinite looping
-
-        Examples
-        --------
-        This generator is useful for creating nodes performing
-        some kind of continuous processing:
-
-        >>> def run(self):
-        ...     for _ in self.loop():
-        ...         if self.inp.ready():
-        ...             val = self.inp.receive()
-        ...             new = do_something(val)
-        ...             self.out.send(new)
 
         """
         i = 0
@@ -677,4 +743,4 @@ class LoopedNode(Node):
     def __init__(
         self, max_loops: int = -1, initial_status: Status = Status.NOT_READY, **kwargs: Any
     ):
-        super().__init__(max_loops, initial_status, **kwargs, loop=True)
+        super().__init__(max_loops=max_loops, initial_status=initial_status, **kwargs, loop=True)

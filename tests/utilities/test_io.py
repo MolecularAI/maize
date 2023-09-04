@@ -56,8 +56,8 @@ def test_linktree(files, tmp_path):
         file.parent.mkdir(parents=True, exist_ok=True)
         file.touch()
 
-    res = sendtree(files, tmp_path, mode="link")
-    for file in res:
+    res = sendtree({i: file for i, file in enumerate(files)}, tmp_path, mode="link")
+    for file in res.values():
         assert (tmp_path / file).exists()
         assert (tmp_path / file).is_symlink()
 

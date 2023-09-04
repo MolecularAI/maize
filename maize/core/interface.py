@@ -126,6 +126,7 @@ class Interface(Generic[T]):
         library and thus not always usable for checks with ``isinstance()``
 
     """
+    _TInter = TypeVar("_TInter", bound="Interface[Any]")
 
     name: str
     parent: "Component"
@@ -136,8 +137,8 @@ class Interface(Generic[T]):
     _args: tuple[Any, ...]
     _kwargs: dict[str, Any]
 
+    # Where to place the interface in the parent component
     _target: ClassVar[str]
-    _TInter = TypeVar("_TInter", bound="Interface[Any]")
 
     # See comment in `build`, this is for the typechecker
     __orig_class__: ClassVar[Any]
@@ -191,7 +192,7 @@ class Interface(Generic[T]):
 
         Returns
         -------
-        Self[T]
+        _TInter
             Copy of the current instance, with references to the name and the parent
 
         """
@@ -272,6 +273,8 @@ class Parameter(Interface[T]):
         Allows specifying a read-only file as a parameter
     Parameter
         Allows specifying any data value as a parameter
+    Flag
+        Alias for boolean parameters
 
     """
 
@@ -320,11 +323,7 @@ class Parameter(Interface[T]):
 
     def set(self, value: T) -> None:
         """
-        Set the parameter.
-
-        Will typically not be called directly, but by the `add` method
-        of the associated class and the constructor of the node, or
-        with the `update_parameters` graph method.
+        Set the parameter to a specified value.
 
         Parameters
         ----------
@@ -335,6 +334,17 @@ class Parameter(Interface[T]):
         ------
         ValueError
             If the datatype doesn't match with the parameter type
+
+        Examples
+        --------
+        >>> foo.val.set(42)
+
+        See Also
+        --------
+        graph.Graph.add
+            Allows setting parameters at the point of node addition
+        component.Component.update_parameters
+            Sets multiple parameters over a node, graph, or workflow at once
 
         """
         if not self.check(value):
@@ -414,6 +424,9 @@ class MultiParameter(Parameter[T]):
     processing instead, subclass `MultiParameter` and overwrite the
     `MultiParameter.set` method.
 
+    Do not use this class directly, instead make use of the
+    :meth:`maize.core.graph.Graph.combine_parameters` method.
+
     Parameters
     ----------
     default
@@ -428,6 +441,12 @@ class MultiParameter(Parameter[T]):
         Name of the parameter
     parent
         Parent component
+
+    See Also
+    --------
+    graph.Graph.combine_parameters
+        Uses `MultiParameter` in the background to combine multiple parameters
+        from separate nodes into a single parameter for a subgraph.
 
     """
 
@@ -705,7 +724,8 @@ class Input(Port[T]):
 
     An input port can either be connected to another node's output
     port to dynamically receive data, or set to a value (with optional
-    default) before workflow execution to obtain a static value.
+    default) before workflow execution to obtain a static value,
+    making it behave analogously to `Parameter`.
 
     Parameters
     ----------
@@ -724,6 +744,11 @@ class Input(Port[T]):
         is closed by a neighbouring process, the current node will not shutdown.
     mode
         Whether to ``'link'``, ``'move'`` or ``'copy'`` (default) files.
+    cached
+        If ``True``, will cache the latest received value and immediately return
+        this value when calling `receive` while the channel is empty. This is useful
+        in cases where a node will run in a loop, but some inputs stay constant, as
+        those constant inputs will only need to receive a value a single time.
 
     Attributes
     ----------
@@ -1256,6 +1281,17 @@ class MultiInput(MultiPort[T]):
     def __lshift__(self, other: Union[Output[T], "MultiOutput[T]"]) -> None:
         if self.parent.parent is not None:
             self.parent.parent.connect(receiving=self, sending=other)
+
+    @property
+    def default(self) -> T | None:
+        """Provides the default value, if available"""
+        return self._ports[0].default
+
+    def set(self, value: T) -> None:
+        """Set unconnected ports to a specified value"""
+        for port in self._ports:
+            if not Port.is_connected(port):
+                port.set(value)
 
     def dump(self) -> list[list[T]]:
         """Dump any data contained in any of the inputs."""

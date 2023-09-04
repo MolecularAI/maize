@@ -1,11 +1,20 @@
 """
 Component
 ---------
-Provides a component class acting as the base for a graph or a component thereof.
+Provides a component class acting as the base for a graph or a component (node) thereof.
 
 `Component` is used as a base class for both `Node` and `Graph` and represents a
 hierarchical component with a ``parent`` (if it's not the root node). It should
-not be used directly.
+not be used directly. The workflow is internally represented as a tree, with the
+`Workflow` representing the root node owning all other nodes. Leaf nodes are termed
+`Node` and represent atomic workflow steps. Nodes with branches are (Sub-)`Graph`s,
+as they contain multiple nodes, but expose the same interface that a would:
+
+          Workflow
+          /      \
+      Subgraph   Node
+      /     \
+    Node   Node
 
 """
 
@@ -84,14 +93,23 @@ class Component:
         Maximum number of CPUs to use, defaults to the number of available cores in the system
     max_gpus
         Maximum number of GPUs to use, defaults to the number of available GPUs in the system
+    loop
+        Whether to run the `run` method in a loop, as opposed to a single time
 
     See Also
     --------
-    node.Node : Node class for implementing custom tasks
-    graph.Graph : Graph class to group nodes together to form a workflow
+    node.Node
+        Node class for implementing custom tasks
+    graph.Graph
+        Graph class to group nodes together to form a subgraph
+    workflow.Workflow
+        Workflow class to group nodes and graphs together to an executable workflow
 
     """
 
+    # By default, we keep track of all defined nodes and subgraphs so that we can instantiate
+    # them from serialized workflow definitions in YAML, JSON, or TOML format. Importing the
+    # node / graph definition is enough to make them available.
     __registry: ClassVar[dict[str, type["Component"]]] = {}
 
     def __init_subclass__(cls, name: str | None = None, register: bool = True):
@@ -285,7 +303,7 @@ class Component:
         max_cpus: int | None = None,
         max_gpus: int | None = None,
         loop: bool | None = None,
-    ):
+    ) -> None:
         self.name = str(name) if name is not None else unique_id()
         ctx = get_context(DEFAULT_CONTEXT)
 
@@ -349,8 +367,8 @@ class Component:
         self.n_attempts = n_attempts
 
         # Both atomic components and subgraphs can have ports / parameters
-        self.inputs: dict[str, Input[Any]] = {}
-        self.outputs: dict[str, Output[Any]] = {}
+        self.inputs: dict[str, Input[Any] | MultiInput[Any]] = {}
+        self.outputs: dict[str, Output[Any] | MultiOutput[Any]] = {}
         self.parameters: dict[str, Parameter[Any]] = {}
         self.status = Status.READY
 
@@ -415,7 +433,7 @@ class Component:
         return sum(inp.size for inp in self.inputs.values())
 
     @property
-    def all_parameters(self) -> dict[str, Input[Any] | Parameter[Any]]:
+    def all_parameters(self) -> dict[str, Input[Any] | MultiInput[Any] | Parameter[Any]]:
         """Returns all settable parameters and unconnected inputs"""
         inp_params = {name: inp for name, inp in self.inputs.items() if not inp.is_connected(inp)}
         return self.parameters | inp_params

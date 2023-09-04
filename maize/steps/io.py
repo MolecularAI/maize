@@ -21,7 +21,7 @@ class Dummy(Node):
     """A dummy node to connect to unused but optional input ports."""
 
     out: Output[Any] = Output()
-    """Dummy output with type 'Any', nothing will be sent"""
+    """Dummy output with type ``Any``, nothing will be sent"""
 
     def run(self) -> None:
         pass
@@ -42,12 +42,13 @@ P = TypeVar("P", bound=Path)
 
 
 class LoadFile(Node, Generic[P]):
-    """Provides a file specified as a parameter on an output channel."""
+    """Provides a file specified as a parameter on an output."""
 
     file: FileParameter[P] = FileParameter()
     """Path to the input file"""
+
     out: Output[P] = Output(mode="copy")
-    """File output channel"""
+    """File output"""
 
     def run(self) -> None:
         path = self.file.filepath
@@ -204,9 +205,13 @@ class Return(Node, Generic[T]):
     Examples
     --------
     >>> save = graph.add(Return[float])
-    >>> # Define your workflow as normal
+    >>> # Define your workflow as normal...
+    >>> graph.execute()
     >>> save.get()
     3.14159
+
+    Note that ``get()`` will pop the item from the internal queue,
+    this means the item will be lost if not assigned to a variable.
 
     """
 

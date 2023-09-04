@@ -11,8 +11,8 @@ from maize.core.interface import Input, Output, Parameter, FileParameter, Suffix
 from maize.core.graph import Graph
 from maize.core.node import Node
 from maize.core.workflow import Workflow
-from maize.steps.plumbing import Merge, Delay
-from maize.steps.io import Return
+from maize.steps.plumbing import Copy, Merge, Delay
+from maize.steps.io import Return, Void
 
 
 class A(Node):
@@ -80,6 +80,19 @@ class SubGraph(Graph):
 @pytest.fixture
 def subgraph():
     return SubGraph
+
+
+@pytest.fixture
+def subgraph_multi():
+    class SubgraphMulti(Graph):
+        def build(self):
+            a = self.add(A, parameters=dict(val=36))
+            copy = self.add(Copy[int])
+            void = self.add(Void)
+            self.connect(a.out, copy.inp)
+            self.connect(copy.out, void.inp)
+            self.map(copy.out)
+    return SubgraphMulti
 
 
 @pytest.fixture

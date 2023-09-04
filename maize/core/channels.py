@@ -131,17 +131,54 @@ class Channel(ABC, Generic[T]):
         """
 
 
-class FileChannel(Channel[list[Path] | Path]):
-    """A communication channel for data in the form of files."""
+_FilePathType = list[Path] | dict[Any, Path] | Path
+
+_T_PATH, _T_LIST, _T_DICT = 0, 1, 2
+
+
+class FileChannel(Channel[_FilePathType]):
+    """
+    A communication channel for data in the form of files. Files must be represented
+    by `Path` objects, and can either be passed alone, as a list, or as a dictionary.
+
+    When sending a file, it is first transferred (depending on `mode`) to an escrow
+    directory specific to the channel (typically a temporary directory). Upon calling
+    `receive`, this file is transferred to an input-directory for the receiving node.
+
+    Parameters
+    ----------
+    mode
+        Whether to ``copy`` (default), ``link``, or ``move`` files from node to node.
+
+    See Also
+    --------
+    DataChannel : Channel for arbitrary serializable data
+
+    """
 
     _destination_path: Path
+
+    # FileChannel allows single Path objects, as well as lists and dictionaries
+    # of paths to be sent. To make this possible, we always send a dictionary of
+    # paths, but convert to and from dictionaries while sending and receiving,
+    # and communicate the type of data through a shared value object.
+    @staticmethod
+    def _convert(items: _FilePathType) -> dict[Any, Path]:
+        if isinstance(items, list):
+            items = {i: item for i, item in enumerate(items)}
+        elif isinstance(items, Path):
+            items = {0: items}
+        return items
 
     def __init__(self, mode: Literal["copy", "link", "move"] = "copy") -> None:
         ctx = get_context(DEFAULT_CONTEXT)
         self._channel_dir = Path(mkdtemp())
-        self._payload: "Queue[list[Path]]" = ctx.Queue(maxsize=1)
+        self._payload: "Queue[dict[Any, Path]]" = ctx.Queue(maxsize=1)
         self._file_trigger = ctx.Event()  # File available trigger
         self._shutdown_signal = ctx.Event()  # Shutdown trigger
+        # FIXME temporary Any type hint until this gets solved
+        # https://github.com/python/typeshed/issues/8799
+        self._transferred_type: Any = ctx.Value("i", _T_DICT)  # Type of data sent, see _T_*
         self.mode = mode
 
     @property
@@ -172,8 +209,6 @@ class FileChannel(Channel[list[Path] | Path]):
             self.preload(existing)
 
     def close(self) -> None:
-        # TODO Revisit this, we need to make sure we're not deleting
-        # data before downstream nodes have time to receive it
         while self._file_trigger.is_set() and has_file(self._channel_dir):
             time.sleep(DEFAULT_TIMEOUT)
         self._shutdown_signal.set()
@@ -182,28 +217,33 @@ class FileChannel(Channel[list[Path] | Path]):
     def kill(self) -> None:
         pass
 
-    def preload(self, items: list[Path] | Path) -> None:
+    def preload(self, items: _FilePathType) -> None:
         """Load a file into the channel without explicitly sending."""
-        items = items if isinstance(items, list) else [items]
+        item = FileChannel._convert(items)
+
+        self._update_type(items)
         try:
-            self._payload.put(items, timeout=DEFAULT_TIMEOUT)
+            self._payload.put(item, timeout=DEFAULT_TIMEOUT)
         except queue.Full as full:
             raise ChannelFull("Attempting to preload an already filled channel") from full
         self._file_trigger.set()
 
-    def send(self, item: list[Path] | Path, timeout: float | None = None) -> None:
-        # Give a time ultimatum, for the trigger
-        items = item if isinstance(item, list) else [item]
-        items = [item.absolute() for item in items]
-        if not all(file.exists() for file in items) or self._file_trigger.is_set():
+    def send(self, item: _FilePathType, timeout: float | None = None) -> None:
+        items = FileChannel._convert(item)
+        items = {k: item.absolute() for k, item in items.items()}
+        if not all(file.exists() for file in items.values()) or self._file_trigger.is_set():
+            # Give a time ultimatum, for the trigger
             if timeout is not None:
                 time.sleep(timeout)
             if self._file_trigger.is_set():
                 raise ChannelFull("File channel already has data, are you sure it was received?")
 
-            if not all(file.exists() for file in items):
-                raise ChannelException(f"Files at {common_parent(items).as_posix()} not found")
+            if not all(file.exists() for file in items.values()):
+                raise ChannelException(
+                    f"Files at {common_parent(list(items.values())).as_posix()} not found"
+                )
 
+        self._update_type(item)
         try:
             self._payload.put(
                 sendtree(items, self._channel_dir, mode=self.mode), timeout=DEFAULT_TIMEOUT
@@ -212,7 +252,7 @@ class FileChannel(Channel[list[Path] | Path]):
             raise ChannelFull("Channel already has files as payload") from full
         self._file_trigger.set()
 
-    def receive(self, timeout: float | None = None) -> list[Path] | Path | None:
+    def receive(self, timeout: float | None = None) -> _FilePathType | None:
         # Wait for the trigger and then check if we have the file
         if not self._file_trigger.wait(timeout=timeout):
             return None
@@ -224,9 +264,9 @@ class FileChannel(Channel[list[Path] | Path]):
 
         dest_files = sendtree(files, self._destination_path, mode="move")
         self._file_trigger.clear()
-        return dest_files if len(dest_files) > 1 else dest_files[0]
+        return self._cast_type(dest_files)
 
-    def flush(self, timeout: float = 0.1) -> list[list[Path] | Path]:
+    def flush(self, timeout: float = DEFAULT_TIMEOUT) -> list[_FilePathType]:
         """
         Flush the contents of the channel.
 
@@ -237,7 +277,7 @@ class FileChannel(Channel[list[Path] | Path]):
 
         Returns
         -------
-        list[list[Path]]
+        list[_FilePathType]
             List with a paths to a file in the destination
             directory or an empty list. This is to be consistent
             with the signature of `DataChannel`.
@@ -247,6 +287,25 @@ class FileChannel(Channel[list[Path] | Path]):
         if files is None:
             return []
         return [files]
+
+    def _update_type(self, data: _FilePathType) -> None:
+        """Updates the type of data being transferred to allow the correct type to be returned."""
+        with self._transferred_type.get_lock():
+            if isinstance(data, dict):
+                self._transferred_type.value = _T_DICT
+            elif isinstance(data, list):
+                self._transferred_type.value = _T_LIST
+            else:
+                self._transferred_type.value = _T_PATH
+
+    def _cast_type(self, data: dict[Any, Path]) -> _FilePathType:
+        """Cast received data to match the original sent type."""
+        if self._transferred_type.value == _T_DICT:
+            return data
+        elif self._transferred_type.value == _T_LIST:
+            return list(data.values())
+        else:
+            return data[0]
 
 
 class DataChannel(Channel[T]):
@@ -259,6 +318,10 @@ class DataChannel(Channel[T]):
     ----------
     size
         Size of the item queue
+
+    See Also
+    --------
+    FileChannel : Channel for files
 
     """
 
@@ -325,7 +388,7 @@ class DataChannel(Channel[T]):
 
             # Sending an item and immediately polling will falsely result in
             # a supposedly empty channel, so we wait a fraction of a second
-            time.sleep(0.1)
+            time.sleep(DEFAULT_TIMEOUT)
         except queue.Full as err:
             raise ChannelFull("Channel queue is full") from err
 
@@ -348,7 +411,7 @@ class DataChannel(Channel[T]):
                 self._n_items.value -= 1
         return val
 
-    def flush(self, timeout: float = 0.1) -> list[T]:
+    def flush(self, timeout: float = DEFAULT_TIMEOUT) -> list[T]:
         """
         Flush the contents of the channel.
 

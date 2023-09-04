@@ -26,6 +26,11 @@ def nested_datafiles(datafile, datafile2):
 
 
 @pytest.fixture
+def nested_datafiles_dict(datafile, datafile2):
+    return {"foo": datafile, 42: datafile2}
+
+
+@pytest.fixture
 def data():
     return 17
 
@@ -86,6 +91,12 @@ def loaded_filechannel2(empty_filechannel, nested_datafiles):
 def loaded_filechannel3(empty_filechannel2, nested_datafiles):
     empty_filechannel2.preload(nested_datafiles)
     return empty_filechannel2
+
+
+@pytest.fixture
+def loaded_filechannel4(empty_filechannel, nested_datafiles_dict):
+    empty_filechannel.preload(nested_datafiles_dict)
+    return empty_filechannel
 
 
 # If this breaks, check this:

@@ -135,11 +135,33 @@ def load_modules(*names: str) -> None:
     from env_modules_python import module  # pylint: disable=import-outside-toplevel,import-error
 
     for name in names:
-        out = io.StringIO()
+        out = io.StringIO()  # pylint: disable=no-member
         with redirect_stderr(out):
             module("load", name)
         if "error" in out.getvalue():
             raise OSError(f"Error loading module '{name}'")
+
+
+def _extract_single_class_docs(node_type: type["Component"]) -> dict[str, str]:
+    """Extracts docs from a class definition in the style of :pep:`258`."""
+    docs = {}
+
+    # A lot of things can go wrong here, so we err on the side of caution
+    with contextlib.suppress(Exception):
+        source = inspect.getsource(node_type)
+        for node in ast.iter_child_nodes(ast.parse(source)):
+            for anno, expr in itertools.pairwise(ast.iter_child_nodes(node)):
+                match anno, expr:
+                    case ast.AnnAssign(
+                        target=ast.Name(name),
+                        annotation=ast.Subscript(
+                            value=ast.Name(
+                                id="Input" | "Output" | "Parameter" | "FileParameter" | "Flag"
+                            )
+                        ),
+                    ), ast.Expr(value=ast.Constant(doc)):
+                        docs[name] = doc
+    return docs
 
 
 # This is *slightly* evil, but it allows us to get docs that are
@@ -159,23 +181,9 @@ def extract_attribute_docs(node_type: type["Component"]) -> dict[str, str]:
         Dictionary of attribute name - docstring pairs
 
     """
-    docs = {}
-
-    # A lot of things can go wrong here, so we err on the side of caution
-    with contextlib.suppress(Exception):
-        source = inspect.getsource(node_type)
-        for node in ast.iter_child_nodes(ast.parse(source)):
-            for anno, expr in itertools.pairwise(ast.iter_child_nodes(node)):
-                match anno, expr:
-                    case ast.AnnAssign(
-                        target=ast.Name(name),
-                        annotation=ast.Subscript(
-                            value=ast.Name(
-                                id="Input" | "Output" | "Parameter" | "FileParameter" | "Flag"
-                            )
-                        ),
-                    ), ast.Expr(value=ast.Constant(doc)):
-                        docs[name] = doc
+    docs: dict[str, str] = {}
+    for cls in (node_type, *node_type.__bases__):
+        docs |= _extract_single_class_docs(cls)
     return docs
 
 
@@ -431,6 +439,8 @@ def is_path_type(arg1: Any) -> bool:
     return is_subhint(arg1, Path | list[Path] | Annotated[Path, ...])
 
 
+# FIXME There seems to be an issue with python 3.11 and NDArray typehints. We're sticking with
+# python 3.10 for now, but ideally we would drop the dependency on beartype at some point.
 def matching_types(arg1: Any, arg2: Any, strict: bool = False) -> bool:
     """
     Checks if two types are matching.

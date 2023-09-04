@@ -101,6 +101,10 @@ class Test_FileChannel:
         with pytest.raises(ChannelFull):
             loaded_filechannel.send(datafile, timeout=1)
 
+    def test_channel_send_dict(self, empty_filechannel, nested_datafiles_dict):
+        empty_filechannel.send(nested_datafiles_dict)
+        assert empty_filechannel.ready
+
     def test_channel_receive(self, loaded_filechannel, datafile):
         path = loaded_filechannel.receive()
         assert path.exists()
@@ -126,6 +130,13 @@ class Test_FileChannel:
         path = loaded_filechannel.receive()
         assert path.exists()
         assert path.name == datafile2.name
+
+    def test_channel_receive_dict(self, loaded_filechannel4, nested_datafiles_dict):
+        paths = loaded_filechannel4.receive()
+        assert paths.keys() == nested_datafiles_dict.keys()
+        for key in nested_datafiles_dict:
+            assert paths[key].exists()
+            assert paths[key].name == nested_datafiles_dict[key].name
 
     def test_channel_receive_empty(self, empty_filechannel):
         assert empty_filechannel.receive(timeout=1) is None

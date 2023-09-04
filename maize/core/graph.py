@@ -1,20 +1,18 @@
 """
 Graph
 -----
-`Graph` is the container for any kind of workflow, and can also act as an
+`Graph` is the container for any kind of graph, and can also act as an
 individual component, for example when used as a subgraph. It will contain
 multiple nodes, connected together using channels. It can also directly
-expose parameters.
-
-Building a graph can be done programatically, or by reading in a suitable
-input file.
+expose parameters. `Workflow` extends `Graph` by providing executing and
+serialization features. Building a graph can be done programatically.
 
 """
 
 import itertools
 from pathlib import Path
 import sys
-from typing import Generic, Literal, TypeVar, Any, overload, get_origin
+from typing import Generic, Literal, Optional, TypeVar, Any, overload, get_origin
 
 from maize.core.component import Component
 from maize.core.channels import DataChannel, Channel, FileChannel
@@ -35,16 +33,9 @@ from maize.utilities.utilities import extract_type, graph_cycles, is_path_type, 
 from maize.utilities.visual import HAS_GRAPHVIZ, nested_graphviz
 
 
-T = TypeVar("T", covariant=True)
+T_co = TypeVar("T_co", covariant=True)
 U = TypeVar("U", bound=Component)
 ChannelKeyType = tuple[tuple[str, ...], tuple[str, ...]]
-
-
-def _is_node(node: type[Component]) -> bool:
-    """Returns ``True`` if argument is a node class, ``False`` otherwise"""
-    if (orig := get_origin(node)) is not None:
-        return issubclass(orig, Node)
-    return issubclass(node, Node)
 
 
 class GraphBuildException(Exception):
@@ -60,6 +51,40 @@ class Graph(Component, register=False):
     custom subgraphs, create a custom subclass and overwrite the `build`
     method, and add nodes and connections there as normal.
 
+    Parameters
+    ----------
+    parent
+        Parent component, typically the graph in context
+    name
+        The name of the component
+    description
+        An optional additional description
+    fail_ok
+        If True, the failure in the component will
+        not trigger the whole network to shutdown
+    n_attempts
+        Number of attempts at executing the `run()` method
+    level
+        Logging level, if not given or ``None`` will use the parent logging level
+    cleanup_temp
+        Whether to remove any temporary directories after completion
+    resume
+        Whether to resume from a previous checkpoint
+    logfile
+        File to output all log messages to, defaults to STDOUT
+    max_cpus
+        Maximum number of CPUs to use, defaults to the number of available cores in the system
+    max_gpus
+        Maximum number of GPUs to use, defaults to the number of available GPUs in the system
+    loop
+        Whether to run the `run` method in a loop, as opposed to a single time
+    strict
+        If ``True`` (default), will not allow generic node parameterisation and
+        raise an exception instead. You may want to switch this to ``False`` if
+        you're automating subgraph construction.
+    default_channel_size
+        The maximum number of items to allow for each channel connecting nodes
+
     Attributes
     ----------
     nodes
@@ -74,14 +99,61 @@ class Graph(Component, register=False):
     GraphBuildException
         If there was an error building the subgraph, e.g. an unconnected port
 
+    Examples
+    --------
+    Defining a new subgraph wrapping an output-only example node with a delay node:
+
+    >>> class SubGraph(Graph):
+    ...     out: Output[int]
+    ...     delay: Parameter[int]
+    ...
+    ...     def build(self) -> None:
+    ...         node = self.add(Example)
+    ...         delay = self.add(Delay, parameters=dict(delay=2))
+    ...         self.connect(node.out, delay.inp)
+    ...         self.out = self.map_port(delay.out)
+    ...         self.delay = self.map(delay.delay)
+
+    It can then be used just like any other node:
+
+    >>> subgraph = g.add(SubGraph, name="subgraph", parameters={"delay": 10})
+    >>> g.connect(subgraph.out, other.inp)
+
     """
 
     _GRAPH_FIELDS = ("name", "description", "level")
 
     def __init__(
-        self, *args: Any, strict: bool = True, default_channel_size: int = 10, **kwargs: Any
+        self,
+        parent: Optional["Graph"] = None,
+        name: str | None = None,
+        description: str | None = None,
+        fail_ok: bool = False,
+        n_attempts: int = 1,
+        level: int | str | None = None,
+        cleanup_temp: bool = True,
+        resume: bool = False,
+        logfile: Path | None = None,
+        max_cpus: int | None = None,
+        max_gpus: int | None = None,
+        loop: bool | None = None,
+        strict: bool = True,
+        default_channel_size: int = 10,
     ) -> None:
-        super().__init__(*args, **kwargs)
+        super().__init__(
+            parent=parent,
+            name=name,
+            description=description,
+            fail_ok=fail_ok,
+            n_attempts=n_attempts,
+            level=level,
+            cleanup_temp=cleanup_temp,
+            resume=resume,
+            logfile=logfile,
+            max_cpus=max_cpus,
+            max_gpus=max_gpus,
+            loop=loop,
+        )
 
         # While nodes can be either a 'Node' or 'Graph'
         # (as a subgraph), we flatten this topology at execution to
@@ -256,11 +328,11 @@ class Graph(Component, register=False):
 
         Examples
         --------
-        >>> g = Graph(name="foo")
-        ... foo = g.add(Foo)
-        ... bar = g.add(Bar)
-        ... g.auto_connect(foo, bar)
-        ... g.check()
+        >>> g = Workflow(name="foo")
+        >>> foo = g.add(Foo)
+        >>> bar = g.add(Bar)
+        >>> g.auto_connect(foo, bar)
+        >>> g.check()
 
         """
         # Check connectivity first
@@ -321,8 +393,8 @@ class Graph(Component, register=False):
         Examples
         --------
         >>> g = Graph(name="foo")
-        ... foo = g.add(Foo, name="foo", parameters=dict(val=42))
-        ... bar = g.add(Bar)
+        >>> foo = g.add(Foo, name="foo", parameters=dict(val=42))
+        >>> bar = g.add(Bar)
 
         """
         name = component.__name__.lower() if name is None else str(name)
@@ -395,6 +467,11 @@ class Graph(Component, register=False):
         tuple[U, ...]
             The initialized component instances
 
+        Examples
+        --------
+        >>> g = Graph(name="foo")
+        >>> foo, bar = g.add_all(Foo, Bar)
+
         """
         return tuple(self.add(comp) for comp in components)
 
@@ -418,9 +495,9 @@ class Graph(Component, register=False):
         Examples
         --------
         >>> g = Graph(name="foo")
-        ... foo = g.add(Foo)
-        ... bar = g.add(Bar)
-        ... g.auto_connect(foo, bar)
+        >>> foo = g.add(Foo)
+        >>> bar = g.add(Bar)
+        >>> g.auto_connect(foo, bar)
 
         """
         for out in sending.outputs.values():
@@ -448,10 +525,10 @@ class Graph(Component, register=False):
         Examples
         --------
         >>> g = Graph(name="foo")
-        ... foo = g.add(Foo)
-        ... bar = g.add(Bar)
-        ... baz = g.add(Baz)
-        ... g.chain(foo, bar, baz)
+        >>> foo = g.add(Foo)
+        >>> bar = g.add(Bar)
+        >>> baz = g.add(Baz)
+        >>> g.chain(foo, bar, baz)
 
         """
         for sending, receiving in itertools.pairwise(nodes):
@@ -531,14 +608,22 @@ class Graph(Component, register=False):
         ports
             Output - Input pairs to connect
 
+        Examples
+        --------
+        >>> g = Graph(name="foo")
+        >>> foo = g.add(Foo)
+        >>> bar = g.add(Bar)
+        >>> baz = g.add(Baz)
+        >>> g.connect_all((foo.out, bar.inp), (bar.out, baz.inp))
+
         """
         for out, inp in ports:
             self.connect(sending=out, receiving=inp)
 
     def connect(
         self,
-        sending: Output[T] | MultiOutput[T],
-        receiving: Input[T] | MultiInput[T],
+        sending: Output[T_co] | MultiOutput[T_co],
+        receiving: Input[T_co] | MultiInput[T_co],
         size: int | None = None,
         mode: Literal["copy", "link", "move"] | None = None,
     ) -> None:
@@ -552,7 +637,7 @@ class Graph(Component, register=False):
         receiving
             Input port for receiving items
         size
-            Size (in items) of the queue used for communication
+            Size (in items) of the queue used for communication, only for serializable data
         mode
             Whether to link, copy or move files, overrides value specified for the port
 
@@ -565,9 +650,9 @@ class Graph(Component, register=False):
         Examples
         --------
         >>> g = Graph(name="foo")
-        ... foo = g.add(Foo)
-        ... bar = g.add(Bar)
-        ... g.connect(foo.out, bar.inp)
+        >>> foo = g.add(Foo)
+        >>> bar = g.add(Bar)
+        >>> g.connect(foo.out, bar.inp)
 
         """
         if not matching_types(sending.datatype, receiving.datatype):
@@ -626,7 +711,8 @@ class Graph(Component, register=False):
 
         This will be required when creating custom subgraphs,
         ports of individual component nodes will need to be
-        mapped to the subgraph.
+        mapped to the subgraph. This method also handles setting
+        a graph attribute with the given name.
 
         Parameters
         ----------
@@ -635,11 +721,16 @@ class Graph(Component, register=False):
         name
             Name for the port to be registered as
 
+        Returns
+        -------
+        _P
+            Mapped port
+
         Examples
         --------
         >>> def build(self):
-        ...     self.node = self.add(Example)
-        ...     self.output = self.map_port(self.node.output, "output")
+        ...     node = self.add(Example)
+        ...     self.map_port(node.output, name="output")
 
         """
         if name is None:
@@ -647,21 +738,22 @@ class Graph(Component, register=False):
         if name in self.ports:
             raise KeyError(f"Port with name '{name}' already exists in graph '{self.name}'")
 
-        if isinstance(port, Input):
+        if isinstance(port, Input | MultiInput):
             self.inputs[name] = port
-        elif isinstance(port, Output):
+        elif isinstance(port, Output | MultiOutput):
             self.outputs[name] = port
         setattr(self, name, port)
         return port
 
     def combine_parameters(
-        self, *parameters: Parameter[T], name: str | None = None, default: T | None = None
-    ) -> MultiParameter[T]:
+        self, *parameters: Parameter[T_co], name: str | None = None, default: T_co | None = None
+    ) -> MultiParameter[T_co]:
         """
         Maps multiple low-level parameters to one high-level one.
 
         This can be useful when a single parameter needs to be
-        supplied to multiple nodes within a subgraph.
+        supplied to multiple nodes within a subgraph. This method
+        also handles setting a graph attribute with the given name.
 
         Parameters
         ----------
@@ -680,16 +772,16 @@ class Graph(Component, register=False):
         Examples
         --------
         >>> def build(self):
-        ...     self.foo = self.add(Foo)
-        ...     self.bar = self.add(Bar)
-        ...     self.param = self.map_parameters(
-        ...         self.foo.param, self.bar.param, name="param", default=42)
+        ...     foo = self.add(Foo)
+        ...     bar = self.add(Bar)
+        ...     self.map_parameters(
+        ...         foo.param, bar.param, name="param", default=42)
 
         """
         if name is None:
             name = parameters[0].name
 
-        multi_param: MultiParameter[T] = MultiParameter(
+        multi_param: MultiParameter[T_co] = MultiParameter(
             parameters=parameters, default=default
         ).build(name=name, parent=self)
         self.parameters[name] = multi_param
@@ -698,7 +790,8 @@ class Graph(Component, register=False):
 
     def map(self, *interfaces: Interface[Any]) -> None:
         """
-        Map multiple child interfaces onto the current graph.
+        Map multiple child interfaces (ports or parameters) onto the current graph.
+        Will also set the graph attributes to the names of the mapped interfaces.
 
         Parameters
         ----------
@@ -711,6 +804,13 @@ class Graph(Component, register=False):
             If you want to map multiple parameters to a single high-level one
         Graph.map_port
             If you want more fine-grained control over naming
+
+        Examples
+        --------
+        >>> def build(self):
+        ...     foo = self.add(Foo)
+        ...     bar = self.add(Bar)
+        ...     self.map(foo.inp, bar.out, foo.param)
 
         """
         for inter in interfaces:
@@ -757,8 +857,15 @@ class Graph(Component, register=False):
 
         Override this method to construct a subgraph encapsulating
         multiple lower-level nodes, by using the `add` and `connect`
-        methods. Additionally use the `map_port` and `map_parameters`
+        methods. Additionally use the `map`, `map_port`, and `map_parameters`
         methods to create a subgraph that can be used just like a node.
+
+        Examples
+        --------
+        >>> def build(self):
+        ...     foo = self.add(Foo)
+        ...     bar = self.add(Bar)
+        ...     self.map(foo.inp, bar.out, foo.param)
 
         """
 

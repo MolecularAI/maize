@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python>=3.10
+  - python=3.10
   - toml>=0.10.2
   - yaml>=0.2.5
   - dill>=0.3.6

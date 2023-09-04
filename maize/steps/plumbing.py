@@ -186,8 +186,10 @@ class Accumulate(LoopedNode, Generic[T]):
 
     inp: Input[T] = Input()
     """Packets to accumulate"""
+
     out: Output[list[T]] = Output()
     """Output for accumulated packets"""
+
     n_packets: Parameter[int] = Parameter()
     """Number of packets to receive before sending one large packet"""
 
@@ -220,7 +222,11 @@ class Delay(LoopedNode, Generic[T]):
     """Pass on a packet with a custom delay."""
 
     inp: Input[T] = Input()
+    """Data input"""
+
     out: Output[T] = Output()
+    """Data output"""
+
     delay: Parameter[float | int] = Parameter(default=1)
     """Delay in seconds"""
 

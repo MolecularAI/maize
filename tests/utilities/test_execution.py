@@ -90,6 +90,13 @@ class Test_CommandRunner:
         for result in results:
             assert result.returncode == 0
 
+    def test_run_multi_input(self):
+        cmd = CommandRunner()
+        inputs = ["foo", "bar"]
+        results = cmd.run_parallel(["cat", "cat"], verbose=True, command_inputs=inputs)
+        for inp, res in zip(inputs, results):
+            assert inp in res.stdout.decode()
+
     def test_run_multi_time(self, sleep_command):
         cmd = CommandRunner()
         start = time.time()

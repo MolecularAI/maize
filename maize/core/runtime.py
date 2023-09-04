@@ -288,12 +288,18 @@ class StatusUpdate:
     ----------
     name
         Name of the node
+    parents
+        Names of all parents
     status
         Node status at completion, will be one of ('FAILED', 'STOPPED', 'COMPLETED')
     run_time
         Time spent in status 'RUNNING'
     full_time
         Time spent for the full node execution, including 'WAITING' for others
+    n_inbound
+        Number of items waiting to be received
+    n_outbound
+        Number of items waiting to be sent
     note
         Additional message to be printed at completion
 
@@ -317,6 +323,8 @@ def format_summaries(summaries: list[StatusUpdate], runtime: datetime.timedelta)
     ----------
     summaries
         List of summaries to be aggregated and formatted
+    runtime
+        The total runtime to format
 
     Returns
     -------
@@ -464,7 +472,7 @@ def setup_node_logging(
     ----------
     name
         Name of the component being logged
-    message_queue
+    logging_queue
         Global messaging queue
     level
         Logging level
@@ -501,6 +509,8 @@ class Logger(Runnable):
         Name of the logger
     level
         Logging level
+    file
+        File to log to
 
     """
 
@@ -540,4 +550,3 @@ class Logger(Runnable):
 
     def cleanup(self) -> None:
         self.queue.put(None)
-

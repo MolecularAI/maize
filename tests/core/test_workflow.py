@@ -107,6 +107,17 @@ def example_b():
     return B
 
 
+@pytest.fixture
+def loopable_subgraph(example_b):
+    class Loopable(Graph):
+        def build(self) -> None:
+            dela = self.add(Delay[int], parameters={"delay": 1})
+            b = self.add(example_b)
+            self.connect(dela.out, b.inp)
+            self.map(dela.inp, b.out, b.out_final)
+    return Loopable
+
+
 class SubSubGraph(Graph):
     def build(self):
         a = self.add(A, "a", parameters=dict(val=36))
@@ -354,16 +365,16 @@ class Test_graph_run:
         g.execute()
         assert dill.loads(t.ret_queue.get(timeout=10)) == 50
 
-    def test_execution_subgraph_looped(self, subgraph, example_b):
-        g = Workflow()
-        sg = g.add(subgraph, "sg", loop=True)
-        b = g.add(example_b, "b", loop=True)
+    def test_execution_subgraph_looped(self, loopable_subgraph, example_a):
+        g = Workflow(level="DEBUG")
+        a = g.add(example_a, "a", parameters={"val": 36})
+        sg = g.add(loopable_subgraph, "sg", loop=True)
         m = g.add(Merge[int], "m")
         t = g.add(Return[int], "t")
+        g.connect(a.out, m.inp)
         g.connect(sg.out, m.inp)
-        g.connect(b.out, m.inp)
-        g.connect(m.out, b.inp)
-        g.connect(b.out_final, t.inp)
+        g.connect(m.out, sg.inp)
+        g.connect(sg.out_final, t.inp)
         g.execute()
         assert dill.loads(t.ret_queue.get(timeout=10)) == 50
 

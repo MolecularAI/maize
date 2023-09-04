@@ -37,6 +37,9 @@ class NodeConfigDict(TypedDict):
     commands: dict[str, str]
 
 
+T = TypeVar("T")
+
+
 XDG = "XDG_CONFIG_HOME"
 MAIZE_CONFIG_ENVVAR = "MAIZE_CONFIG"
 
@@ -68,7 +71,7 @@ def remove_dir_contents(path: Path) -> None:
             item.unlink(missing_ok=True)
 
 
-def common_parent(files: list[Path]) -> Path:
+def common_parent(files: Sequence[Path]) -> Path:
     """
     Provides the common parent directory for a list of files.
 
@@ -93,15 +96,15 @@ def common_parent(files: list[Path]) -> Path:
 
 
 def sendtree(
-    files: list[Path], dest: Path, mode: Literal["move", "copy", "link"] = "copy"
-) -> list[Path]:
+    files: dict[T, Path], dest: Path, mode: Literal["move", "copy", "link"] = "copy"
+) -> dict[T, Path]:
     """
     Links, copies or moves multiple files to a destination directory and preserves the structure.
 
     Parameters
     ----------
     files
-        List of paths to link / copy
+        Paths to link / copy
     dest
         Destination directory
     mode
@@ -109,15 +112,15 @@ def sendtree(
 
     Returns
     -------
-    list[Path]
+    dict[Any, Path]
         Created links / copies
 
     """
-    files = [file.absolute() for file in files]
-    common = common_parent(files)
+    files = {k: file.absolute() for k, file in files.items()}
+    common = common_parent(list(files.values()))
 
-    results: list[Path] = []
-    for file in files:
+    results: dict[T, Path] = {}
+    for k, file in files.items():
         dest_path = dest.absolute() / file.relative_to(common)
         if not dest_path.exists():
             dest_path.parent.mkdir(parents=True, exist_ok=True)
@@ -129,7 +132,7 @@ def sendtree(
                 shutil.move(file, dest_path)
             else:
                 assert_never()
-        results.append(dest_path)
+        results[k] = dest_path
     return results
 
 
@@ -249,10 +252,12 @@ class Config:
         List of namespace packages to load
     scratch
         The directory the workflow should be created in. Uses a temporary directory by default.
-    environment
-        Any environment variables to be set in the execution context
     batch_config
         Default options to be passed to the batch submission system
+    environment
+        Any environment variables to be set in the execution context
+    nodes
+        Entries specific to each node
 
     Examples
     --------
@@ -484,9 +489,6 @@ def setup_workflow(workflow: "Workflow") -> None:
         return
 
     workflow.execute()
-
-
-T = TypeVar("T")
 
 
 def with_keys(data: dict[T, Any], keys: Sequence[T]) -> dict[T, Any]:
