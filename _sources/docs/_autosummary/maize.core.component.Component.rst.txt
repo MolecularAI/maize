@@ -1,0 +1,59 @@
+Component
+=========
+
+.. currentmodule:: maize.core.component
+
+.. autoclass:: Component
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Component.__init__
+      ~Component.as_dict
+      ~Component.get_available_nodes
+      ~Component.get_inputs
+      ~Component.get_interfaces
+      ~Component.get_node_class
+      ~Component.get_outputs
+      ~Component.get_parameters
+      ~Component.get_summary_line
+      ~Component.ports_active
+      ~Component.send_update
+      ~Component.serialized_summary
+      ~Component.setup_directories
+      ~Component.update_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Component.all_parameters
+      ~Component.component_path
+      ~Component.datatype
+      ~Component.n_inbound
+      ~Component.n_outbound
+      ~Component.node_config
+      ~Component.parents
+      ~Component.ports
+      ~Component.required_callables
+      ~Component.required_packages
+      ~Component.root
+      ~Component.status
+      ~Component.logger
+      ~Component.run_timer
+      ~Component.full_timer
+      ~Component.work_dir
+   
+   

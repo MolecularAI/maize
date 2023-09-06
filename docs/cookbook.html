@@ -1,0 +1,745 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Examples" href="examples.html" /><link rel="prev" title="User guide" href="userguide.html" />
+
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.08.19 -->
+        <title>Cookbook - maize</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: rgb(131,0,81);
+  --color-brand-content: rgb(131,0,81);
+  --color-api-name: rgb(0,56,101);
+  --color-api-pre-name: rgb(0,56,101);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">maize</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/maize-logo.svg" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">User guide</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="steps/index.html">Steps</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Steps</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="steps/plumbing.html">Plumbing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="steps/io.html">Input / Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/maize.core.html">core</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of core</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.channels.html">channels</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of channels</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.Channel.html">Channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.DataChannel.html">DataChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.FileChannel.html">FileChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.ChannelEmpty.html">ChannelEmpty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.ChannelException.html">ChannelException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.ChannelFull.html">ChannelFull</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.component.html">component</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of component</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.component.Component.html">Component</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.graph.html">graph</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of graph</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.graph.Graph.html">Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.graph.GraphBuildException.html">GraphBuildException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.interface.html">interface</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of interface</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.FileParameter.html">FileParameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Input.html">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Interface.html">Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.MultiInput.html">MultiInput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.MultiOutput.html">MultiOutput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.MultiParameter.html">MultiParameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.MultiPort.html">MultiPort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Output.html">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Parameter.html">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Port.html">Port</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Suffix.html">Suffix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.ParameterException.html">ParameterException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.PortException.html">PortException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.PortInterrupt.html">PortInterrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.node.html">node</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of node</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.node.LoopedNode.html">LoopedNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.node.Node.html">Node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.node.NodeBuildException.html">NodeBuildException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.runtime.html">runtime</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of runtime</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.format_summaries.html">format_summaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.format_update.html">format_update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.init_signal.html">init_signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.setup_build_logging.html">setup_build_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.setup_node_logging.html">setup_node_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.CustomFormat.html">CustomFormat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.Logger.html">Logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.RunPool.html">RunPool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.Runnable.html">Runnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.Status.html">Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.StatusHandler.html">StatusHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.StatusUpdate.html">StatusUpdate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.NodeException.html">NodeException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.workflow.html">workflow</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of workflow</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.workflow.expose.html">expose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html">Workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.workflow.CheckpointException.html">CheckpointException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.workflow.ParsingException.html">ParsingException</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/maize.utilities.html">utilities</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.execution.html">execution</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of execution</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.check_executable.html">check_executable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.check_returncode.html">check_returncode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.run_single_process.html">run_single_process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.CommandRunner.html">CommandRunner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.CommandRunnerPSIJ.html">CommandRunnerPSIJ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.JobResourceConfig.html">JobResourceConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.ResourceManagerConfig.html">ResourceManagerConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.ProcessError.html">ProcessError</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.io.html">io</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.common_parent.html">common_parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.create_default_parser.html">create_default_parser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.expand_shell_vars.html">expand_shell_vars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.get_plugins.html">get_plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.load_file.html">load_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.parse_groups.html">parse_groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.read_input.html">read_input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.remove_dir_contents.html">remove_dir_contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.sendtree.html">sendtree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.setup_workflow.html">setup_workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.with_fields.html">with_fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.with_keys.html">with_keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.write_input.html">write_input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.Config.html">Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.NodeConfig.html">NodeConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.NodeConfigDict.html">NodeConfigDict</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.macros.html">macros</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of macros</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.macros.function_to_node.html">function_to_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.macros.lambda_node.html">lambda_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.macros.node_to_function.html">node_to_function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.macros.parallel.html">parallel</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.resources.html">resources</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of resources</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.resources.cpu_count.html">cpu_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.resources.gpu_count.html">gpu_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.resources.ChunkedSemaphore.html">ChunkedSemaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.resources.Resources.html">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.testing.html">testing</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of testing</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.testing.MockChannel.html">MockChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.testing.TestRig.html">TestRig</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.utilities.html">utilities</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.change_environment.html">change_environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.chunks.html">chunks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.extract_attribute_docs.html">extract_attribute_docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.extract_parent_type.html">extract_parent_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.extract_type.html">extract_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.find_probable_files_from_command.html">find_probable_files_from_command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.graph_cycles.html">graph_cycles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.graph_to_nx.html">graph_to_nx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.has_file.html">has_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.has_module_system.html">has_module_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.is_path_type.html">is_path_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.load_modules.html">load_modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.make_list.html">make_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.match_context.html">match_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.matching_types.html">matching_types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.nested_dict_to_tuple.html">nested_dict_to_tuple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.set_environment.html">set_environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.tuple_to_nested_dict.html">tuple_to_nested_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.typecheck.html">typecheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.unique_id.html">unique_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.StrEnum.html">StrEnum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.Timer.html">Timer</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.validation.html">validation</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of validation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.validation.FailValidator.html">FailValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.validation.FileValidator.html">FileValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.validation.OutputValidator.html">OutputValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.validation.SuccessValidator.html">SuccessValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.validation.Validator.html">Validator</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.visual.html">visual</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of visual</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.visual.nested_graphviz.html">nested_graphviz</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize-contrib/steps/index.html">Steps</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize-contrib/utilities.html">Utilities</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="cookbook">
+<h1>Cookbook<a class="headerlink" href="#cookbook" title="Link to this heading">#</a></h1>
+<p>I want to create a…</p>
+<section id="simple-linear-workflow">
+<h2>Simple linear workflow<a class="headerlink" href="#simple-linear-workflow" title="Link to this heading">#</a></h2>
+<p>We will create a simple workflow that just reads some data, processes it, and logs the result. First, import the required nodes and modules:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">LoadData</span><span class="p">,</span> <span class="n">LogResult</span>
+<span class="kn">from</span> <span class="nn">maize.steps.your_module</span> <span class="kn">import</span> <span class="n">YourNode</span>
+</pre></div>
+</div>
+<p>Then construct your workflow by instantiating a <a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html#maize.core.workflow.Workflow" title="maize.core.workflow.Workflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code></a> object and adding nodes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;example&quot;</span><span class="p">)</span>
+<span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">})</span>
+<span class="n">my_node</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">YourNode</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;param&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LogResult</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now connect them together:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">my_node</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">my_node</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally check everything’s okay and run!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You should see the result being written to the log.</p>
+</section>
+<section id="cyclic-workflow">
+<h2>Cyclic workflow<a class="headerlink" href="#cyclic-workflow" title="Link to this heading">#</a></h2>
+<p>Cyclic workflows often appear whenever we want to iteratively improve a solution until a certain threshold has been reached. The general outline for such a workflow will look like this:</p>
+<img alt="../_images/cyclic-workflow.svg" src="../_images/cyclic-workflow.svg" /><p>This means that the node labelled <code class="docutils literal notranslate"><span class="pre">Calc</span></code> will return only once the final solution has been produced and sent off to the final node. It is further important that <code class="docutils literal notranslate"><span class="pre">Calc</span></code> runs in a loop (e.g. by using <code class="xref py py-meth docutils literal notranslate"><span class="pre">loop()</span></code>) to allow continuous processing. To build this workflow in maize, instantiate your workflow and add the required nodes as normal:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">LoadData</span><span class="p">,</span> <span class="n">LogResult</span>
+<span class="kn">from</span> <span class="nn">maize.steps.plumbing</span> <span class="kn">import</span> <span class="n">Merge</span>
+
+<span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;cycle&quot;</span><span class="p">)</span>
+<span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">})</span>
+<span class="n">merge</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Merge</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span>
+<span class="n">calc</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Calc</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LogResult</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can now connect everything together analogously to the diagram above:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">connect_all</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">merge</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">merge</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">calc</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">calc</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">merge</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">calc</span><span class="o">.</span><span class="n">out_final</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that although it appears like we are connecting two nodes to the same input, the input in <code class="xref py py-class docutils literal notranslate"><span class="pre">Merge</span></code> is a <a class="reference internal" href="_autosummary/maize.core.interface.MultiInput.html#maize.core.interface.MultiInput" title="maize.core.interface.MultiInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiInput</span></code></a>, which means that it will create additional ports as necessary.</p>
+</section>
+<section id="conditionally-branched-workflow">
+<h2>Conditionally branched workflow<a class="headerlink" href="#conditionally-branched-workflow" title="Link to this heading">#</a></h2>
+<p>Remember that in maize, all nodes are constantly running as their own process, no matter if they have data to process or not. This makes branched workflows easy to implement: We only need to output data to the corresponding port. Here’s an example node definition:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">maize.core.interface</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
+
+<span class="k">class</span> <span class="nc">Condition</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+    <span class="n">out_a</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+    <span class="n">out_b</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">out_a</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">out_b</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can of course optionally wrap this in a loop (using <code class="xref py py-meth docutils literal notranslate"><span class="pre">loop()</span></code>) and also define the condition for branching using a <a class="reference internal" href="_autosummary/maize.core.interface.Parameter.html#maize.core.interface.Parameter" title="maize.core.interface.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></a> or even using another input. Creating the workflow can now be done as before:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">LoadData</span><span class="p">,</span> <span class="n">LogResult</span>
+
+<span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;cycle&quot;</span><span class="p">)</span>
+<span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">})</span>
+<span class="n">cond</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Condition</span><span class="p">)</span>
+<span class="n">out_a</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LogResult</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;out_a&quot;</span><span class="p">)</span>
+<span class="n">out_b</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LogResult</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;out_b&quot;</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect_all</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">cond</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">cond</span><span class="o">.</span><span class="n">out_a</span><span class="p">,</span> <span class="n">out_a</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">cond</span><span class="o">.</span><span class="n">out_b</span><span class="p">,</span> <span class="n">out_b</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="pass-a-result-back-to-python">
+<h2>Pass a result back to python<a class="headerlink" href="#pass-a-result-back-to-python" title="Link to this heading">#</a></h2>
+<p>We can use the special <code class="xref py py-class docutils literal notranslate"><span class="pre">Return</span></code> node to transfer a value back to the main process. This can be useful if you want to incorporate a workflow into an existing python script without having to save and load from a file. All you need to do is call <code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code> after workflow execution:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">LoadData</span><span class="p">,</span> <span class="n">Return</span>
+
+<span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;example&quot;</span><span class="p">)</span>
+<span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">})</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Return</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+
+<span class="n">flow</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="c1"># 17</span>
+</pre></div>
+</div>
+</section>
+<section id="workflow-with-load-balancing">
+<span id="workflow-load-balance"></span><h2>Workflow with load balancing<a class="headerlink" href="#workflow-with-load-balancing" title="Link to this heading">#</a></h2>
+<p>Using nodes from the <code class="xref py py-mod docutils literal notranslate"><span class="pre">plumbing</span></code> module allows to distribute data over multiple nodes. We assume our data arrives in the form of a sequence of items that should be split across nodes and then collected together again at the end. We’ll use <code class="xref py py-class docutils literal notranslate"><span class="pre">Delay</span></code> nodes to emulate our workers:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">LoadData</span><span class="p">,</span> <span class="n">LogResult</span>
+<span class="kn">from</span> <span class="nn">maize.steps.plumbing</span> <span class="kn">import</span> <span class="n">Scatter</span><span class="p">,</span> <span class="n">Accumulate</span><span class="p">,</span> <span class="n">RoundRobin</span><span class="p">,</span> <span class="n">Merge</span><span class="p">,</span> <span class="n">Delay</span>
+
+<span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;balance&quot;</span><span class="p">)</span>
+<span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]})</span>
+
+<span class="c1"># Decomposes our list into items and sends them separately</span>
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Scatter</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span>
+
+<span class="c1"># Sends each item it receives to a different output</span>
+<span class="n">bal</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">RoundRobin</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bal&quot;</span><span class="p">)</span>
+
+<span class="c1"># Our processing nodes</span>
+<span class="n">worker1</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Delay</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;worker1&quot;</span><span class="p">)</span>
+<span class="n">worker2</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Delay</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;worker2&quot;</span><span class="p">)</span>
+<span class="n">worker3</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Delay</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;worker3&quot;</span><span class="p">)</span>
+
+<span class="c1"># Merges multiple inputs into one output</span>
+<span class="n">merge</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Merge</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span>
+
+<span class="c1"># Accumulate multiple items into one list</span>
+<span class="n">accu</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Accumulate</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;n_packets&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LogResult</span><span class="p">)</span>
+
+<span class="n">flow</span><span class="o">.</span><span class="n">connect_all</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">scatter</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">scatter</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">bal</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">bal</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">worker1</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">bal</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">worker2</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">bal</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">worker3</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">worker1</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">merge</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">worker2</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">merge</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">worker3</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">merge</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">merge</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">accu</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">accu</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, you can make use of the <a class="reference internal" href="_autosummary/maize.utilities.macros.parallel.html#maize.utilities.macros.parallel" title="maize.utilities.macros.parallel"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel()</span></code></a> macro to automate this sometimes tedious procedure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.utilities.macros</span> <span class="kn">import</span> <span class="n">parallel</span>
+<span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">LoadData</span><span class="p">,</span> <span class="n">LogResult</span>
+<span class="kn">from</span> <span class="nn">maize.steps.plumbing</span> <span class="kn">import</span> <span class="n">Scatter</span><span class="p">,</span> <span class="n">Accumulate</span><span class="p">,</span> <span class="n">RoundRobin</span><span class="p">,</span> <span class="n">Merge</span><span class="p">,</span> <span class="n">Delay</span>
+
+<span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;balance&quot;</span><span class="p">)</span>
+<span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]})</span>
+
+<span class="c1"># Decomposes our list into items and sends them separately</span>
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Scatter</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span>
+
+<span class="c1"># Apply our macro</span>
+<span class="n">worker_subgraph</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">parallel</span><span class="p">(</span><span class="n">Delay</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">n_branches</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Accumulate multiple items into one list</span>
+<span class="n">accu</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Accumulate</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;n_packets&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LogResult</span><span class="p">)</span>
+
+<span class="n">flow</span><span class="o">.</span><span class="n">connect_all</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">scatter</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">scatter</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">worker_subgraph</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">worker_subgraph</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">accu</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">accu</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="workflow-as-a-script">
+<h2>Workflow as a script<a class="headerlink" href="#workflow-as-a-script" title="Link to this heading">#</a></h2>
+<p>We can make a workflow callable on the commandline as a normal script by using the <a class="reference internal" href="_autosummary/maize.utilities.io.setup_workflow.html#maize.utilities.io.setup_workflow" title="maize.utilities.io.setup_workflow"><code class="xref py py-func docutils literal notranslate"><span class="pre">setup_workflow()</span></code></a> function and exposing workflow parameters using <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.map" title="maize.core.graph.Graph.map"><code class="xref py py-meth docutils literal notranslate"><span class="pre">map()</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">maize.utilities.io</span> <span class="kn">import</span> <span class="n">setup_workflow</span>
+<span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">LoadData</span><span class="p">,</span> <span class="n">LogResult</span>
+<span class="kn">from</span> <span class="nn">maize.steps.your_module</span> <span class="kn">import</span> <span class="n">YourNode</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;example&quot;</span><span class="p">)</span>
+    <span class="n">load</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadData</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">})</span>
+    <span class="n">my_node</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">YourNode</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;param&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LogResult</span><span class="p">)</span>
+
+    <span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">my_node</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+    <span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">my_node</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+
+    <span class="n">flow</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">load</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">my_node</span><span class="o">.</span><span class="n">param</span><span class="p">)</span>
+
+    <span class="n">setup_workflow</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You will now have a workflow that behaves as a normal script, with a help message listing all maize and workflow-specific parameters (using <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code>).</p>
+</section>
+<section id="workflow-with-ultra-high-throughput">
+<h2>Workflow with ultra-high throughput<a class="headerlink" href="#workflow-with-ultra-high-throughput" title="Link to this heading">#</a></h2>
+<p>You may sometimes run into situations where you have a very large amount of individual datapoints to send through a workflow. For instance, you might have a simple docking workflow and want to dock 100000 SMILES codes in one go. For some machines, this naive implementation might actually work:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">Return</span><span class="p">,</span> <span class="n">Void</span>
+<span class="kn">from</span> <span class="nn">maize.steps.mai.docking</span> <span class="kn">import</span> <span class="n">AutoDockGPU</span>
+<span class="kn">from</span> <span class="nn">maize.steps.mai.molecule</span> <span class="kn">import</span> <span class="n">LoadSmiles</span><span class="p">,</span> <span class="n">Smiles2Molecules</span>
+
+<span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;vina&quot;</span><span class="p">)</span>
+<span class="n">smi</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadSmiles</span><span class="p">)</span>
+<span class="n">gyp</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Smiles2Molecules</span><span class="p">)</span>
+<span class="n">adg</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">AutoDockGPU</span><span class="p">)</span>
+<span class="n">sco</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Return</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scores&quot;</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Void</span><span class="p">)</span>
+
+<span class="n">smi</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;smiles-100k.smi&quot;</span><span class="p">))</span>
+<span class="n">adg</span><span class="o">.</span><span class="n">grid_file</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;grid/rec.maps.fld&quot;</span><span class="p">))</span>
+<span class="n">adg</span><span class="o">.</span><span class="n">scores_only</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">adg</span><span class="o">.</span><span class="n">strict</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">flow</span><span class="o">.</span><span class="n">connect_all</span><span class="p">(</span>
+   <span class="p">(</span><span class="n">smi</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">gyp</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+   <span class="p">(</span><span class="n">gyp</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">adg</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+   <span class="p">(</span><span class="n">adg</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">log</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+   <span class="p">(</span><span class="n">adg</span><span class="o">.</span><span class="n">out_scores</span><span class="p">,</span> <span class="n">sco</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here, 100000 SMILES will be loaded and sent to the embedding and docking steps at once. This can cause memory issues with the channels and possibly the backend software that you’re using. It is also inefficient as docking will have to wait for all molecules to be embedded before it can start docking. A simple solution is to split the data into chunks and send these individual batches to looped variants of the inner processing nodes. This can be accomplished with <code class="xref py py-class docutils literal notranslate"><span class="pre">Batch</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">Combine</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">maize.steps.io</span> <span class="kn">import</span> <span class="n">Return</span><span class="p">,</span> <span class="n">Void</span>
+<span class="kn">from</span> <span class="nn">maize.steps.plumbing</span> <span class="kn">import</span> <span class="n">Batch</span><span class="p">,</span> <span class="n">Combine</span>
+<span class="kn">from</span> <span class="nn">maize.steps.mai.docking</span> <span class="kn">import</span> <span class="n">AutoDockGPU</span>
+<span class="kn">from</span> <span class="nn">maize.steps.mai.molecule</span> <span class="kn">import</span> <span class="n">LoadSmiles</span><span class="p">,</span> <span class="n">Smiles2Molecules</span>
+
+<span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;vina&quot;</span><span class="p">)</span>
+<span class="n">smi</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LoadSmiles</span><span class="p">)</span>
+
+<span class="c1"># Split the data into batches</span>
+<span class="n">bat</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Batch</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span>
+
+<span class="c1"># Important: You must specify looped execution for the inner nodes!</span>
+<span class="n">gyp</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Smiles2Molecules</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">adg</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">AutoDockGPU</span><span class="p">,</span> <span class="n">loop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Reassemble original data shape</span>
+<span class="n">com</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Combine</span><span class="p">[</span><span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]])</span>
+<span class="n">sco</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Return</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scores&quot;</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Void</span><span class="p">)</span>
+
+<span class="n">smi</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;smiles-100k.smi&quot;</span><span class="p">))</span>
+<span class="n">adg</span><span class="o">.</span><span class="n">grid_file</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;grid/rec.maps.fld&quot;</span><span class="p">))</span>
+<span class="n">adg</span><span class="o">.</span><span class="n">scores_only</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">adg</span><span class="o">.</span><span class="n">strict</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">flow</span><span class="o">.</span><span class="n">connect_all</span><span class="p">(</span>
+   <span class="p">(</span><span class="n">smi</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">bat</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+   <span class="p">(</span><span class="n">bat</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">gyp</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+   <span class="p">(</span><span class="n">gyp</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">adg</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+   <span class="p">(</span><span class="n">adg</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">log</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+   <span class="p">(</span><span class="n">adg</span><span class="o">.</span><span class="n">out_scores</span><span class="p">,</span> <span class="n">com</span><span class="o">.</span><span class="n">inp</span><span class="p">),</span>
+   <span class="p">(</span><span class="n">com</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">sco</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># This is the number of batches we will use</span>
+<span class="n">n_batches</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">combine_parameters</span><span class="p">(</span><span class="n">bat</span><span class="o">.</span><span class="n">n_batches</span><span class="p">,</span> <span class="n">com</span><span class="o">.</span><span class="n">n_batches</span><span class="p">)</span>
+<span class="n">n_batches</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">flow</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The embedding and docking steps will now only receive batches of 100 molecules at a time, avoiding potential memory issues and allowing parallel execution of embedding and docking. This technique can be easily combined with <a class="reference external" href="#workflow-load-balance">load balancing</a>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="examples.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Examples</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="userguide.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">User guide</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Molecular AI group
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Cookbook</a><ul>
+<li><a class="reference internal" href="#simple-linear-workflow">Simple linear workflow</a></li>
+<li><a class="reference internal" href="#cyclic-workflow">Cyclic workflow</a></li>
+<li><a class="reference internal" href="#conditionally-branched-workflow">Conditionally branched workflow</a></li>
+<li><a class="reference internal" href="#pass-a-result-back-to-python">Pass a result back to python</a></li>
+<li><a class="reference internal" href="#workflow-with-load-balancing">Workflow with load balancing</a></li>
+<li><a class="reference internal" href="#workflow-as-a-script">Workflow as a script</a></li>
+<li><a class="reference internal" href="#workflow-with-ultra-high-throughput">Workflow with ultra-high throughput</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=c87aa342"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

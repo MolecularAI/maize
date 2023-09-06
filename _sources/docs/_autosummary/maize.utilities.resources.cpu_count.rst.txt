@@ -1,0 +1,6 @@
+cpu\_count
+==========
+
+.. currentmodule:: maize.utilities.resources
+
+.. autofunction:: cpu_count

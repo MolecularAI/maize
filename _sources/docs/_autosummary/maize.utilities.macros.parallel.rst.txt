@@ -1,0 +1,6 @@
+parallel
+========
+
+.. currentmodule:: maize.utilities.macros
+
+.. autofunction:: parallel

@@ -1,0 +1,38 @@
+Channel
+=======
+
+.. currentmodule:: maize.core.channels
+
+.. autoclass:: Channel
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Channel.__init__
+      ~Channel.close
+      ~Channel.flush
+      ~Channel.kill
+      ~Channel.receive
+      ~Channel.send
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Channel.active
+      ~Channel.ready
+      ~Channel.size
+   
+   

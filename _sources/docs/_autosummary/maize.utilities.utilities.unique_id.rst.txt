@@ -1,0 +1,6 @@
+unique\_id
+==========
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: unique_id

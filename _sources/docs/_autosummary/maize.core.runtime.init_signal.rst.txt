@@ -1,0 +1,6 @@
+init\_signal
+============
+
+.. currentmodule:: maize.core.runtime
+
+.. autofunction:: init_signal

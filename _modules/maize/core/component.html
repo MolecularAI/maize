@@ -1,0 +1,971 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.08.19 -->
+        <title>maize.core.component - maize</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: rgb(131,0,81);
+  --color-brand-content: rgb(131,0,81);
+  --color-api-name: rgb(0,56,101);
+  --color-api-pre-name: rgb(0,56,101);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">maize</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/maize-logo.svg" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/userguide.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/cookbook.html">Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/examples.html">Examples</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../docs/steps/index.html">Steps</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Steps</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/steps/plumbing.html">Plumbing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/steps/io.html">Input / Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/glossary.html">Glossary</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/development.html">Development</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../docs/reference.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.core.html">core</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of core</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.core.channels.html">channels</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of channels</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.channels.Channel.html">Channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.channels.DataChannel.html">DataChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.channels.FileChannel.html">FileChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.channels.ChannelEmpty.html">ChannelEmpty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.channels.ChannelException.html">ChannelException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.channels.ChannelFull.html">ChannelFull</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.core.component.html">component</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of component</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.component.Component.html">Component</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.core.graph.html">graph</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of graph</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.graph.Graph.html">Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.graph.GraphBuildException.html">GraphBuildException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.html">interface</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of interface</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.FileParameter.html">FileParameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.Input.html">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.Interface.html">Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.MultiInput.html">MultiInput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.MultiOutput.html">MultiOutput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.MultiParameter.html">MultiParameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.MultiPort.html">MultiPort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.Output.html">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.Parameter.html">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.Port.html">Port</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.Suffix.html">Suffix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.ParameterException.html">ParameterException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.PortException.html">PortException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.interface.PortInterrupt.html">PortInterrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.core.node.html">node</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of node</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.node.LoopedNode.html">LoopedNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.node.Node.html">Node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.node.NodeBuildException.html">NodeBuildException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.html">runtime</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of runtime</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.format_summaries.html">format_summaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.format_update.html">format_update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.init_signal.html">init_signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.setup_build_logging.html">setup_build_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.setup_node_logging.html">setup_node_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.CustomFormat.html">CustomFormat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.Logger.html">Logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.RunPool.html">RunPool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.Runnable.html">Runnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.Status.html">Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.StatusHandler.html">StatusHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.StatusUpdate.html">StatusUpdate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.runtime.NodeException.html">NodeException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.core.workflow.html">workflow</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of workflow</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.workflow.expose.html">expose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.workflow.Workflow.html">Workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.workflow.CheckpointException.html">CheckpointException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.core.workflow.ParsingException.html">ParsingException</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.html">utilities</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.execution.html">execution</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of execution</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.execution.check_executable.html">check_executable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.execution.check_returncode.html">check_returncode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.execution.run_single_process.html">run_single_process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.execution.CommandRunner.html">CommandRunner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.execution.CommandRunnerPSIJ.html">CommandRunnerPSIJ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.execution.JobResourceConfig.html">JobResourceConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.execution.ResourceManagerConfig.html">ResourceManagerConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.execution.ProcessError.html">ProcessError</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.html">io</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.common_parent.html">common_parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.create_default_parser.html">create_default_parser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.expand_shell_vars.html">expand_shell_vars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.get_plugins.html">get_plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.load_file.html">load_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.parse_groups.html">parse_groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.read_input.html">read_input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.remove_dir_contents.html">remove_dir_contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.sendtree.html">sendtree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.setup_workflow.html">setup_workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.with_fields.html">with_fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.with_keys.html">with_keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.write_input.html">write_input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.Config.html">Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.NodeConfig.html">NodeConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.io.NodeConfigDict.html">NodeConfigDict</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.macros.html">macros</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of macros</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.macros.function_to_node.html">function_to_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.macros.lambda_node.html">lambda_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.macros.node_to_function.html">node_to_function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.macros.parallel.html">parallel</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.resources.html">resources</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of resources</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.resources.cpu_count.html">cpu_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.resources.gpu_count.html">gpu_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.resources.ChunkedSemaphore.html">ChunkedSemaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.resources.Resources.html">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.testing.html">testing</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of testing</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.testing.MockChannel.html">MockChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.testing.TestRig.html">TestRig</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.html">utilities</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.change_environment.html">change_environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.chunks.html">chunks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.extract_attribute_docs.html">extract_attribute_docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.extract_parent_type.html">extract_parent_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.extract_type.html">extract_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.find_probable_files_from_command.html">find_probable_files_from_command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.graph_cycles.html">graph_cycles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.graph_to_nx.html">graph_to_nx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.has_file.html">has_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.has_module_system.html">has_module_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.is_path_type.html">is_path_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.load_modules.html">load_modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.make_list.html">make_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.match_context.html">match_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.matching_types.html">matching_types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.nested_dict_to_tuple.html">nested_dict_to_tuple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.set_environment.html">set_environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.tuple_to_nested_dict.html">tuple_to_nested_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.typecheck.html">typecheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.unique_id.html">unique_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.StrEnum.html">StrEnum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.utilities.Timer.html">Timer</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.validation.html">validation</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of validation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.validation.FailValidator.html">FailValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.validation.FileValidator.html">FileValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.validation.OutputValidator.html">OutputValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.validation.SuccessValidator.html">SuccessValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.validation.Validator.html">Validator</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.visual.html">visual</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of visual</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../docs/_autosummary/maize.utilities.visual.nested_graphviz.html">nested_graphviz</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize-contrib/steps/index.html">Steps</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize-contrib/utilities.html">Utilities</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <h1>Source code for maize.core.component</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Component</span>
+<span class="sd">---------</span>
+<span class="sd">Provides a component class acting as the base for a graph or a component (node) thereof.</span>
+
+<span class="sd">`Component` is used as a base class for both `Node` and `Graph` and represents a</span>
+<span class="sd">hierarchical component with a ``parent`` (if it&#39;s not the root node). It should</span>
+<span class="sd">not be used directly. The workflow is internally represented as a tree, with the</span>
+<span class="sd">`Workflow` representing the root node owning all other nodes. Leaf nodes are termed</span>
+<span class="sd">`Node` and represent atomic workflow steps. Nodes with branches are (Sub-)`Graph`s,</span>
+<span class="sd">as they contain multiple nodes, but expose the same interface that a would:</span>
+
+<span class="sd">.. code-block:: text</span>
+
+<span class="sd">          Workflow</span>
+<span class="sd">          /      \</span>
+<span class="sd">      Subgraph   Node</span>
+<span class="sd">      /     \</span>
+<span class="sd">    Node   Node</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">get_context</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TYPE_CHECKING</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">,</span>
+    <span class="n">Any</span><span class="p">,</span>
+    <span class="n">ClassVar</span><span class="p">,</span>
+    <span class="n">TypeAlias</span><span class="p">,</span>
+    <span class="n">Union</span><span class="p">,</span>
+    <span class="n">Literal</span><span class="p">,</span>
+    <span class="n">cast</span><span class="p">,</span>
+    <span class="n">get_origin</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">TypedDict</span>
+
+<span class="kn">from</span> <span class="nn">maize.core.interface</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FileParameter</span><span class="p">,</span>
+    <span class="n">Input</span><span class="p">,</span>
+    <span class="n">Interface</span><span class="p">,</span>
+    <span class="n">MultiInput</span><span class="p">,</span>
+    <span class="n">MultiOutput</span><span class="p">,</span>
+    <span class="n">MultiParameter</span><span class="p">,</span>
+    <span class="n">Output</span><span class="p">,</span>
+    <span class="n">Port</span><span class="p">,</span>
+    <span class="n">Parameter</span><span class="p">,</span>
+    <span class="n">MultiPort</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">import</span> <span class="nn">maize.core.interface</span> <span class="k">as</span> <span class="nn">_in</span>
+<span class="kn">from</span> <span class="nn">maize.core.runtime</span> <span class="kn">import</span> <span class="n">Status</span><span class="p">,</span> <span class="n">StatusHandler</span><span class="p">,</span> <span class="n">StatusUpdate</span>
+<span class="kn">from</span> <span class="nn">maize.utilities.execution</span> <span class="kn">import</span> <span class="n">DEFAULT_CONTEXT</span>
+<span class="kn">from</span> <span class="nn">maize.utilities.resources</span> <span class="kn">import</span> <span class="n">Resources</span><span class="p">,</span> <span class="n">cpu_count</span><span class="p">,</span> <span class="n">gpu_count</span>
+<span class="kn">from</span> <span class="nn">maize.utilities.utilities</span> <span class="kn">import</span> <span class="n">Timer</span><span class="p">,</span> <span class="n">unique_id</span>
+<span class="kn">from</span> <span class="nn">maize.utilities.io</span> <span class="kn">import</span> <span class="n">Config</span><span class="p">,</span> <span class="n">NodeConfig</span><span class="p">,</span> <span class="n">with_fields</span>
+
+<span class="c1"># https://github.com/python/typeshed/issues/4266</span>
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">LogRecord</span>
+    <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Queue</span>
+    <span class="kn">from</span> <span class="nn">multiprocessing.synchronize</span> <span class="kn">import</span> <span class="n">Event</span> <span class="k">as</span> <span class="n">EventClass</span>
+    <span class="kn">from</span> <span class="nn">traceback</span> <span class="kn">import</span> <span class="n">TracebackException</span>
+    <span class="kn">from</span> <span class="nn">maize.core.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
+
+    <span class="n">MessageType</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="n">TracebackException</span> <span class="o">|</span> <span class="n">StatusUpdate</span> <span class="o">|</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="Component">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component">[docs]</a>
+<span class="k">class</span> <span class="nc">Component</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for all components. Should not be used directly.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    parent</span>
+<span class="sd">        Parent component, typically the graph in context</span>
+<span class="sd">    name</span>
+<span class="sd">        The name of the component</span>
+<span class="sd">    description</span>
+<span class="sd">        An optional additional description</span>
+<span class="sd">    fail_ok</span>
+<span class="sd">        If True, the failure in the component will</span>
+<span class="sd">        not trigger the whole network to shutdown</span>
+<span class="sd">    n_attempts</span>
+<span class="sd">        Number of attempts at executing the `run()` method</span>
+<span class="sd">    level</span>
+<span class="sd">        Logging level, if not given or ``None`` will use the parent logging level</span>
+<span class="sd">    cleanup_temp</span>
+<span class="sd">        Whether to remove any temporary directories after completion</span>
+<span class="sd">    resume</span>
+<span class="sd">        Whether to resume from a previous checkpoint</span>
+<span class="sd">    logfile</span>
+<span class="sd">        File to output all log messages to, defaults to STDOUT</span>
+<span class="sd">    max_cpus</span>
+<span class="sd">        Maximum number of CPUs to use, defaults to the number of available cores in the system</span>
+<span class="sd">    max_gpus</span>
+<span class="sd">        Maximum number of GPUs to use, defaults to the number of available GPUs in the system</span>
+<span class="sd">    loop</span>
+<span class="sd">        Whether to run the `run` method in a loop, as opposed to a single time</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    node.Node</span>
+<span class="sd">        Node class for implementing custom tasks</span>
+<span class="sd">    graph.Graph</span>
+<span class="sd">        Graph class to group nodes together to form a subgraph</span>
+<span class="sd">    workflow.Workflow</span>
+<span class="sd">        Workflow class to group nodes and graphs together to an executable workflow</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># By default, we keep track of all defined nodes and subgraphs so that we can instantiate</span>
+    <span class="c1"># them from serialized workflow definitions in YAML, JSON, or TOML format. Importing the</span>
+    <span class="c1"># node / graph definition is enough to make them available.</span>
+    <span class="n">__registry</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">[</span><span class="s2">&quot;Component&quot;</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">register</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">register</span><span class="p">:</span>
+            <span class="n">Component</span><span class="o">.</span><span class="n">__registry</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init_subclass__</span><span class="p">()</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_generate_sample_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates a sample config to be concatenated with the docstring.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">cls</span><span class="o">.</span><span class="n">required_callables</span><span class="p">:</span>
+            <span class="n">conf</span> <span class="o">=</span> <span class="n">NodeConfig</span><span class="p">()</span><span class="o">.</span><span class="n">generate_template_toml</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">required_callables</span><span class="p">)</span>
+            <span class="n">conf</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;       </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">conf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">+=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">    .. rubric:: Config example</span><span class="se">\n\n</span><span class="s2">    Example configuration for </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Each required callable only requires either ``scripts`` &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;OR ``commands``.</span><span class="se">\n\n</span><span class="s2">    .. code-block:: toml</span><span class="se">\n\n</span><span class="si">{</span><span class="n">conf</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">_SerialType</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+        <span class="n">inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+        <span class="n">outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+        <span class="n">parameters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+
+<div class="viewcode-block" id="Component.serialized_summary">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.serialized_summary">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">serialized_summary</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_SerialType</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Provides a serialized representation of the component type.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict[str, Any]</span>
+<span class="sd">            Nested dictionary of the component type structure, including I/O and parameters.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; Merge.serialized_summary()</span>
+<span class="sd">        {&quot;name&quot;: &quot;Merge&quot;, &quot;inputs&quot;: [{&quot;name&quot;: &quot;inp&quot;, ...}]}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">Component</span><span class="o">.</span><span class="n">_SerialType</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">Interface</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">}</span> <span class="o">|</span> <span class="n">attr</span><span class="o">.</span><span class="n">serialized</span>
+            <span class="k">match</span> <span class="n">attr</span><span class="p">:</span>
+                <span class="k">case</span> <span class="n">Input</span><span class="p">()</span> <span class="o">|</span> <span class="n">MultiInput</span><span class="p">():</span>
+                    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">case</span> <span class="n">Output</span><span class="p">()</span> <span class="o">|</span> <span class="n">MultiOutput</span><span class="p">():</span>
+                    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;outputs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">case</span> <span class="n">Parameter</span><span class="p">()</span> <span class="o">|</span> <span class="n">MultiParameter</span><span class="p">()</span> <span class="o">|</span> <span class="n">FileParameter</span><span class="p">():</span>
+                    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="Component.get_summary_line">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.get_summary_line">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_summary_line</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provides a one-line summary of the node.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="Component.get_interfaces">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.get_interfaces">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_interfaces</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="s2">&quot;parameter&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all interfaces available to the node.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        kind</span>
+<span class="sd">            Kind of interface to retrieve</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        set[str]</span>
+<span class="sd">            Interface names</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">inter</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">attr</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">|</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__annotations__</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">match</span> <span class="n">get_origin</span><span class="p">(</span><span class="n">attr</span><span class="p">),</span> <span class="n">kind</span><span class="p">:</span>
+                <span class="k">case</span> <span class="p">(</span><span class="n">_in</span><span class="o">.</span><span class="n">Input</span> <span class="o">|</span> <span class="n">_in</span><span class="o">.</span><span class="n">MultiInput</span><span class="p">),</span> <span class="s2">&quot;input&quot;</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">inter</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">case</span> <span class="p">(</span><span class="n">_in</span><span class="o">.</span><span class="n">Output</span> <span class="o">|</span> <span class="n">_in</span><span class="o">.</span><span class="n">MultiOutput</span><span class="p">),</span> <span class="s2">&quot;output&quot;</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">inter</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">case</span> <span class="p">(</span><span class="n">_in</span><span class="o">.</span><span class="n">Parameter</span> <span class="o">|</span> <span class="n">_in</span><span class="o">.</span><span class="n">MultiParameter</span> <span class="o">|</span> <span class="n">_in</span><span class="o">.</span><span class="n">FileParameter</span><span class="p">),</span> <span class="s2">&quot;parameter&quot;</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">inter</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">inter</span></div>
+
+
+<div class="viewcode-block" id="Component.get_inputs">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.get_inputs">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_inputs</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns all inputs available to the node.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_interfaces</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;input&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Component.get_outputs">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.get_outputs">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_outputs</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns all outputs available to the node.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_interfaces</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Component.get_parameters">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.get_parameters">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_parameters</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns all parameters available to the node.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_interfaces</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;parameter&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Component.get_available_nodes">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.get_available_nodes">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_available_nodes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="s2">&quot;Component&quot;</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all available and registered nodes.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        set[str]</span>
+<span class="sd">            All available node names</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">Component</span><span class="o">.</span><span class="n">__registry</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="Component.get_node_class">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.get_node_class">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_node_class</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">[</span><span class="s2">&quot;Component&quot;</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the node class corresponding to the given name.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name</span>
+<span class="sd">            Name of the component class to retrieve</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Type[Component]</span>
+<span class="sd">            The retrieved component class, can be passed to `add_node`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Component</span><span class="o">.</span><span class="n">__registry</span><span class="p">[</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Node of type </span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2"> not found in the registry. &quot;</span>
+                <span class="s2">&quot;Have you imported the node class definitions?&quot;</span>
+            <span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span></div>
+
+
+    <span class="n">_COMPONENT_FIELDS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;fail_ok&quot;</span><span class="p">,</span> <span class="s2">&quot;n_attempts&quot;</span><span class="p">,</span> <span class="s2">&quot;n_inputs&quot;</span><span class="p">,</span> <span class="s2">&quot;n_outputs&quot;</span><span class="p">)</span>
+
+    <span class="n">required_callables</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;List of external commandline programs that are required for running the component.&quot;&quot;&quot;</span>
+
+    <span class="n">required_packages</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;List of required python packages&quot;&quot;&quot;</span>
+
+    <span class="n">logger</span><span class="p">:</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Python logger for both the build and run procedures.&quot;&quot;&quot;</span>
+
+    <span class="n">run_timer</span><span class="p">:</span> <span class="n">Timer</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Timer for the run duration, without waiting for resources or other nodes.&quot;&quot;&quot;</span>
+
+    <span class="n">full_timer</span><span class="p">:</span> <span class="n">Timer</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Timer for the full duration, including waiting for resources or other nodes.&quot;&quot;&quot;</span>
+
+    <span class="n">work_dir</span><span class="p">:</span> <span class="n">Path</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Working directory for the component.&quot;&quot;&quot;</span>
+
+    <span class="n">datatype</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The component datatype if it&#39;s generic.&quot;&quot;&quot;</span>
+
+    <span class="n">status</span> <span class="o">=</span> <span class="n">StatusHandler</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Current status of the component.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Component.__init__">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Graph&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">fail_ok</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">n_attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cleanup_temp</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">resume</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">logfile</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_cpus</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_gpus</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">loop</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">unique_id</span><span class="p">()</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="n">get_context</span><span class="p">(</span><span class="n">DEFAULT_CONTEXT</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># This is the queue for communication with the main process, it will</span>
+            <span class="c1"># allow exceptions to be raised, and shutdown tokens to be raised</span>
+            <span class="c1"># Pylint freaks out here, see: https://github.com/PyCQA/pylint/issues/3488</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">message_queue</span><span class="p">:</span> <span class="s2">&quot;Queue[MessageType]&quot;</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+            <span class="c1"># This is the logging-only queue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logging_queue</span><span class="p">:</span> <span class="s2">&quot;Queue[LogRecord | None]&quot;</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+            <span class="c1"># This will signal the whole graph to shutdown gracefully</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal</span><span class="p">:</span> <span class="s2">&quot;EventClass&quot;</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+
+            <span class="c1"># Special considerations apply when resuming, especially for channel handling</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resume</span> <span class="o">=</span> <span class="n">resume</span>
+
+            <span class="c1"># Global config</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="o">.</span><span class="n">from_default</span><span class="p">()</span>
+
+            <span class="c1"># Cleanup all working directories</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_temp</span> <span class="o">=</span> <span class="n">cleanup_temp</span>
+
+            <span class="c1"># Optional logfile</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="n">logfile</span>
+
+            <span class="c1"># Whether to loop the `run` method for itself (nodes) or child nodes (graph)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">looped</span> <span class="o">=</span> <span class="n">loop</span> <span class="k">if</span> <span class="n">loop</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">False</span>
+
+            <span class="c1"># Resource management</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cpus</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">(</span><span class="n">max_count</span><span class="o">=</span><span class="n">max_cpus</span> <span class="ow">or</span> <span class="n">cpu_count</span><span class="p">(),</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gpus</span> <span class="o">=</span> <span class="n">Resources</span><span class="p">(</span><span class="n">max_count</span><span class="o">=</span><span class="n">max_gpus</span> <span class="ow">or</span> <span class="n">gpu_count</span><span class="p">(),</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">message_queue</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">message_queue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logging_queue</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">logging_queue</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">signal</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">signal</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resume</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">resume</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">config</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_temp</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">cleanup_temp</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">logfile</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cpus</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">cpus</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gpus</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">gpus</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">looped</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">looped</span> <span class="k">if</span> <span class="n">loop</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">loop</span>
+
+        <span class="c1"># Logging level follows the parent graph by default, but can be overridden</span>
+        <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">parent</span><span class="o">.</span><span class="n">level</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span><span class="o">.</span><span class="n">level</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">level</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">level</span>
+
+        <span class="c1"># Temporary working directory path to allow some basic pre-execution uses</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">work_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Prepared commands</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fail_ok</span> <span class="o">=</span> <span class="n">fail_ok</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_attempts</span> <span class="o">=</span> <span class="n">n_attempts</span>
+
+        <span class="c1"># Both atomic components and subgraphs can have ports / parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Input</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="n">MultiInput</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Output</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="n">MultiOutput</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">READY</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(name=&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;, parent=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__lshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Component&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="s2">&quot;Component&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">auto_connect</span><span class="p">(</span><span class="n">receiving</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">sending</span><span class="o">=</span><span class="n">other</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__rshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s2">&quot;Component&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="s2">&quot;Component&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">auto_connect</span><span class="p">(</span><span class="n">receiving</span><span class="o">=</span><span class="n">other</span><span class="p">,</span> <span class="n">sending</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">other</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ports</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Port</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provides a convenience iterator for all inputs and outputs.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="s2">&quot;Component&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provides all parent components.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parents</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,)</span>
+        <span class="k">return</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parents</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">component_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provides the full path to the component as a tuple of names.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parents</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="o">*</span><span class="n">parent_names</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">*</span><span class="n">parent_names</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">root</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Graph&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provides the root workflow or graph instance.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parents</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;Graph&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="n">root</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parents</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="s2">&quot;Graph&quot;</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">node_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NodeConfig</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provides the configuration of the current node&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">NodeConfig</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">n_outbound</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the number of items waiting to be sent&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">out</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">n_inbound</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the number of items waiting to be received&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">all_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Input</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="n">MultiInput</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="n">Parameter</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns all settable parameters and unconnected inputs&quot;&quot;&quot;</span>
+        <span class="n">inp_params</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">inp</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">inp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">inp</span><span class="o">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">inp</span><span class="p">)}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">|</span> <span class="n">inp_params</span>
+
+<div class="viewcode-block" id="Component.setup_directories">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.setup_directories">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_directories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets up the required directories.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">parent_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parent_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">work_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parent_path</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;comp-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">work_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Component.as_dict">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.as_dict">[docs]</a>
+    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provides a non-recursive dictionary view of the component.&quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">with_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_COMPONENT_FIELDS</span><span class="p">)</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">para</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">para</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">para</span><span class="o">.</span><span class="n">is_set</span><span class="p">}</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+
+
+<div class="viewcode-block" id="Component.send_update">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.send_update">[docs]</a>
+    <span class="k">def</span> <span class="nf">send_update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send a status update to the main process.&quot;&quot;&quot;</span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">StatusUpdate</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">parents</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">component_path</span><span class="p">,</span>
+            <span class="n">status</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">,</span>
+            <span class="n">run_time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">run_timer</span><span class="o">.</span><span class="n">elapsed_time</span><span class="p">,</span>
+            <span class="n">full_time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">full_timer</span><span class="o">.</span><span class="n">elapsed_time</span><span class="p">,</span>
+            <span class="n">n_inbound</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_inbound</span><span class="p">,</span>
+            <span class="n">n_outbound</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_outbound</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">summary</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Component.ports_active">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.ports_active">[docs]</a>
+    <span class="k">def</span> <span class="nf">ports_active</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if all required ports are active.</span>
+
+<span class="sd">        Can be overridden by the user to allow custom shutdown scenarios,</span>
+<span class="sd">        for example in the case of complex inter-port dependencies. By</span>
+<span class="sd">        default only checks if any mandatory ports are inactive.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        bool</span>
+<span class="sd">            ``True`` if all required ports are active, ``False`` otherwise.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">port</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ports</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">subports</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Port</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">|</span> <span class="n">MultiPort</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">port</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">MultiPort</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">port</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">subport</span> <span class="ow">in</span> <span class="n">subports</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">subport</span><span class="o">.</span><span class="n">active</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">subport</span><span class="o">.</span><span class="n">optional</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Component.update_parameters">
+<a class="viewcode-back" href="../../../docs/_autosummary/maize.core.component.Component.html#maize.core.component.Component.update_parameters">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update component parameters.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Name - value pairs supplied as keyword arguments</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_parameters</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Parameter &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39; not found in component parameters</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;  Available parameters: &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">all_parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">all_parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Molecular AI group
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/documentation_options.js?v=c87aa342"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+Output
+======
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: Output
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Output.__init__
+      ~Output.build
+      ~Output.check
+      ~Output.close
+      ~Output.is_connected
+      ~Output.send
+      ~Output.set_channel
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Output.active
+      ~Output.connected
+      ~Output.path
+      ~Output.serialized
+      ~Output.size
+      ~Output.name
+      ~Output.parent
+      ~Output.datatype
+      ~Output.doc
+   
+   

@@ -1,0 +1,6 @@
+find\_probable\_files\_from\_command
+====================================
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: find_probable_files_from_command

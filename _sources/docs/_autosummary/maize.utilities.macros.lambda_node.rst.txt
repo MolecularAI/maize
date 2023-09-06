@@ -1,0 +1,6 @@
+lambda\_node
+============
+
+.. currentmodule:: maize.utilities.macros
+
+.. autofunction:: lambda_node

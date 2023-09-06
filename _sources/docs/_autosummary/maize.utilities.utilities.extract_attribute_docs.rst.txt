@@ -1,0 +1,6 @@
+extract\_attribute\_docs
+========================
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: extract_attribute_docs

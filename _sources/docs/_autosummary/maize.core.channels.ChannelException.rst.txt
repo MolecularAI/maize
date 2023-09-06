@@ -1,0 +1,6 @@
+ChannelException
+================
+
+.. currentmodule:: maize.core.channels
+
+.. autoexception:: ChannelException

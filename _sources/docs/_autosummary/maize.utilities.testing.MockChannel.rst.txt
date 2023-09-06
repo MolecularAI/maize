@@ -1,0 +1,39 @@
+MockChannel
+===========
+
+.. currentmodule:: maize.utilities.testing
+
+.. autoclass:: MockChannel
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MockChannel.__init__
+      ~MockChannel.close
+      ~MockChannel.flush
+      ~MockChannel.get
+      ~MockChannel.kill
+      ~MockChannel.receive
+      ~MockChannel.send
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MockChannel.active
+      ~MockChannel.ready
+      ~MockChannel.size
+   
+   

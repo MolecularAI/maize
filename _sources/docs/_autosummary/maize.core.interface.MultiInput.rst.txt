@@ -1,0 +1,48 @@
+MultiInput
+==========
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: MultiInput
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MultiInput.__init__
+      ~MultiInput.build
+      ~MultiInput.check
+      ~MultiInput.close
+      ~MultiInput.dump
+      ~MultiInput.is_connected
+      ~MultiInput.preload
+      ~MultiInput.set
+      ~MultiInput.set_channel
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MultiInput.active
+      ~MultiInput.connected
+      ~MultiInput.default
+      ~MultiInput.path
+      ~MultiInput.serialized
+      ~MultiInput.size
+      ~MultiInput.name
+      ~MultiInput.parent
+      ~MultiInput.datatype
+      ~MultiInput.doc
+   
+   

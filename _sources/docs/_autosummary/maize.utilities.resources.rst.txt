@@ -1,0 +1,41 @@
+resources
+=========
+
+.. automodule:: maize.utilities.resources
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :template: custom-base.rst
+   
+      cpu_count
+      gpu_count
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class.rst
+   
+      ChunkedSemaphore
+      Resources
+   
+   
+
+   
+   
+   
+
+
+

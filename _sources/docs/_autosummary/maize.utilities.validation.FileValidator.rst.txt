@@ -1,0 +1,25 @@
+FileValidator
+=============
+
+.. currentmodule:: maize.utilities.validation
+
+.. autoclass:: FileValidator
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~FileValidator.__init__
+   
+   
+
+   
+   
+   

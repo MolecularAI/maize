@@ -1,0 +1,38 @@
+﻿core
+====
+
+.. automodule:: maize.core
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom-module.rst
+   :recursive:
+
+   maize.core.channels
+   maize.core.component
+   maize.core.graph
+   maize.core.interface
+   maize.core.node
+   maize.core.runtime
+   maize.core.workflow
+

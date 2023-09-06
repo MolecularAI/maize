@@ -1,0 +1,6 @@
+tuple\_to\_nested\_dict
+=======================
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: tuple_to_nested_dict

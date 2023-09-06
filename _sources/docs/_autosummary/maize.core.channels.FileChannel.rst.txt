@@ -1,0 +1,40 @@
+FileChannel
+===========
+
+.. currentmodule:: maize.core.channels
+
+.. autoclass:: FileChannel
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~FileChannel.__init__
+      ~FileChannel.close
+      ~FileChannel.flush
+      ~FileChannel.kill
+      ~FileChannel.preload
+      ~FileChannel.receive
+      ~FileChannel.send
+      ~FileChannel.setup
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FileChannel.active
+      ~FileChannel.ready
+      ~FileChannel.size
+   
+   

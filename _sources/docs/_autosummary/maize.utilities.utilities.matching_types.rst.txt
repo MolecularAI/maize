@@ -1,0 +1,6 @@
+matching\_types
+===============
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: matching_types

@@ -1,0 +1,6 @@
+ProcessError
+============
+
+.. currentmodule:: maize.utilities.execution
+
+.. autoexception:: ProcessError

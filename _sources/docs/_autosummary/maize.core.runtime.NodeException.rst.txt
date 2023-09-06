@@ -1,0 +1,6 @@
+NodeException
+=============
+
+.. currentmodule:: maize.core.runtime
+
+.. autoexception:: NodeException

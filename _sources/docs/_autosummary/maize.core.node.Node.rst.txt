@@ -1,0 +1,78 @@
+Node
+====
+
+.. currentmodule:: maize.core.node
+
+.. autoclass:: Node
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Node.__init__
+      ~Node.as_dict
+      ~Node.build
+      ~Node.check
+      ~Node.check_dependencies
+      ~Node.check_parameters
+      ~Node.cleanup
+      ~Node.execute
+      ~Node.get_available_nodes
+      ~Node.get_inputs
+      ~Node.get_interfaces
+      ~Node.get_node_class
+      ~Node.get_outputs
+      ~Node.get_parameters
+      ~Node.get_summary_line
+      ~Node.ports_active
+      ~Node.prepare
+      ~Node.run
+      ~Node.run_command
+      ~Node.run_multi
+      ~Node.send_update
+      ~Node.serialized_summary
+      ~Node.setup_directories
+      ~Node.shutdown
+      ~Node.update_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Node.all_parameters
+      ~Node.batch_options
+      ~Node.commands
+      ~Node.component_path
+      ~Node.datatype
+      ~Node.modules
+      ~Node.n_inbound
+      ~Node.n_outbound
+      ~Node.node_config
+      ~Node.parents
+      ~Node.ports
+      ~Node.python
+      ~Node.required_callables
+      ~Node.required_packages
+      ~Node.root
+      ~Node.scripts
+      ~Node.status
+      ~Node.logger
+      ~Node.run_timer
+      ~Node.full_timer
+      ~Node.work_dir
+      ~Node.name
+      ~Node.signal
+      ~Node.n_signals
+   
+   

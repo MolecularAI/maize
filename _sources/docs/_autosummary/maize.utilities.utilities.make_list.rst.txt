@@ -1,0 +1,6 @@
+make\_list
+==========
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: make_list

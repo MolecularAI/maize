@@ -1,0 +1,85 @@
+Graph
+=====
+
+.. currentmodule:: maize.core.graph
+
+.. autoclass:: Graph
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Graph.__init__
+      ~Graph.add
+      ~Graph.add_all
+      ~Graph.as_dict
+      ~Graph.auto_connect
+      ~Graph.build
+      ~Graph.chain
+      ~Graph.check
+      ~Graph.check_dependencies
+      ~Graph.combine_parameters
+      ~Graph.connect
+      ~Graph.connect_all
+      ~Graph.get_available_nodes
+      ~Graph.get_inputs
+      ~Graph.get_interfaces
+      ~Graph.get_node
+      ~Graph.get_node_class
+      ~Graph.get_outputs
+      ~Graph.get_parameter
+      ~Graph.get_parameters
+      ~Graph.get_port
+      ~Graph.get_summary_line
+      ~Graph.map
+      ~Graph.map_port
+      ~Graph.ports_active
+      ~Graph.send_update
+      ~Graph.serialized_summary
+      ~Graph.setup_directories
+      ~Graph.update_parameters
+      ~Graph.visualize
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Graph.P
+      ~Graph.P1
+      ~Graph.P2
+      ~Graph.P3
+      ~Graph.P4
+      ~Graph.P5
+      ~Graph.active_nodes
+      ~Graph.all_parameters
+      ~Graph.component_path
+      ~Graph.datatype
+      ~Graph.flat_channels
+      ~Graph.flat_components
+      ~Graph.flat_nodes
+      ~Graph.n_inbound
+      ~Graph.n_outbound
+      ~Graph.node_config
+      ~Graph.parents
+      ~Graph.ports
+      ~Graph.required_callables
+      ~Graph.required_packages
+      ~Graph.root
+      ~Graph.logger
+      ~Graph.run_timer
+      ~Graph.full_timer
+      ~Graph.work_dir
+      ~Graph.status
+   
+   

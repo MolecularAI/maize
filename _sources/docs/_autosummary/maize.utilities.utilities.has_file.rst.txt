@@ -1,0 +1,6 @@
+has\_file
+=========
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: has_file

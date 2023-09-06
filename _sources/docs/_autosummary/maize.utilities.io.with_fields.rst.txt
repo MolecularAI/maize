@@ -1,0 +1,6 @@
+with\_fields
+============
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: with_fields

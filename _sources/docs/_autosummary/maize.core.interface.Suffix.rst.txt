@@ -1,0 +1,25 @@
+Suffix
+======
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: Suffix
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Suffix.__init__
+   
+   
+
+   
+   
+   

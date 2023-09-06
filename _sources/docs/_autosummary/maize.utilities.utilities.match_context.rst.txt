@@ -1,0 +1,6 @@
+match\_context
+==============
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: match_context

@@ -1,0 +1,25 @@
+SuccessValidator
+================
+
+.. currentmodule:: maize.utilities.validation
+
+.. autoclass:: SuccessValidator
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SuccessValidator.__init__
+   
+   
+
+   
+   
+   

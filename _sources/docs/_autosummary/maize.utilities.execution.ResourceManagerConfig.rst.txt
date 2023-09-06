@@ -1,0 +1,36 @@
+ResourceManagerConfig
+=====================
+
+.. currentmodule:: maize.utilities.execution
+
+.. autoclass:: ResourceManagerConfig
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ResourceManagerConfig.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ResourceManagerConfig.launcher
+      ~ResourceManagerConfig.max_jobs
+      ~ResourceManagerConfig.project
+      ~ResourceManagerConfig.queue
+      ~ResourceManagerConfig.system
+      ~ResourceManagerConfig.walltime
+   
+   

@@ -1,0 +1,54 @@
+Input
+=====
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: Input
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Input.__init__
+      ~Input.build
+      ~Input.check
+      ~Input.close
+      ~Input.dump
+      ~Input.is_connected
+      ~Input.preload
+      ~Input.ready
+      ~Input.receive
+      ~Input.receive_optional
+      ~Input.set
+      ~Input.set_channel
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Input.active
+      ~Input.changed
+      ~Input.connected
+      ~Input.is_default
+      ~Input.is_set
+      ~Input.path
+      ~Input.serialized
+      ~Input.size
+      ~Input.value
+      ~Input.name
+      ~Input.parent
+      ~Input.datatype
+      ~Input.doc
+   
+   

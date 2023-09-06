@@ -1,0 +1,1105 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Cookbook" href="cookbook.html" /><link rel="prev" title="Quickstart" href="quickstart.html" />
+
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.08.19 -->
+        <title>User guide - maize</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: rgb(131,0,81);
+  --color-brand-content: rgb(131,0,81);
+  --color-api-name: rgb(0,56,101);
+  --color-api-pre-name: rgb(0,56,101);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">maize</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/maize-logo.svg" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cookbook.html">Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="steps/index.html">Steps</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Steps</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="steps/plumbing.html">Plumbing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="steps/io.html">Input / Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="reference.html">Reference</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/maize.core.html">core</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of core</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.channels.html">channels</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of channels</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.Channel.html">Channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.DataChannel.html">DataChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.FileChannel.html">FileChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.ChannelEmpty.html">ChannelEmpty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.ChannelException.html">ChannelException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.channels.ChannelFull.html">ChannelFull</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.component.html">component</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of component</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.component.Component.html">Component</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.graph.html">graph</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of graph</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.graph.Graph.html">Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.graph.GraphBuildException.html">GraphBuildException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.interface.html">interface</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of interface</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.FileParameter.html">FileParameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Input.html">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Interface.html">Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.MultiInput.html">MultiInput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.MultiOutput.html">MultiOutput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.MultiParameter.html">MultiParameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.MultiPort.html">MultiPort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Output.html">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Parameter.html">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Port.html">Port</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.Suffix.html">Suffix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.ParameterException.html">ParameterException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.PortException.html">PortException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.interface.PortInterrupt.html">PortInterrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.node.html">node</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of node</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.node.LoopedNode.html">LoopedNode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.node.Node.html">Node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.node.NodeBuildException.html">NodeBuildException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.runtime.html">runtime</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of runtime</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.format_summaries.html">format_summaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.format_update.html">format_update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.init_signal.html">init_signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.setup_build_logging.html">setup_build_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.setup_node_logging.html">setup_node_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.CustomFormat.html">CustomFormat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.Logger.html">Logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.RunPool.html">RunPool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.Runnable.html">Runnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.Status.html">Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.StatusHandler.html">StatusHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.StatusUpdate.html">StatusUpdate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.runtime.NodeException.html">NodeException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.core.workflow.html">workflow</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of workflow</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.workflow.expose.html">expose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html">Workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.workflow.CheckpointException.html">CheckpointException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.core.workflow.ParsingException.html">ParsingException</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="_autosummary/maize.utilities.html">utilities</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.execution.html">execution</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of execution</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.check_executable.html">check_executable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.check_returncode.html">check_returncode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.run_single_process.html">run_single_process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.CommandRunner.html">CommandRunner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.CommandRunnerPSIJ.html">CommandRunnerPSIJ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.JobResourceConfig.html">JobResourceConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.ResourceManagerConfig.html">ResourceManagerConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.execution.ProcessError.html">ProcessError</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.io.html">io</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.common_parent.html">common_parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.create_default_parser.html">create_default_parser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.expand_shell_vars.html">expand_shell_vars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.get_plugins.html">get_plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.load_file.html">load_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.parse_groups.html">parse_groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.read_input.html">read_input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.remove_dir_contents.html">remove_dir_contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.sendtree.html">sendtree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.setup_workflow.html">setup_workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.with_fields.html">with_fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.with_keys.html">with_keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.write_input.html">write_input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.Config.html">Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.NodeConfig.html">NodeConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.io.NodeConfigDict.html">NodeConfigDict</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.macros.html">macros</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of macros</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.macros.function_to_node.html">function_to_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.macros.lambda_node.html">lambda_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.macros.node_to_function.html">node_to_function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.macros.parallel.html">parallel</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.resources.html">resources</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of resources</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.resources.cpu_count.html">cpu_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.resources.gpu_count.html">gpu_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.resources.ChunkedSemaphore.html">ChunkedSemaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.resources.Resources.html">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.testing.html">testing</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of testing</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.testing.MockChannel.html">MockChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.testing.TestRig.html">TestRig</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.utilities.html">utilities</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.change_environment.html">change_environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.chunks.html">chunks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.extract_attribute_docs.html">extract_attribute_docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.extract_parent_type.html">extract_parent_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.extract_type.html">extract_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.find_probable_files_from_command.html">find_probable_files_from_command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.graph_cycles.html">graph_cycles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.graph_to_nx.html">graph_to_nx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.has_file.html">has_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.has_module_system.html">has_module_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.is_path_type.html">is_path_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.load_modules.html">load_modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.make_list.html">make_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.match_context.html">match_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.matching_types.html">matching_types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.nested_dict_to_tuple.html">nested_dict_to_tuple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.set_environment.html">set_environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.tuple_to_nested_dict.html">tuple_to_nested_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.typecheck.html">typecheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.unique_id.html">unique_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.StrEnum.html">StrEnum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.utilities.Timer.html">Timer</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.validation.html">validation</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of validation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.validation.FailValidator.html">FailValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.validation.FileValidator.html">FileValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.validation.OutputValidator.html">OutputValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.validation.SuccessValidator.html">SuccessValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.validation.Validator.html">Validator</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="_autosummary/maize.utilities.visual.html">visual</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of visual</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="_autosummary/maize.utilities.visual.nested_graphviz.html">nested_graphviz</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize-contrib/steps/index.html">Steps</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize-contrib/utilities.html">Utilities</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="user-guide">
+<h1>User guide<a class="headerlink" href="#user-guide" title="Link to this heading">#</a></h1>
+<p>This is a detailed user guide for <em>maize</em>. We will approach workflows in a top-down manner, starting with workflow definitions, followed by grouping multiple nodes together in subgraphs, and finally discussing how to implement custom functionality in your own nodes.</p>
+<section id="workflows">
+<h2>Workflows<a class="headerlink" href="#workflows" title="Link to this heading">#</a></h2>
+<p>A <a class="reference internal" href="glossary.html#term-workflow"><span class="xref std std-term">workflow</span></a> is a high-level description of a <a class="reference internal" href="glossary.html#term-graph"><span class="xref std std-term">graph</span></a>, allowing execution. It contains multiple <a class="reference internal" href="glossary.html#term-node"><span class="xref std std-term">nodes</span></a> or <a class="reference internal" href="glossary.html#term-subgraph"><span class="xref std std-term">subgraphs</span></a>, joined together with <a class="reference internal" href="glossary.html#term-channel"><span class="xref std std-term">channels</span></a>. You can construct a workflow from both pre-defined nodes and custom ones to tailor a workflow to your particular needs. The following image summarizes the anatomy of a workflow with exposed parameters, with <a class="reference internal" href="glossary.html#term-parameter"><span class="xref std std-term">parameters</span></a> shown in yellow, <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">inputs</span></a> in green, and <a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">outputs</span></a> in red:</p>
+<img alt="../_images/workflow-anatomy.svg" src="../_images/workflow-anatomy.svg" /><p>Workflows can be defined programmatically in python (the most flexible approach), or described in a tree-based serialization format (<code class="docutils literal notranslate"><span class="pre">JSON</span></code>, <code class="docutils literal notranslate"><span class="pre">YAML</span></code>, or <code class="docutils literal notranslate"><span class="pre">TOML</span></code>). They can then be run within python, or exposed as a commandline tool to be integrated into other pipelines. In contrast to pipelining tools like <a class="reference external" href="https://airflow.apache.org/">*airflow*</a> and <a class="reference external" href="https://github.com/spotify/luigi">*luigi*</a>, <em>maize</em> can run workflows with arbitrary topologies including cycles and conditionals.</p>
+<section id="adding-nodes">
+<span id="custom-workflows"></span><h3>Adding nodes<a class="headerlink" href="#adding-nodes" title="Link to this heading">#</a></h3>
+<p>Defining a workflow starts by creating a <a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html#maize.core.workflow.Workflow" title="maize.core.workflow.Workflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">Workflow</span></code></a> object:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+
+<span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Example&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Not specifying a name will result in a random 6-character sequence being used instead. There are additional useful options:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span>
+   <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Example&quot;</span><span class="p">,</span>
+   <span class="n">level</span><span class="o">=</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span>
+   <span class="n">cleanup_temp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+   <span class="n">default_channel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+   <span class="n">logfile</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;out.log&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><cite>level</cite> specifies the logging verbosity (see the <a class="reference external" href="https://docs.python.org/3/library/logging.html#module-logging" title="(in Python v3.11)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">python</span> <span class="pre">logging</span> <span class="pre">module</span></code></a>), <cite>cleanup_temp</cite> specifies whether the directories created during execution should be cleaned up, <cite>default_channel_size</cite> determines how many items can sit in an inter-node channel at a time, and <cite>logfile</cite> allows one to write the logs to a file, as opposed to <code class="docutils literal notranslate"><span class="pre">STDOUT</span></code>.</p>
+<p>We can then start adding nodes to the workflow using the <a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html#maize.core.workflow.Workflow.add" title="maize.core.workflow.Workflow.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Example</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that if you want to add another <code class="docutils literal notranslate"><span class="pre">Example</span></code> node, you will have to specify a custom name:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">node2</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;other_example&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can again specify additional options that change the way the node is set up and how it is run, including <a class="reference internal" href="glossary.html#term-parameter"><span class="xref std std-term">parameters</span></a> to be overridden:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">other</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+   <span class="n">OtherExample</span><span class="p">,</span>
+   <span class="n">name</span><span class="o">=</span><span class="s2">&quot;other&quot;</span><span class="p">,</span>
+   <span class="n">parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span>
+   <span class="n">loop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+   <span class="n">fail_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+   <span class="n">n_attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+   <span class="n">max_loops</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>If not explicitly told to do so, the <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run" title="maize.core.node.Node.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method of the node, containing all user code, will only run once. That means it will typically wait to receive some data, process it, send it onwards, and then shutdown. If you want to keep it running and continuously accept input, you can set <code class="docutils literal notranslate"><span class="pre">loop</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>. If you want to limit the maximum number of iterations, use <code class="docutils literal notranslate"><span class="pre">max_loops</span></code>, by default the node will loop until it receives a shutdown signal or detects neighbouring nodes shutting down.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">max_loops</span></code> argument can be useful when testing the behaviour of continuously running nodes. For some examples, see the test suites for <code class="xref py py-mod docutils literal notranslate"><span class="pre">plumbing</span></code>.</p>
+</div>
+<p>Any failures encountered during execution will raise an exception and cause the whole workflow to shutdown (the default), unless <code class="docutils literal notranslate"><span class="pre">fail_ok</span></code> is enabled. This can be useful for additional optional calculations that are not upstream of other essential nodes. Similarly, if a node is expected to fail occasionally, one can increase <code class="docutils literal notranslate"><span class="pre">n_attempts</span></code> from the default <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>The order nodes are added doesn’t matter. Alternatively, if you want to add a lot of nodes at once, you can use the <a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html#maize.core.workflow.Workflow.add_all" title="maize.core.workflow.Workflow.add_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_all()</span></code></a> method and specify multiple node classes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">node</span><span class="p">,</span> <span class="n">other</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add_all</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">OtherExample</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You won’t be able to directly override any parameters or specify additional keyword arguments though.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When defining a new node, it will be automatically added to an internal registry of node types. The node class (not instance) can then be retrieved from the name only using the <a class="reference internal" href="_autosummary/maize.core.component.Component.html#maize.core.component.Component.get_node_class" title="maize.core.component.Component.get_node_class"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_node_class()</span></code></a> function.</p>
+</div>
+</section>
+<section id="setting-parameters">
+<h3>Setting parameters<a class="headerlink" href="#setting-parameters" title="Link to this heading">#</a></h3>
+<p>Configuration of nodes is performed using <a class="reference internal" href="glossary.html#term-parameter"><span class="xref std std-term">parameters</span></a>. These are typically node settings that are unique to that node and the wrapped software, and would make little sense to change during execution of a workflow. These are things like configuration files or other set-and-forget options. Parameters can be set at node instantiation with <a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html#maize.core.workflow.Workflow.add" title="maize.core.workflow.Workflow.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a> as mentioned above, or on the nodes themselves using the <a class="reference internal" href="_autosummary/maize.core.interface.Parameter.html#maize.core.interface.Parameter.set" title="maize.core.interface.Parameter.set"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set()</span></code></a> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">node</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">37</span><span class="p">)</span>
+<span class="n">other</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;config.yml&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You can also set them on the commandline, if they are correctly exposed (see <a class="reference external" href="#running-workflows">running workflows</a>).</p>
+<p>Alternatively, <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">inputs</span></a> can also act as <a class="reference internal" href="glossary.html#term-parameter"><span class="xref std std-term">parameters</span></a>. This simplifies cases in which values might normally be set statically at workflow definition, but should allow changes in some special workflow cases. To enable this, <a class="reference internal" href="_autosummary/maize.core.interface.Input.html#maize.core.interface.Input" title="maize.core.interface.Input"><code class="xref py py-class docutils literal notranslate"><span class="pre">Input</span></code></a> can be instantiated with the <code class="docutils literal notranslate"><span class="pre">optional</span></code> flag and / or default values (using <code class="docutils literal notranslate"><span class="pre">default</span></code> and <code class="docutils literal notranslate"><span class="pre">default_factory</span></code>). In those cases, it will not have to be connected to another port and can be used as a parameter instead. Note that once the port is connected, it will not be able to be used as a parameter.</p>
+</section>
+<section id="handling-external-software">
+<h3>Handling external software<a class="headerlink" href="#handling-external-software" title="Link to this heading">#</a></h3>
+<p>In many cases, nodes will depend on packages that may have conflicts with other packages from other nodes. In this situation it is possible to run a node in a different python environment by specifying the path to the desired python executable (e.g. as part of a <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment) to the special, always available <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.python" title="maize.core.node.Node.python"><code class="xref py py-attr docutils literal notranslate"><span class="pre">python</span></code></a> parameter. In this case you must make sure that the relevant imports are defined in <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run" title="maize.core.node.Node.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> and not in the top-level. In addition, the other environment must also have maize installed.</p>
+<p>If your system has a <em>module</em> framework, and the node you’re using requires custom software, you can use the <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.modules" title="maize.core.node.Node.modules"><code class="xref py py-attr docutils literal notranslate"><span class="pre">modules</span></code></a> parameter to list modules to load.</p>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Module loading is performed in the python process of the node, not in a subprocess. Thus, any modifications to the existing python environment can have unintended consequences.</p>
+</div>
+<p>If a node requires custom scripts you can use the <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.scripts" title="maize.core.node.Node.scripts"><code class="xref py py-attr docutils literal notranslate"><span class="pre">scripts</span></code></a> parameter to specify an <code class="docutils literal notranslate"><span class="pre">interpreter</span></code> - <code class="docutils literal notranslate"><span class="pre">script</span></code> pair, or if you installed the required command in a non-standard location (and it’s not in your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>), you can use the <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.commands" title="maize.core.node.Node.commands"><code class="xref py py-attr docutils literal notranslate"><span class="pre">commands</span></code></a> parameter.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>All these options (<a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.python" title="maize.core.node.Node.python"><code class="xref py py-attr docutils literal notranslate"><span class="pre">python</span></code></a>, <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.modules" title="maize.core.node.Node.modules"><code class="xref py py-attr docutils literal notranslate"><span class="pre">modules</span></code></a>, <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.scripts" title="maize.core.node.Node.scripts"><code class="xref py py-attr docutils literal notranslate"><span class="pre">scripts</span></code></a>, <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.commands" title="maize.core.node.Node.commands"><code class="xref py py-attr docutils literal notranslate"><span class="pre">commands</span></code></a>) can be specified in a workflow-agnostic configuration file (see <a class="reference external" href="#configuring-workflows">global config</a>). This is useful for one-time configurations of HPC or other systems.</p>
+</div>
+</section>
+<section id="connecting-nodes">
+<h3>Connecting nodes<a class="headerlink" href="#connecting-nodes" title="Link to this heading">#</a></h3>
+<p>The next step is connecting the individual nodes together. In most cases, you should prefer the <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.connect" title="maize.core.graph.Graph.connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect()</span></code></a> method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Maize will assign a <a class="reference internal" href="glossary.html#term-channel"><span class="xref std std-term">channel</span></a> connecting these ports together based on their types. If the type is a file or a list or dictionary of files (using <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pathlib.Path</span></code></a>), Maize will use a special <a class="reference internal" href="_autosummary/maize.core.channels.FileChannel.html#maize.core.channels.FileChannel" title="maize.core.channels.FileChannel"><code class="xref py py-class docutils literal notranslate"><span class="pre">FileChannel</span></code></a> to connect the ports, with the option of either copying the file(s) (the default, and appropriate for smaller files), creating a symlink (when dealing with potentially large files) with <code class="docutils literal notranslate"><span class="pre">mode=&quot;link&quot;</span></code>, or simply moving the file(s) using <code class="docutils literal notranslate"><span class="pre">mode=&quot;move&quot;</span></code>.</p>
+<p>In some cases you might be faced with creating a long sequential workflow in which you are joining many nodes with a single <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">input</span></a> and single <a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">output</span></a> each. In that case you can use the more convenient <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.auto_connect" title="maize.core.graph.Graph.auto_connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">auto_connect()</span></code></a> or <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.chain" title="maize.core.graph.Graph.chain"><code class="xref py py-meth docutils literal notranslate"><span class="pre">chain()</span></code></a> methods on the nodes instead of the ports:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">auto_connect</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+<span class="c1"># Or:</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">another</span><span class="p">,</span> <span class="n">and_another</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In general it is better to explicitly define the connection though, as these methods will attempt to connect the first compatible pair of ports found. If you are faced with creating a lot of connections at once, you can use the <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.connect_all" title="maize.core.graph.Graph.connect_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect_all()</span></code></a> method with (<a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">output</span></a> - <a class="reference internal" href="glossary.html#term-input"><span class="xref std std-term">input</span></a>) pairs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">connect_all</span><span class="p">(</span>
+   <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">input</span><span class="p">),</span>
+   <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">another</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Static type checking for <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.connect_all" title="maize.core.graph.Graph.connect_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect_all()</span></code></a> and <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.add_all" title="maize.core.graph.Graph.add_all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_all()</span></code></a> is only implemented for up to 6 items due to limitations in Python’s type system.</p>
+</div>
+<p>Some nodes, especially general purpose data-piping tools such as those provided under <a class="reference internal" href="steps/index.html"><span class="doc">steps</span></a>, use special ports that allow multiple connections (<a class="reference internal" href="_autosummary/maize.core.interface.MultiPort.html#maize.core.interface.MultiPort" title="maize.core.interface.MultiPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiPort</span></code></a>). In this case, just call <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.connect" title="maize.core.graph.Graph.connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect()</span></code></a> multiple times on the same port. This will create more ports and connections as required:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">connect_all</span><span class="p">(</span>
+   <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">input</span><span class="p">),</span>
+   <span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">another</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Here we have connected the output of <code class="docutils literal notranslate"><span class="pre">node</span></code> to two different node inputs. Note that this is <em>only</em> possible with <a class="reference internal" href="_autosummary/maize.core.interface.MultiPort.html#maize.core.interface.MultiPort" title="maize.core.interface.MultiPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiPort</span></code></a>, this is because there is some ambiguity on whether data packets should be copied or distributed (if you want to implement behaviour like this, look at the <code class="xref py py-mod docutils literal notranslate"><span class="pre">plumbing</span></code> module). Under the hood, <a class="reference internal" href="_autosummary/maize.core.interface.MultiPort.html#maize.core.interface.MultiPort" title="maize.core.interface.MultiPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiPort</span></code></a> creates multiple individual ports as required, and the node using them must loop through them to send or receive items.</p>
+</section>
+<section id="handling-parameters">
+<h3>Handling parameters<a class="headerlink" href="#handling-parameters" title="Link to this heading">#</a></h3>
+<p>One step we might want to perform is to expose node-specific parameters on the workflow level. This can be done using <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.map" title="maize.core.graph.Graph.map"><code class="xref py py-meth docutils literal notranslate"><span class="pre">map()</span></code></a>, it will simply map all node parameters to the workflow, using the same name:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">another</span><span class="o">.</span><span class="n">param</span><span class="p">,</span> <span class="n">and_another</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The workflow will now have parameters named <code class="docutils literal notranslate"><span class="pre">value</span></code>, <code class="docutils literal notranslate"><span class="pre">param</span></code>, and <code class="docutils literal notranslate"><span class="pre">temperature</span></code>. These will be accessible as attributes on the workflow itself, or in the <code class="xref py py-attr docutils literal notranslate"><span class="pre">parameters</span></code> dictionary. For more fine-grained control over naming, and mapping multiple node parameters to a single workflow parameter, use <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.combine_parameters" title="maize.core.graph.Graph.combine_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">combine_parameters()</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">combine_parameters</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">another</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;val&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here both passed parameters are mapped to a single one, allowing a single call to <a class="reference internal" href="_autosummary/maize.core.interface.Parameter.html#maize.core.interface.Parameter.set" title="maize.core.interface.Parameter.set"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set()</span></code></a> to adjust multiple values at once. One example where this can be useful is a temperature setting for many physical computations. Thus, a call to <a class="reference internal" href="_autosummary/maize.core.interface.Parameter.html#maize.core.interface.Parameter.set" title="maize.core.interface.Parameter.set"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set()</span></code></a> will set both <code class="docutils literal notranslate"><span class="pre">other.value</span></code> and <code class="docutils literal notranslate"><span class="pre">another.value</span></code> to <code class="docutils literal notranslate"><span class="pre">37</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">val</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">37</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="alternative-workflow-definitions">
+<h3>Alternative workflow definitions<a class="headerlink" href="#alternative-workflow-definitions" title="Link to this heading">#</a></h3>
+<p>While a workflow definition through python is the most flexible, it can also be done using a suitable serialization format. In this example we will use <code class="docutils literal notranslate"><span class="pre">YAML</span></code> due to its readibility, but you can also use <code class="docutils literal notranslate"><span class="pre">JSON</span></code> or <code class="docutils literal notranslate"><span class="pre">TOML</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">workflow</span>
+<span class="nt">nodes</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Example</span>
+<span class="w">  </span><span class="nt">parameters</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">term</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Return</span>
+
+<span class="nt">channels</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">receiving</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">term</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input</span>
+<span class="w">  </span><span class="nt">sending</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">output</span>
+</pre></div>
+</div>
+<p>This file is equivalent to the following python code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="s2">&quot;workflow&quot;</span><span class="p">)</span>
+<span class="n">node</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Example</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;node&quot;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">42</span><span class="p">))</span>
+<span class="n">term</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Return</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;term&quot;</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">term</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Any arguments you would normally pass to the node initialization can be defined under the node list item. To read in the workflow defined above the <a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html#maize.core.workflow.Workflow.from_file" title="maize.core.workflow.Workflow.from_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_file()</span></code></a> method can be used:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">Workflow</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;file.yaml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You may need to import the relevant node definitions before loading the workflow.</p>
+</div>
+<p>You can also save workflows to a file to recover them later:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;file.yaml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also save a workflow to a normal python dictionary and use your own serialization method using <a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html#maize.core.workflow.Workflow.to_dict" title="maize.core.workflow.Workflow.to_dict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_dict()</span></code></a> and <a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html#maize.core.workflow.Workflow.from_dict" title="maize.core.workflow.Workflow.from_dict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_dict()</span></code></a>.</p>
+</section>
+<section id="id1">
+<h3>Running workflows<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Before we run our workflow it is good practice to check that is has been constructed correctly and that all dependencies are accessible:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">check</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.check" title="maize.core.graph.Graph.check"><code class="xref py py-meth docutils literal notranslate"><span class="pre">check()</span></code></a> ensures that all nodes are connected, that the types used are consistent, all non-optional parameters are set, and will attempt to run each node in it’s designated environment (using <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.prepare" title="maize.core.node.Node.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a>) by loading modules, packages and ensuring all required software is available. Running our constructed workflow is now just as simple as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This will log the execution progress to <code class="docutils literal notranslate"><span class="pre">STDOUT</span></code> by default. However in many cases we will want to execute a given workflow as a commandline tool, in the form of a python script. To do so we can use the <a class="reference internal" href="_autosummary/maize.utilities.io.setup_workflow.html#maize.utilities.io.setup_workflow" title="maize.utilities.io.setup_workflow"><code class="xref py py-func docutils literal notranslate"><span class="pre">setup_workflow()</span></code></a> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">setup_workflow</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>On some systems it might be necessary to use the <code class="code docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;:</span> <span class="pre">...</span></code> guard with workflow scripts to avoid issues with spawning new processes.</p>
+</div>
+<p>It will create an argument parser with two groups: one for general <em>maize</em> parameters governing verbosity, global configuration, and whether to only check the graph without running it; and another one for any exposed parameters. This means that a workflow script can be called like this:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>workflow.py<span class="w"> </span>--val<span class="w"> </span><span class="m">42</span>
+</pre></div>
+</div>
+<p>Calling the script with <code class="docutils literal notranslate"><span class="pre">--help</span></code> will show all available maize and workflow-specific options:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Short</p></th>
+<th class="head"><p>Long</p></th>
+<th class="head"><p>Information</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-c</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--check</span></code></p></td>
+<td><p>Check if the graph was built correctly and exit</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-l</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--list</span></code></p></td>
+<td><p>List all available nodes and exit</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-o</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--options</span></code></p></td>
+<td><p>List all exposed workflow parameters and exit</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-d</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--debug</span></code></p></td>
+<td><p>Provide debugging information</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-q</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--quiet</span></code></p></td>
+<td><p>Silence all output except errors and warnings</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">NA</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--keep</span></code></p></td>
+<td><p>Keep all output files</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NA</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">CONFIG</span></code></p></td>
+<td><p>Global configuration file to use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">NA</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--log</span> <span class="pre">LOG</span></code></p></td>
+<td><p>Logfile to use (instead of <code class="docutils literal notranslate"><span class="pre">STDOUT</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">NA</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--parameters</span> <span class="pre">PARAMETERS</span></code></p></td>
+<td><p>A serialized file containing additional parameters</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If you have a workflow in a serialized format, you can run it using the <code class="docutils literal notranslate"><span class="pre">maize</span></code> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>maize<span class="w"> </span>flow.yaml
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In <em>maize-contrib</em>, complete workflows are defined as functions and then exposed in <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code> as runnable scripts. This allows a far simpler commandline usage.</p>
+</div>
+</section>
+<section id="configuring-workflows">
+<span id="config-workflow"></span><h3>Configuring workflows<a class="headerlink" href="#configuring-workflows" title="Link to this heading">#</a></h3>
+<p>Maize further allows the use of a global configuration file (<code class="docutils literal notranslate"><span class="pre">--config</span></code>) to adjust options that are more workflow-independent. Here’s an example:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># maize global configuration file example</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="c1"># Where to save temporary files and all workflow directories</span>
+<span class="linenos"> 4</span><span class="n">scratch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/tmp&quot;</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1"># Additional packages to load</span>
+<span class="linenos"> 7</span><span class="n">packages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="s">&quot;maize.steps.mai&quot;</span>
+<span class="linenos"> 9</span><span class="p">]</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="c1"># Environment variables to be set globally</span>
+<span class="linenos">12</span><span class="k">[environment]</span>
+<span class="linenos">13</span><span class="n">EXAMPLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;VARIABLE&quot;</span>
+<span class="linenos">14</span><span class="n">OTHER_EXAMPLE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;OTHER_VARIABLE&quot;</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># Batch job system options</span>
+<span class="linenos">17</span><span class="k">[batch]</span>
+<span class="linenos">18</span><span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;slurm&quot;</span><span class="w">  </span><span class="c1"># Can be one of {&#39;cobalt&#39;, &#39;flux&#39;, &#39;local&#39;, &#39;lsf&#39;, &#39;pbspro&#39;, &#39;rp&#39;, &#39;slurm&#39;}</span>
+<span class="linenos">19</span><span class="n">max_jobs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w">  </span><span class="c1"># The maximum number of jobs that can be submitted by a node at once</span>
+<span class="linenos">20</span><span class="n">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;core&quot;</span>
+<span class="linenos">21</span><span class="n">project</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;your_project&quot;</span>
+<span class="linenos">22</span><span class="n">launcher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;srun&quot;</span><span class="w">  </span><span class="c1"># The launcher to use for the command, usually one of {&#39;srun&#39;, &#39;mpirun&#39;, &#39;mpiexec&#39;}</span>
+<span class="linenos">23</span><span class="n">walltime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;24:00:00&quot;</span><span class="w">  </span><span class="c1"># Job walltime limit, shorter times may improve queueing times</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="c1"># The next sections configure nodes requiring specific executables,</span>
+<span class="linenos">26</span><span class="c1"># here we are configuring the node defined as ``Example``:</span>
+<span class="linenos">27</span><span class="k">[example]</span>
+<span class="linenos">28</span><span class="n">python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path/to/python&quot;</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="c1"># Modules to load</span>
+<span class="linenos">31</span><span class="n">modules</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;program_module/1.0&quot;</span><span class="p">]</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="c1"># Commands and their paths</span>
+<span class="linenos">34</span><span class="n">commands</span><span class="p">.</span><span class="n">other_program</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path/to/other_program&quot;</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="c1"># You can also expand environment variables that might have been set by the module</span>
+<span class="linenos">37</span><span class="n">commands</span><span class="p">.</span><span class="n">another_program</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;$MODULE_ENV_VAR/another_program&quot;</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span><span class="c1"># Scripts that require a specific interpreter</span>
+<span class="linenos">40</span><span class="n">scripts</span><span class="p">.</span><span class="n">program</span><span class="p">.</span><span class="n">interpreter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path/to/python&quot;</span>
+<span class="linenos">41</span><span class="n">scripts</span><span class="p">.</span><span class="n">program</span><span class="p">.</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;path/to/program/or/folder&quot;</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span><span class="c1"># Default parameter settings for this node</span>
+<span class="linenos">44</span><span class="n">parameters</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span>
+</pre></div>
+</div>
+<p>While not recommended, you can also specify the config in python, or overwrite specific parts of it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.utilities.io</span> <span class="kn">import</span> <span class="n">Config</span><span class="p">,</span> <span class="n">NodeConfig</span>
+
+<span class="n">flow</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;path/to/config.toml&quot;</span><span class="p">))</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">scratch</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;./&quot;</span><span class="p">)</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;vina&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">NodeConfig</span><span class="p">(</span><span class="n">modules</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;OtherVinaModule&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Here, <a class="reference internal" href="_autosummary/maize.utilities.io.NodeConfig.html#maize.utilities.io.NodeConfig" title="maize.utilities.io.NodeConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">NodeConfig</span></code></a> is a node-level configuration class allowing the specification of paths to any required software.</p>
+<p>By default <a class="reference internal" href="_autosummary/maize.utilities.io.Config.html#maize.utilities.io.Config" title="maize.utilities.io.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></a> will look for a configuration file named <code class="docutils literal notranslate"><span class="pre">maize.toml</span></code> in <code class="docutils literal notranslate"><span class="pre">$XDG_CONFIG_HOME</span></code> (usually at <code class="docutils literal notranslate"><span class="pre">~/.config/</span></code>, see <a class="reference external" href="https://xdgbasedirectoryspecification.com/">here for more information on the XDG standard</a>) or one specified using the <code class="docutils literal notranslate"><span class="pre">MAIZE_CONFIG</span></code> environment variable. If you’re confused about what to add to your config for a particular workflow, you can use <a class="reference internal" href="_autosummary/maize.core.workflow.Workflow.html#maize.core.workflow.Workflow.generate_config_template" title="maize.core.workflow.Workflow.generate_config_template"><code class="xref py py-meth docutils literal notranslate"><span class="pre">generate_config_template()</span></code></a> to create a TOML template that you can populate with the correct paths. Note that only one of <code class="docutils literal notranslate"><span class="pre">scripts</span></code> and <code class="docutils literal notranslate"><span class="pre">commands</span></code> needs to be specified for a given command.</p>
+</section>
+</section>
+<section id="subgraphs">
+<span id="custom-graphs"></span><h2>Subgraphs<a class="headerlink" href="#subgraphs" title="Link to this heading">#</a></h2>
+<p>When creating complex workflows, we will often find ourselves in a situation where multiple nodes can be grouped together to one logical unit – a <a class="reference internal" href="glossary.html#term-subgraph"><span class="xref std std-term">subgraph</span></a>:</p>
+<img alt="../_images/graph-anatomy.svg" src="../_images/graph-anatomy.svg" /><p>This is where <a class="reference internal" href="glossary.html#term-subgraph"><span class="xref std std-term">subgraphs</span></a> can be helpful. To define them, create a new class with <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph" title="maize.core.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> as a base, and add nodes by calling the <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.add" title="maize.core.graph.Graph.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a> and <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.connect" title="maize.core.graph.Graph.connect"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connect()</span></code></a> methods in a custom <code class="docutils literal notranslate"><span class="pre">build()</span></code> method, as if we were creating a normal workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.graph</span> <span class="kn">import</span> <span class="n">Graph</span>
+<span class="kn">from</span> <span class="nn">maize.steps.plumbing</span> <span class="kn">import</span> <span class="n">Delay</span>
+
+<span class="k">class</span> <span class="nc">SubGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="n">delay</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Example</span><span class="p">)</span>
+        <span class="n">delay</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Delay</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">delay</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">delay</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_port</span><span class="p">(</span><span class="n">delay</span><span class="o">.</span><span class="n">out</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">delay</span><span class="o">.</span><span class="n">delay</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A key difference between a <a class="reference internal" href="glossary.html#term-subgraph"><span class="xref std std-term">subgraph</span></a> and a workflow is that the former will always have exposed ports. We however have to clarify which port should be exposed how, by using the <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.map_port" title="maize.core.graph.Graph.map_port"><code class="xref py py-meth docutils literal notranslate"><span class="pre">map_port()</span></code></a> method and specifying a reference to the original port of a contained node and optionally a new name. We can again use the <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.map" title="maize.core.graph.Graph.map"><code class="xref py py-meth docutils literal notranslate"><span class="pre">map()</span></code></a> convenience method to automatically expose parameters. Note that to get the benefits of type-checking you should in those cases declare all interfaces in the class body. To group multiple parameters together, we can again use <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.combine_parameters" title="maize.core.graph.Graph.combine_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">combine_parameters()</span></code></a>. <code class="docutils literal notranslate"><span class="pre">SubGraph</span></code> will now behave just like any other <a class="reference internal" href="glossary.html#term-component"><span class="xref std std-term">component</span></a> in the workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sg</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SubGraph</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">delay</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">flow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">sg</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">another</span><span class="o">.</span><span class="n">inp</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A common situation is running all contained nodes in a loop, in this case you can pass <code class="docutils literal notranslate"><span class="pre">loop=True</span></code> just like for a normal node. At execution, the whole workflow is flattened and each node executed normally, irrespective of nesting. The <a class="reference internal" href="glossary.html#term-subgraph"><span class="xref std std-term">subgraph</span></a> paradigm is therefore mostly a conceptual aid for complex workflows.</p>
+</section>
+<section id="custom-nodes">
+<span id="id2"></span><h2>Custom nodes<a class="headerlink" href="#custom-nodes" title="Link to this heading">#</a></h2>
+<p>A <a class="reference internal" href="glossary.html#term-node"><span class="xref std std-term">node</span></a> is the fundamental unit of computation in <em>maize</em>. It features at least one <a class="reference internal" href="glossary.html#term-port"><span class="xref std std-term">port</span></a>, and any number of <a class="reference internal" href="glossary.html#term-parameter"><span class="xref std std-term">parameters</span></a> that allow communication with other nodes and the user, respectively:</p>
+<img alt="../_images/node-anatomy.svg" src="../_images/node-anatomy.svg" /><p>Each port (and by extension <a class="reference internal" href="glossary.html#term-channel"><span class="xref std std-term">channel</span></a>) has a specific type associated that will prevent a graph from succeeding with a call to <a class="reference internal" href="_autosummary/maize.core.graph.Graph.html#maize.core.graph.Graph.check" title="maize.core.graph.Graph.check"><code class="xref py py-meth docutils literal notranslate"><span class="pre">check()</span></code></a> in case of type mismatches. All interfaces of a port will typically be available as attributes, but can also be accessed through specific dictionaries (<code class="xref py py-attr docutils literal notranslate"><span class="pre">inputs</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">outputs</span></code> and <code class="xref py py-attr docutils literal notranslate"><span class="pre">parameters</span></code>). All computation is performed in <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run" title="maize.core.node.Node.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a>, which is defined by the user. This is an example node definition:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">maize.core.interface</span> <span class="kn">import</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">Output</span>
+
+<span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This node takes a <code class="docutils literal notranslate"><span class="pre">str</span></code> as a parameter (with a default value of <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code>) and outputs it to an <a class="reference internal" href="glossary.html#term-output"><span class="xref std std-term">output</span></a> port. It only runs this once (unless added to the workflow with <code class="docutils literal notranslate"><span class="pre">loop</span></code> set to <code class="docutils literal notranslate"><span class="pre">True</span></code>), and if the call to <a class="reference internal" href="_autosummary/maize.core.interface.Output.html#maize.core.interface.Output.send" title="maize.core.interface.Output.send"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send()</span></code></a> was successful it will immediately return and complete. It’s also possible to specify optional parameters with no default value using the <code class="docutils literal notranslate"><span class="pre">optional</span></code> keyword in the <a class="reference internal" href="_autosummary/maize.core.interface.Parameter.html#maize.core.interface.Parameter" title="maize.core.interface.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></a> constructor.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Any custom imports must be made inside the <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run" title="maize.core.node.Node.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method, or in functions called by <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run" title="maize.core.node.Node.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a>.</p>
+</div>
+<section id="handling-files">
+<h3>Handling files<a class="headerlink" href="#handling-files" title="Link to this heading">#</a></h3>
+<p>A custom node can also send and receive files. This can be accomplished by specifying <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">pathlib.Path</span></code></a> as a type. If you expect the files you are receiving or sending to be very large, you should also set the <code class="docutils literal notranslate"><span class="pre">mode</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">'link'</span></code> or <code class="docutils literal notranslate"><span class="pre">'move'</span></code>, to ensure that large files don’t get copied.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">maize.core.interface</span> <span class="kn">import</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">Output</span>
+
+<span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;link&quot;</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">create_large_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Behind the scenes, maize lets the receiving node know that one or more files are available. The files only get copied or linked once the other node calls the <a class="reference internal" href="_autosummary/maize.core.interface.Input.html#maize.core.interface.Input.receive" title="maize.core.interface.Input.receive"><code class="xref py py-meth docutils literal notranslate"><span class="pre">receive()</span></code></a> method, avoiding most situations in which files could be overwritten.</p>
+</section>
+<section id="looped-execution">
+<span id="looped-nodes"></span><h3>Looped execution<a class="headerlink" href="#looped-execution" title="Link to this heading">#</a></h3>
+<p>The above example represents a case of a single execution. We may however be interested in performing some form of continuous repeating computation. This can be accomplished by passing <code class="docutils literal notranslate"><span class="pre">loop=True</span></code> to the node or subgraph when adding it to the workflow. The following node, when used with looping, will continuously send the same value, akin to the Unix <code class="docutils literal notranslate"><span class="pre">yes</span></code> command:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">maize.core.interface</span> <span class="kn">import</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">Output</span>
+
+<span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, in some cases you might want to keep state over multiple loops. In that situation, you can setup any data structures you need in the <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.prepare" title="maize.core.node.Node.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> method (making sure to call the base method using <cite>super</cite>). The <code class="xref py py-class docutils literal notranslate"><span class="pre">RoundRobin</span></code> node is a good example of this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RoundRobin</span><span class="p">(</span><span class="n">LoopedNode</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Outputs a single input packet to a single output port at a time,</span>
+<span class="sd">    cycling through output ports.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Single input to alternatingly send on&quot;&quot;&quot;</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">MultiOutput</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">MultiOutput</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Multiple outputs to distribute over&quot;&quot;&quot;</span>
+
+    <span class="n">_output_cycle</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Output</span><span class="p">[</span><span class="n">T</span><span class="p">]]</span>
+    <span class="n">_current_output</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_cycle</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_output</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_cycle</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">active</span> <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span><span class="ow">not</span> <span class="n">out</span><span class="o">.</span><span class="n">active</span> <span class="k">for</span> <span class="n">out</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PortInterrupt</span><span class="p">(</span><span class="s2">&quot;Inactive ports&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_output</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_output</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_cycle</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, we called the base <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.prepare" title="maize.core.node.Node.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> method, followed by creating an iterator over all outputs, and initializing the first output by calling <cite>next</cite>. In <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run" title="maize.core.node.Node.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a>, we can use this output as normal and increment the iterator.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Patterns using continuous loops like this always have the potential to cause deadlocks, as they have no explicit exit condition. In many cases however downstream nodes that finish computation will signal a port shutdown and consequently cause the sending port to exit.</p>
+</div>
+<p>A common pattern with looped nodes is an optional receive, i.e. we will want to receive one or multiple values (see <a class="reference internal" href="_autosummary/maize.core.interface.MultiPort.html#maize.core.interface.MultiPort" title="maize.core.interface.MultiPort"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiPort</span></code></a>) only if they are available and then continue. This can be accomplished by using optional ports, and querying them using <a class="reference internal" href="_autosummary/maize.core.interface.Input.html#maize.core.interface.Input.ready" title="maize.core.interface.Input.ready"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ready()</span></code></a> before attempting to receive:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">maize.core.interface</span> <span class="kn">import</span> <span class="n">MultiInput</span><span class="p">,</span> <span class="n">Output</span>
+
+<span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="n">inp</span><span class="p">:</span> <span class="n">MultiInput</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">MultiInput</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">concat</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">inp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">inp</span><span class="o">.</span><span class="n">ready</span><span class="p">():</span>
+                <span class="n">concat</span> <span class="o">+=</span> <span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">concat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This node will always send a value every iteration, no matter if data is available or not. The optional flag will also ensure it can shutdown correctly when neighbouring nodes stop. Alternatively you can use the <a class="reference internal" href="_autosummary/maize.core.interface.Input.html#maize.core.interface.Input.receive_optional" title="maize.core.interface.Input.receive_optional"><code class="xref py py-meth docutils literal notranslate"><span class="pre">receive_optional()</span></code></a> method to unconditionally receive a value, with the possibility of receiving <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>Another useful option is to allow an input to cache a previously received value by adding the <code class="docutils literal notranslate"><span class="pre">cached</span></code> flag to the constructor:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maize.core.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">maize.core.interface</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
+
+<span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">cached</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span> <span class="o">+</span> <span class="s2">&quot;-bar&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, if the node received the string <code class="docutils literal notranslate"><span class="pre">&quot;foo&quot;</span></code> the previous iteration, but hasn’t been sent a new value this iteration, it will still receive <code class="docutils literal notranslate"><span class="pre">&quot;foo&quot;</span></code>. This is particularly useful for setting up parameters at the beginning of a workflow and then keeping them unchanged over various internal loops.</p>
+</section>
+<section id="generic-nodes">
+<h3>Generic nodes<a class="headerlink" href="#generic-nodes" title="Link to this heading">#</a></h3>
+<p>When designing nodes for general purpose “plumbing” use, it is attractive to allow generic types. Rather than using <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">typing.Any</span></code></a>, it is safer to use a <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">typing.TypeVar</span></code></a>, for example like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Generic</span>
+
+<span class="kn">from</span> <span class="nn">maize.core.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">maize.core.interface</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This informs the type system that <code class="docutils literal notranslate"><span class="pre">Example</span></code> can receive any value, but the sent value will be of the same type. When creating a workflow, we should however explicitly specify the type when adding nodes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Example</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;node&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This way we get static typing support throughout our workflow, minimizing errors in graph construction.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Dynamic type-checking with generic nodes is currently in an experimental phase. If you encounter problems, using <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">typing.Any</span></code></a> is a temporary work-around.</p>
+</div>
+</section>
+<section id="running-commands">
+<h3>Running commands<a class="headerlink" href="#running-commands" title="Link to this heading">#</a></h3>
+<p>There are two main ways of running commands: locally or using a resource manager (such as <a class="reference external" href="https://slurm.schedmd.com/overview.html">SLURM</a>). Both can be used through <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run_command" title="maize.core.node.Node.run_command"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_command()</span></code></a> and <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run_multi" title="maize.core.node.Node.run_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_multi()</span></code></a>: by default any command will simply be run locally (with optional validation) and return a <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#subprocess.CompletedProcess" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">subprocess.CompletedProcess</span></code></a> instance containing the returncode and any output generated on <em>standard output</em> or <em>standard error</em>.</p>
+<section id="software-dependencies">
+<h4>Software dependencies<a class="headerlink" href="#software-dependencies" title="Link to this heading">#</a></h4>
+<p>A common issue is that many programs will require some environment preparation that is often heavily system dependent. To accomodate this, any node definitions should include a <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.required_callables" title="maize.core.node.Node.required_callables"><code class="xref py py-attr docutils literal notranslate"><span class="pre">required_callables</span></code></a> definition listing the commands or software that is necessary to run, and / or a <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.required_packages" title="maize.core.node.Node.required_packages"><code class="xref py py-attr docutils literal notranslate"><span class="pre">required_packages</span></code></a> attribute listing python packages required in the environment. They can then be specified in the <a class="reference external" href="#configuring-workflows">global config</a> using the <code class="docutils literal notranslate"><span class="pre">modules</span></code>, <code class="docutils literal notranslate"><span class="pre">scripts</span></code>, and <code class="docutils literal notranslate"><span class="pre">commands</span></code> parameters or using the corresponding pre-defined parameters (see <a class="reference external" href="#handling-external-software">handling software</a>). For example, if the node <code class="docutils literal notranslate"><span class="pre">MyNode</span></code> requires an executable named <code class="docutils literal notranslate"><span class="pre">executable</span></code>, it will first load any modules under the <code class="docutils literal notranslate"><span class="pre">MyNode</span></code> heading, followed by looking for an entry including <code class="docutils literal notranslate"><span class="pre">executable</span></code> in the <code class="docutils literal notranslate"><span class="pre">commands</span></code> and <code class="docutils literal notranslate"><span class="pre">scripts</span></code> sections. Any discovered matching commands will be place in the <code class="xref py py-attr docutils literal notranslate"><span class="pre">runnable</span></code> dictionary, which can be used with any command invocation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="n">required_callables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;executable&quot;</span><span class="p">]</span>
+    <span class="n">required_packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;my_package&quot;</span><span class="p">]</span>
+
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">my_package</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;executable&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> --data </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">stdout</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Here, we are running a command that takes some floating point value as input, and outputs a result to <em>standard output</em>. We convert this output to a float and send it on. In practice you will probably need more sophisticated parsing of command outputs. The associated configuration section might look something like this:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[example]</span>
+<span class="n">python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/path/to/python/interpreter&quot;</span><span class="w">  </span><span class="c1"># must contain &#39;my_package&#39;</span>
+<span class="n">commands</span><span class="p">.</span><span class="n">executable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/path/to/executable&quot;</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">executable</span></code> is a script and requires a preceding interpreter to run, your configuration might look like this instead:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[example]</span>
+<span class="n">python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/path/to/python/interpreter&quot;</span><span class="w">  </span><span class="c1"># must contain &#39;my_package&#39;</span>
+<span class="n">scripts</span><span class="p">.</span><span class="n">executable</span><span class="p">.</span><span class="n">interpreter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/path/to/interpreter&quot;</span>
+<span class="n">scripts</span><span class="p">.</span><span class="n">executable</span><span class="p">.</span><span class="n">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/path/to/script&quot;</span>
+</pre></div>
+</div>
+<p>If your node requires more customized environment setups, you can override the <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.prepare" title="maize.core.node.Node.prepare"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare()</span></code></a> method with your own initialization logic (making sure to call the original method using <cite>super</cite>).</p>
+</section>
+<section id="running-in-parallel">
+<h4>Running in parallel<a class="headerlink" href="#running-in-parallel" title="Link to this heading">#</a></h4>
+<p>You can also run multiple commands in parallel using <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run_multi" title="maize.core.node.Node.run_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_multi()</span></code></a>. It takes a list of commands to run and runs them in batches according to the <code class="docutils literal notranslate"><span class="pre">n_jobs</span></code> parameter. This can be useful when processing potentially large batches of data with software that does not have its own internal parallelization. Each command can optionally be run in a separate working directory, and otherwise accepts the same parameters as <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run_command" title="maize.core.node.Node.run_command"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_command()</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="n">required_callables</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;executable&quot;</span><span class="p">]</span>
+
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="n">commands</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">runnable</span><span class="p">[</span><span class="s1">&#39;executable&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> --data </span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_multi</span><span class="p">(</span><span class="n">commands</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span> <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We did the same thing as above, but receive and send lists of floats and run our executable in parallel, using 4 jobs.</p>
+</section>
+<section id="job-submission">
+<h4>Job submission<a class="headerlink" href="#job-submission" title="Link to this heading">#</a></h4>
+<p>To make use of batch processing systems common in HPC environments, pass execution options (<a class="reference internal" href="_autosummary/maize.utilities.execution.JobResourceConfig.html#maize.utilities.execution.JobResourceConfig" title="maize.utilities.execution.JobResourceConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobResourceConfig</span></code></a>) to <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run_command" title="maize.core.node.Node.run_command"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_command()</span></code></a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="n">JobResourceConfig</span><span class="p">(</span><span class="n">nodes</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;echo </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">batch_options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Batch system settings are handled in the maize configuration (see <a class="reference external" href="#config-workflow">configuring workflows</a>) using <a class="reference internal" href="_autosummary/maize.utilities.execution.ResourceManagerConfig.html#maize.utilities.execution.ResourceManagerConfig" title="maize.utilities.execution.ResourceManagerConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResourceManagerConfig</span></code></a>, for example:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[batch]</span>
+<span class="n">system</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;slurm&quot;</span>
+<span class="n">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;core&quot;</span>
+<span class="n">walltime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;00:05:00&quot;</span>
+</pre></div>
+</div>
+<p>Running batch commands in parallel can be done using <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run_multi" title="maize.core.node.Node.run_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_multi()</span></code></a> in the same way, i.e. passing a <a class="reference internal" href="_autosummary/maize.utilities.execution.JobResourceConfig.html#maize.utilities.execution.JobResourceConfig" title="maize.utilities.execution.JobResourceConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobResourceConfig</span></code></a> object to <code class="docutils literal notranslate"><span class="pre">batch_options</span></code>. In this case, <code class="docutils literal notranslate"><span class="pre">n_jobs</span></code> refers to the maximum number of jobs to submit at once. A common pattern of use is to first prepare the required directory structure and corresponding commands, and then send all commands for execution at once.</p>
+</section>
+<section id="resource-management">
+<h4>Resource management<a class="headerlink" href="#resource-management" title="Link to this heading">#</a></h4>
+<p>Because all nodes run simultaneously on a single machine with limited resources, maize features some simple management tools to reserve computational resources:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="n">inp</span><span class="p">:</span> <span class="n">Input</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Input</span><span class="p">()</span>
+    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpus</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">do_something_heavy</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also reserve GPUs (using <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.gpus" title="maize.core.node.Node.gpus"><code class="xref py py-attr docutils literal notranslate"><span class="pre">gpus</span></code></a>) using the same syntax.</p>
+</section>
+<section id="advanced-options">
+<h4>Advanced options<a class="headerlink" href="#advanced-options" title="Link to this heading">#</a></h4>
+<p>There are multiple additional options for <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run_command" title="maize.core.node.Node.run_command"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_command()</span></code></a> and <a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run_multi" title="maize.core.node.Node.run_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_multi()</span></code></a> that are worth knowing about:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Information</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">validators</span></code></p></td>
+<td><p>A list of <a class="reference internal" href="_autosummary/maize.utilities.validation.Validator.html#maize.utilities.validation.Validator" title="maize.utilities.validation.Validator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Validator</span></code></a> objects, allowing output files or <em>standard output / error</em> to be checked for content indicating success or failure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">verbose</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, will also log command output to the Maize log.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">raise_on_failure</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, will raise an exception if something goes wrong, otherwise will just log a warning. This can be useful when handling batches of data in which some datapoints might be expected to fail.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">command_input</span></code></p></td>
+<td><p>Can be used to send data to <em>standard input</em>. This can be used for commands that might normally require manual user input or interactivity on the commandline.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pre_execution</span></code></p></td>
+<td><p>Any command to run just before the main command. Note that if you need to load modules or set environment variables, you should use the options in the configuration system instead (see <a class="reference external" href="#handling-external-software">handling software</a>). Not only does this allow full de-coupling of system and workflow configuration, but it is also more efficient as a module will only be loaded once.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">timeout</span></code></p></td>
+<td><p>Maximum runtime for a command in seconds.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">working_dirs</span></code></p></td>
+<td><p>Run in this directory instead of the node working directory (<a class="reference internal" href="_autosummary/maize.core.node.Node.html#maize.core.node.Node.run_multi" title="maize.core.node.Node.run_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run_multi()</span></code></a> only).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="cookbook.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Cookbook</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="quickstart.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Quickstart</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Molecular AI group
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">User guide</a><ul>
+<li><a class="reference internal" href="#workflows">Workflows</a><ul>
+<li><a class="reference internal" href="#adding-nodes">Adding nodes</a></li>
+<li><a class="reference internal" href="#setting-parameters">Setting parameters</a></li>
+<li><a class="reference internal" href="#handling-external-software">Handling external software</a></li>
+<li><a class="reference internal" href="#connecting-nodes">Connecting nodes</a></li>
+<li><a class="reference internal" href="#handling-parameters">Handling parameters</a></li>
+<li><a class="reference internal" href="#alternative-workflow-definitions">Alternative workflow definitions</a></li>
+<li><a class="reference internal" href="#id1">Running workflows</a></li>
+<li><a class="reference internal" href="#configuring-workflows">Configuring workflows</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#subgraphs">Subgraphs</a></li>
+<li><a class="reference internal" href="#custom-nodes">Custom nodes</a><ul>
+<li><a class="reference internal" href="#handling-files">Handling files</a></li>
+<li><a class="reference internal" href="#looped-execution">Looped execution</a></li>
+<li><a class="reference internal" href="#generic-nodes">Generic nodes</a></li>
+<li><a class="reference internal" href="#running-commands">Running commands</a><ul>
+<li><a class="reference internal" href="#software-dependencies">Software dependencies</a></li>
+<li><a class="reference internal" href="#running-in-parallel">Running in parallel</a></li>
+<li><a class="reference internal" href="#job-submission">Job submission</a></li>
+<li><a class="reference internal" href="#resource-management">Resource management</a></li>
+<li><a class="reference internal" href="#advanced-options">Advanced options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=c87aa342"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+MultiPort
+=========
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: MultiPort
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MultiPort.__init__
+      ~MultiPort.build
+      ~MultiPort.check
+      ~MultiPort.close
+      ~MultiPort.is_connected
+      ~MultiPort.set_channel
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MultiPort.active
+      ~MultiPort.connected
+      ~MultiPort.path
+      ~MultiPort.serialized
+      ~MultiPort.size
+      ~MultiPort.name
+      ~MultiPort.parent
+      ~MultiPort.datatype
+      ~MultiPort.doc
+   
+   

@@ -1,0 +1,19 @@
+StrEnum
+=======
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autoclass:: StrEnum
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   

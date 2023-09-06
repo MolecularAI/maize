@@ -1,0 +1,78 @@
+LoopedNode
+==========
+
+.. currentmodule:: maize.core.node
+
+.. autoclass:: LoopedNode
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LoopedNode.__init__
+      ~LoopedNode.as_dict
+      ~LoopedNode.build
+      ~LoopedNode.check
+      ~LoopedNode.check_dependencies
+      ~LoopedNode.check_parameters
+      ~LoopedNode.cleanup
+      ~LoopedNode.execute
+      ~LoopedNode.get_available_nodes
+      ~LoopedNode.get_inputs
+      ~LoopedNode.get_interfaces
+      ~LoopedNode.get_node_class
+      ~LoopedNode.get_outputs
+      ~LoopedNode.get_parameters
+      ~LoopedNode.get_summary_line
+      ~LoopedNode.ports_active
+      ~LoopedNode.prepare
+      ~LoopedNode.run
+      ~LoopedNode.run_command
+      ~LoopedNode.run_multi
+      ~LoopedNode.send_update
+      ~LoopedNode.serialized_summary
+      ~LoopedNode.setup_directories
+      ~LoopedNode.shutdown
+      ~LoopedNode.update_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LoopedNode.all_parameters
+      ~LoopedNode.batch_options
+      ~LoopedNode.commands
+      ~LoopedNode.component_path
+      ~LoopedNode.datatype
+      ~LoopedNode.modules
+      ~LoopedNode.n_inbound
+      ~LoopedNode.n_outbound
+      ~LoopedNode.node_config
+      ~LoopedNode.parents
+      ~LoopedNode.ports
+      ~LoopedNode.python
+      ~LoopedNode.required_callables
+      ~LoopedNode.required_packages
+      ~LoopedNode.root
+      ~LoopedNode.scripts
+      ~LoopedNode.logger
+      ~LoopedNode.run_timer
+      ~LoopedNode.full_timer
+      ~LoopedNode.work_dir
+      ~LoopedNode.status
+      ~LoopedNode.name
+      ~LoopedNode.signal
+      ~LoopedNode.n_signals
+   
+   

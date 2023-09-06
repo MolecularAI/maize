@@ -1,0 +1,6 @@
+setup\_node\_logging
+====================
+
+.. currentmodule:: maize.core.runtime
+
+.. autofunction:: setup_node_logging

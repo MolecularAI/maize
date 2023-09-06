@@ -1,0 +1,6 @@
+CheckpointException
+===================
+
+.. currentmodule:: maize.core.workflow
+
+.. autoexception:: CheckpointException

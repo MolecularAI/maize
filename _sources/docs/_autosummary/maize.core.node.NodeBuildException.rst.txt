@@ -1,0 +1,6 @@
+NodeBuildException
+==================
+
+.. currentmodule:: maize.core.node
+
+.. autoexception:: NodeBuildException

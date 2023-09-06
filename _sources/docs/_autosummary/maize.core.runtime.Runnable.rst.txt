@@ -1,0 +1,35 @@
+Runnable
+========
+
+.. currentmodule:: maize.core.runtime
+
+.. autoclass:: Runnable
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Runnable.__init__
+      ~Runnable.cleanup
+      ~Runnable.execute
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Runnable.name
+      ~Runnable.signal
+      ~Runnable.n_signals
+   
+   

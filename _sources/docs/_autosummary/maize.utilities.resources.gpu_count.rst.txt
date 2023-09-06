@@ -1,0 +1,6 @@
+gpu\_count
+==========
+
+.. currentmodule:: maize.utilities.resources
+
+.. autofunction:: gpu_count

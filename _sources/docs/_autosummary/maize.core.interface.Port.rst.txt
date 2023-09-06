@@ -1,0 +1,44 @@
+Port
+====
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: Port
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Port.__init__
+      ~Port.build
+      ~Port.check
+      ~Port.close
+      ~Port.is_connected
+      ~Port.set_channel
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Port.active
+      ~Port.connected
+      ~Port.path
+      ~Port.serialized
+      ~Port.size
+      ~Port.name
+      ~Port.parent
+      ~Port.datatype
+      ~Port.doc
+   
+   

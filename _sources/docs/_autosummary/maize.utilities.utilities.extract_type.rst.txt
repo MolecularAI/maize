@@ -1,0 +1,6 @@
+extract\_type
+=============
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: extract_type

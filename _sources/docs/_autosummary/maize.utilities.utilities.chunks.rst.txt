@@ -1,0 +1,6 @@
+chunks
+======
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: chunks

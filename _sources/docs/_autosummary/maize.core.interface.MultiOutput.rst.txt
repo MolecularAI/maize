@@ -1,0 +1,44 @@
+MultiOutput
+===========
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: MultiOutput
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MultiOutput.__init__
+      ~MultiOutput.build
+      ~MultiOutput.check
+      ~MultiOutput.close
+      ~MultiOutput.is_connected
+      ~MultiOutput.set_channel
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MultiOutput.active
+      ~MultiOutput.connected
+      ~MultiOutput.path
+      ~MultiOutput.serialized
+      ~MultiOutput.size
+      ~MultiOutput.name
+      ~MultiOutput.parent
+      ~MultiOutput.datatype
+      ~MultiOutput.doc
+   
+   

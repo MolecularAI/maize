@@ -1,0 +1,27 @@
+ChunkedSemaphore
+================
+
+.. currentmodule:: maize.utilities.resources
+
+.. autoclass:: ChunkedSemaphore
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ChunkedSemaphore.__init__
+      ~ChunkedSemaphore.acquire
+      ~ChunkedSemaphore.release
+   
+   
+
+   
+   
+   

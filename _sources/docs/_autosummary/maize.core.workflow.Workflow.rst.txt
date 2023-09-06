@@ -1,0 +1,104 @@
+Workflow
+========
+
+.. currentmodule:: maize.core.workflow
+
+.. autoclass:: Workflow
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Workflow.__init__
+      ~Workflow.add
+      ~Workflow.add_all
+      ~Workflow.add_arguments
+      ~Workflow.as_dict
+      ~Workflow.auto_connect
+      ~Workflow.build
+      ~Workflow.chain
+      ~Workflow.check
+      ~Workflow.check_dependencies
+      ~Workflow.cleanup
+      ~Workflow.combine_parameters
+      ~Workflow.connect
+      ~Workflow.connect_all
+      ~Workflow.execute
+      ~Workflow.from_checkpoint
+      ~Workflow.from_dict
+      ~Workflow.from_file
+      ~Workflow.from_name
+      ~Workflow.generate_config_template
+      ~Workflow.get_available_nodes
+      ~Workflow.get_available_workflows
+      ~Workflow.get_inputs
+      ~Workflow.get_interfaces
+      ~Workflow.get_node
+      ~Workflow.get_node_class
+      ~Workflow.get_outputs
+      ~Workflow.get_parameter
+      ~Workflow.get_parameters
+      ~Workflow.get_port
+      ~Workflow.get_summary_line
+      ~Workflow.get_workflow_summary
+      ~Workflow.load_checkpoint
+      ~Workflow.map
+      ~Workflow.map_port
+      ~Workflow.ports_active
+      ~Workflow.register
+      ~Workflow.send_update
+      ~Workflow.serialized_summary
+      ~Workflow.set_global_attribute
+      ~Workflow.setup_directories
+      ~Workflow.to_checkpoint
+      ~Workflow.to_dict
+      ~Workflow.to_file
+      ~Workflow.update_parameters
+      ~Workflow.update_settings_with_args
+      ~Workflow.update_with_args
+      ~Workflow.visualize
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Workflow.AddableArgType
+      ~Workflow.P
+      ~Workflow.P1
+      ~Workflow.P2
+      ~Workflow.P3
+      ~Workflow.P4
+      ~Workflow.P5
+      ~Workflow.active_nodes
+      ~Workflow.all_parameters
+      ~Workflow.component_path
+      ~Workflow.datatype
+      ~Workflow.flat_channels
+      ~Workflow.flat_components
+      ~Workflow.flat_nodes
+      ~Workflow.n_inbound
+      ~Workflow.n_outbound
+      ~Workflow.node_config
+      ~Workflow.parents
+      ~Workflow.ports
+      ~Workflow.required_callables
+      ~Workflow.required_packages
+      ~Workflow.root
+      ~Workflow.logger
+      ~Workflow.run_timer
+      ~Workflow.full_timer
+      ~Workflow.work_dir
+      ~Workflow.status
+   
+   

@@ -1,0 +1,6 @@
+PortInterrupt
+=============
+
+.. currentmodule:: maize.core.interface
+
+.. autoexception:: PortInterrupt

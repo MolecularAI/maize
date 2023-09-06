@@ -1,0 +1,6 @@
+setup\_workflow
+===============
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: setup_workflow

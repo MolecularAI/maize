@@ -1,0 +1,6 @@
+write\_input
+============
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: write_input

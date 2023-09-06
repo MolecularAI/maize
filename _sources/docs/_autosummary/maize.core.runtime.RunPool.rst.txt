@@ -1,0 +1,31 @@
+RunPool
+=======
+
+.. currentmodule:: maize.core.runtime
+
+.. autoclass:: RunPool
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RunPool.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~RunPool.n_processes
+   
+   

@@ -1,0 +1,38 @@
+Interface
+=========
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: Interface
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Interface.__init__
+      ~Interface.build
+      ~Interface.check
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Interface.path
+      ~Interface.serialized
+      ~Interface.name
+      ~Interface.parent
+      ~Interface.datatype
+      ~Interface.doc
+   
+   

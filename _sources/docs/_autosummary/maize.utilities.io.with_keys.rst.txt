@@ -1,0 +1,6 @@
+with\_keys
+==========
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: with_keys

@@ -1,0 +1,38 @@
+NodeConfig
+==========
+
+.. currentmodule:: maize.utilities.io
+
+.. autoclass:: NodeConfig
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~NodeConfig.__init__
+      ~NodeConfig.from_dict
+      ~NodeConfig.generate_template
+      ~NodeConfig.generate_template_toml
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~NodeConfig.python
+      ~NodeConfig.modules
+      ~NodeConfig.commands
+      ~NodeConfig.scripts
+      ~NodeConfig.parameters
+   
+   

@@ -1,0 +1,6 @@
+ParsingException
+================
+
+.. currentmodule:: maize.core.workflow
+
+.. autoexception:: ParsingException

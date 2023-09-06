@@ -1,0 +1,6 @@
+ChannelEmpty
+============
+
+.. currentmodule:: maize.core.channels
+
+.. autoexception:: ChannelEmpty

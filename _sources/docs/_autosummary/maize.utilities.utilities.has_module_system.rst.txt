@@ -1,0 +1,6 @@
+has\_module\_system
+===================
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: has_module_system

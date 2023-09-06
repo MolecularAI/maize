@@ -1,0 +1,43 @@
+channels
+========
+
+.. automodule:: maize.core.channels
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class.rst
+   
+      Channel
+      DataChannel
+      FileChannel
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:
+      :template: custom-base.rst
+   
+      ChannelEmpty
+      ChannelException
+      ChannelFull
+   
+   
+
+
+

@@ -1,0 +1,39 @@
+DataChannel
+===========
+
+.. currentmodule:: maize.core.channels
+
+.. autoclass:: DataChannel
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DataChannel.__init__
+      ~DataChannel.close
+      ~DataChannel.flush
+      ~DataChannel.kill
+      ~DataChannel.preload
+      ~DataChannel.receive
+      ~DataChannel.send
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DataChannel.active
+      ~DataChannel.ready
+      ~DataChannel.size
+   
+   

@@ -1,0 +1,6 @@
+PortException
+=============
+
+.. currentmodule:: maize.core.interface
+
+.. autoexception:: PortException

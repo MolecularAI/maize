@@ -1,0 +1,30 @@
+CommandRunner
+=============
+
+.. currentmodule:: maize.utilities.execution
+
+.. autoclass:: CommandRunner
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CommandRunner.__init__
+      ~CommandRunner.run
+      ~CommandRunner.run_only
+      ~CommandRunner.run_parallel
+      ~CommandRunner.run_validate
+      ~CommandRunner.validate
+   
+   
+
+   
+   
+   

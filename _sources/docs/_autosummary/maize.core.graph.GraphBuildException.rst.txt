@@ -1,0 +1,6 @@
+GraphBuildException
+===================
+
+.. currentmodule:: maize.core.graph
+
+.. autoexception:: GraphBuildException

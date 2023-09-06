@@ -1,0 +1,31 @@
+component
+=========
+
+.. automodule:: maize.core.component
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class.rst
+   
+      Component
+   
+   
+
+   
+   
+   
+
+
+

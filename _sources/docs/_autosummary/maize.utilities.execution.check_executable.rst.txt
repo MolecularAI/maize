@@ -1,0 +1,6 @@
+check\_executable
+=================
+
+.. currentmodule:: maize.utilities.execution
+
+.. autofunction:: check_executable

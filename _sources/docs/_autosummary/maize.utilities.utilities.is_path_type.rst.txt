@@ -1,0 +1,6 @@
+is\_path\_type
+==============
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: is_path_type

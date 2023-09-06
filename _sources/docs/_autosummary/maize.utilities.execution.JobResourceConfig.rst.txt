@@ -1,0 +1,38 @@
+JobResourceConfig
+=================
+
+.. currentmodule:: maize.utilities.execution
+
+.. autoclass:: JobResourceConfig
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~JobResourceConfig.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~JobResourceConfig.cores_per_process
+      ~JobResourceConfig.exclusive_use
+      ~JobResourceConfig.gpus_per_process
+      ~JobResourceConfig.nodes
+      ~JobResourceConfig.processes
+      ~JobResourceConfig.processes_per_node
+      ~JobResourceConfig.walltime
+      ~JobResourceConfig.custom_attributes
+   
+   

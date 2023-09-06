@@ -1,0 +1,44 @@
+FileParameter
+=============
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: FileParameter
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~FileParameter.__init__
+      ~FileParameter.build
+      ~FileParameter.check
+      ~FileParameter.set
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FileParameter.changed
+      ~FileParameter.filepath
+      ~FileParameter.is_default
+      ~FileParameter.is_set
+      ~FileParameter.path
+      ~FileParameter.serialized
+      ~FileParameter.value
+      ~FileParameter.name
+      ~FileParameter.parent
+      ~FileParameter.datatype
+      ~FileParameter.doc
+   
+   

@@ -1,0 +1,6 @@
+sendtree
+========
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: sendtree

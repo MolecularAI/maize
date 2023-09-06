@@ -1,0 +1,6 @@
+setup\_build\_logging
+=====================
+
+.. currentmodule:: maize.core.runtime
+
+.. autofunction:: setup_build_logging

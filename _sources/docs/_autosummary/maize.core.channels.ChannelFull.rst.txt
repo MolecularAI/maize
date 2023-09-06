@@ -1,0 +1,6 @@
+ChannelFull
+===========
+
+.. currentmodule:: maize.core.channels
+
+.. autoexception:: ChannelFull

@@ -1,0 +1,6 @@
+get\_plugins
+============
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: get_plugins

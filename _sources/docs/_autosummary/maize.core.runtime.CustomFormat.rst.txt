@@ -1,0 +1,41 @@
+CustomFormat
+============
+
+.. currentmodule:: maize.core.runtime
+
+.. autoclass:: CustomFormat
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CustomFormat.__init__
+      ~CustomFormat.converter
+      ~CustomFormat.format
+      ~CustomFormat.formatException
+      ~CustomFormat.formatMessage
+      ~CustomFormat.formatStack
+      ~CustomFormat.formatTime
+      ~CustomFormat.usesTime
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CustomFormat.LOG_FORMAT
+      ~CustomFormat.default_msec_format
+      ~CustomFormat.default_time_format
+      ~CustomFormat.formats
+   
+   

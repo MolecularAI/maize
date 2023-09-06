@@ -1,0 +1,6 @@
+read\_input
+===========
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: read_input

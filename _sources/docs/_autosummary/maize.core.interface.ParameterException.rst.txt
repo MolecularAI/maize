@@ -1,0 +1,6 @@
+ParameterException
+==================
+
+.. currentmodule:: maize.core.interface
+
+.. autoexception:: ParameterException

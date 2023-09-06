@@ -1,0 +1,45 @@
+MultiParameter
+==============
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: MultiParameter
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MultiParameter.__init__
+      ~MultiParameter.as_dict
+      ~MultiParameter.build
+      ~MultiParameter.check
+      ~MultiParameter.set
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MultiParameter.changed
+      ~MultiParameter.is_default
+      ~MultiParameter.is_set
+      ~MultiParameter.parents
+      ~MultiParameter.path
+      ~MultiParameter.serialized
+      ~MultiParameter.value
+      ~MultiParameter.name
+      ~MultiParameter.parent
+      ~MultiParameter.datatype
+      ~MultiParameter.doc
+   
+   

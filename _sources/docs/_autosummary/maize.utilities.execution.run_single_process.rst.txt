@@ -1,0 +1,6 @@
+run\_single\_process
+====================
+
+.. currentmodule:: maize.utilities.execution
+
+.. autofunction:: run_single_process

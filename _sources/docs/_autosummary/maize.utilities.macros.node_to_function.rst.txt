@@ -1,0 +1,6 @@
+node\_to\_function
+==================
+
+.. currentmodule:: maize.utilities.macros
+
+.. autofunction:: node_to_function

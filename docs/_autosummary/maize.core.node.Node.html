@@ -1,0 +1,1181 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="NodeBuildException" href="maize.core.node.NodeBuildException.html" /><link rel="prev" title="LoopedNode" href="maize.core.node.LoopedNode.html" />
+
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.08.19 -->
+        <title>Node - maize</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: rgb(131,0,81);
+  --color-brand-content: rgb(131,0,81);
+  --color-api-name: rgb(0,56,101);
+  --color-api-pre-name: rgb(0,56,101);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">maize</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/maize-logo.svg" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../userguide.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cookbook.html">Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../steps/index.html">Steps</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Steps</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../steps/plumbing.html">Plumbing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../steps/io.html">Input / Output</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design.html">Design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../reference.html">Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current has-children"><a class="reference internal" href="maize.core.html">core</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of core</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.core.channels.html">channels</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of channels</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.channels.Channel.html">Channel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.channels.DataChannel.html">DataChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.channels.FileChannel.html">FileChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.channels.ChannelEmpty.html">ChannelEmpty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.channels.ChannelException.html">ChannelException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.channels.ChannelFull.html">ChannelFull</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.core.component.html">component</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of component</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.component.Component.html">Component</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.core.graph.html">graph</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of graph</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.graph.Graph.html">Graph</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.graph.GraphBuildException.html">GraphBuildException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.core.interface.html">interface</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of interface</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.FileParameter.html">FileParameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.Input.html">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.Interface.html">Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.MultiInput.html">MultiInput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.MultiOutput.html">MultiOutput</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.MultiParameter.html">MultiParameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.MultiPort.html">MultiPort</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.Output.html">Output</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.Parameter.html">Parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.Port.html">Port</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.Suffix.html">Suffix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.ParameterException.html">ParameterException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.PortException.html">PortException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.interface.PortInterrupt.html">PortInterrupt</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current has-children"><a class="reference internal" href="maize.core.node.html">node</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of node</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="maize.core.node.LoopedNode.html">LoopedNode</a></li>
+<li class="toctree-l4 current current-page"><a class="current reference internal" href="#">Node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.node.NodeBuildException.html">NodeBuildException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.core.runtime.html">runtime</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of runtime</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.format_summaries.html">format_summaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.format_update.html">format_update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.init_signal.html">init_signal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.setup_build_logging.html">setup_build_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.setup_node_logging.html">setup_node_logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.CustomFormat.html">CustomFormat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.Logger.html">Logger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.RunPool.html">RunPool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.Runnable.html">Runnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.Status.html">Status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.StatusHandler.html">StatusHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.StatusUpdate.html">StatusUpdate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.runtime.NodeException.html">NodeException</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.core.workflow.html">workflow</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of workflow</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.workflow.expose.html">expose</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.workflow.Workflow.html">Workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.workflow.CheckpointException.html">CheckpointException</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.core.workflow.ParsingException.html">ParsingException</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="maize.utilities.html">utilities</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.utilities.execution.html">execution</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of execution</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.execution.check_executable.html">check_executable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.execution.check_returncode.html">check_returncode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.execution.run_single_process.html">run_single_process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.execution.CommandRunner.html">CommandRunner</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.execution.CommandRunnerPSIJ.html">CommandRunnerPSIJ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.execution.JobResourceConfig.html">JobResourceConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.execution.ResourceManagerConfig.html">ResourceManagerConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.execution.ProcessError.html">ProcessError</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.utilities.io.html">io</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of io</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.common_parent.html">common_parent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.create_default_parser.html">create_default_parser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.expand_shell_vars.html">expand_shell_vars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.get_plugins.html">get_plugins</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.load_file.html">load_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.parse_groups.html">parse_groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.read_input.html">read_input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.remove_dir_contents.html">remove_dir_contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.sendtree.html">sendtree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.setup_workflow.html">setup_workflow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.with_fields.html">with_fields</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.with_keys.html">with_keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.write_input.html">write_input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.Config.html">Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.NodeConfig.html">NodeConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.io.NodeConfigDict.html">NodeConfigDict</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.utilities.macros.html">macros</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of macros</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.macros.function_to_node.html">function_to_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.macros.lambda_node.html">lambda_node</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.macros.node_to_function.html">node_to_function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.macros.parallel.html">parallel</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.utilities.resources.html">resources</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of resources</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.resources.cpu_count.html">cpu_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.resources.gpu_count.html">gpu_count</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.resources.ChunkedSemaphore.html">ChunkedSemaphore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.resources.Resources.html">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.utilities.testing.html">testing</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" role="switch" type="checkbox"/><label for="toctree-checkbox-16"><div class="visually-hidden">Toggle navigation of testing</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.testing.MockChannel.html">MockChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.testing.TestRig.html">TestRig</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.utilities.utilities.html">utilities</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" role="switch" type="checkbox"/><label for="toctree-checkbox-17"><div class="visually-hidden">Toggle navigation of utilities</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.change_environment.html">change_environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.chunks.html">chunks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.extract_attribute_docs.html">extract_attribute_docs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.extract_parent_type.html">extract_parent_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.extract_type.html">extract_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.find_probable_files_from_command.html">find_probable_files_from_command</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.graph_cycles.html">graph_cycles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.graph_to_nx.html">graph_to_nx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.has_file.html">has_file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.has_module_system.html">has_module_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.is_path_type.html">is_path_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.load_modules.html">load_modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.make_list.html">make_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.match_context.html">match_context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.matching_types.html">matching_types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.nested_dict_to_tuple.html">nested_dict_to_tuple</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.set_environment.html">set_environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.tuple_to_nested_dict.html">tuple_to_nested_dict</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.typecheck.html">typecheck</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.unique_id.html">unique_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.StrEnum.html">StrEnum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.utilities.Timer.html">Timer</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.utilities.validation.html">validation</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" role="switch" type="checkbox"/><label for="toctree-checkbox-18"><div class="visually-hidden">Toggle navigation of validation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.validation.FailValidator.html">FailValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.validation.FileValidator.html">FileValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.validation.OutputValidator.html">OutputValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.validation.SuccessValidator.html">SuccessValidator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.validation.Validator.html">Validator</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="maize.utilities.visual.html">visual</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" role="switch" type="checkbox"/><label for="toctree-checkbox-19"><div class="visually-hidden">Toggle navigation of visual</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="maize.utilities.visual.nested_graphviz.html">nested_graphviz</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">External</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize-contrib/steps/index.html">Steps</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://molecularai.github.io/maize-contrib/utilities.html">Utilities</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="node">
+<h1>Node<a class="headerlink" href="#node" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="maize.core.node.Node">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">maize.core.node.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="maize.core.graph.Graph.html#maize.core.graph.Graph" title="maize.core.graph.Graph"><span class="pre">Graph</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fail_ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleanup_temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_cpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_gpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_loops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="maize.core.runtime.Status.html#maize.core.runtime.Status" title="maize.core.runtime.Status"><span class="pre">Status</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Status.NOT_READY</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/maize/core/node.html#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="maize.core.component.Component.html#maize.core.component.Component" title="maize.core.component.Component"><code class="xref py py-class docutils literal notranslate"><span class="pre">Component</span></code></a>, <a class="reference internal" href="maize.core.runtime.Runnable.html#maize.core.runtime.Runnable" title="maize.core.runtime.Runnable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Runnable</span></code></a></p>
+<p>Base class for all atomic (non-subgraph) nodes of a graph.
+Create a subclass to implement your own custom tasks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> – Parent component, typically the graph in context</p></li>
+<li><p><strong>name</strong> – The name of the component</p></li>
+<li><p><strong>description</strong> – An optional additional description</p></li>
+<li><p><strong>fail_ok</strong> – If True, the failure in the component will
+not trigger the whole network to shutdown</p></li>
+<li><p><strong>n_attempts</strong> – Number of attempts at executing the <cite>run()</cite> method</p></li>
+<li><p><strong>level</strong> – Logging level, if not given or <code class="docutils literal notranslate"><span class="pre">None</span></code> will use the parent logging level</p></li>
+<li><p><strong>cleanup_temp</strong> – Whether to remove any temporary directories after completion</p></li>
+<li><p><strong>resume</strong> – Whether to resume from a previous checkpoint</p></li>
+<li><p><strong>logfile</strong> – File to output all log messages to, defaults to STDOUT</p></li>
+<li><p><strong>max_cpus</strong> – Maximum number of CPUs to use, defaults to the number of available cores in the system</p></li>
+<li><p><strong>max_gpus</strong> – Maximum number of GPUs to use, defaults to the number of available GPUs in the system</p></li>
+<li><p><strong>loop</strong> – Whether to run the <cite>run</cite> method in a loop, as opposed to a single time</p></li>
+<li><p><strong>initial_status</strong> – The initial status of the node, will be <code class="docutils literal notranslate"><span class="pre">NOT_READY</span></code> by default, but
+can be set otherwise to indicate that the node should not be run.
+This would be useful when starting from a partially completed graph.</p></li>
+<li><p><strong>max_loops</strong> – Run the internal <cite>loop</cite> method a maximum number of <cite>max_loops</cite> times</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.cpus">
+<span class="sig-name descname"><span class="pre">cpus</span></span><a class="headerlink" href="#maize.core.node.Node.cpus" title="Link to this definition">#</a></dt>
+<dd><p>Resource semaphore allowing the reservation of multiple CPUs</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.gpus">
+<span class="sig-name descname"><span class="pre">gpus</span></span><a class="headerlink" href="#maize.core.node.Node.gpus" title="Link to this definition">#</a></dt>
+<dd><p>Resource semaphore allowing the reservation of multiple GPUs</p>
+</dd></dl>
+
+<p class="rubric">Examples</p>
+<p>Subclassing can be done the following way:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">out</span><span class="p">:</span> <span class="n">Output</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+<span class="gp">...</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="maize.core.graph.Graph.html#maize.core.graph.Graph" title="maize.core.graph.Graph"><span class="pre">Graph</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fail_ok</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_attempts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleanup_temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_cpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_gpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_loops</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="maize.core.runtime.Status.html#maize.core.runtime.Status" title="maize.core.runtime.Status"><span class="pre">Status</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Status.NOT_READY</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.__init__" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.__init__" title="maize.core.node.Node.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([parent, name, description, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.as_dict" title="maize.core.node.Node.as_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_dict</span></code></a>()</p></td>
+<td><p>Provides a non-recursive dictionary view of the component.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.build" title="maize.core.node.Node.build"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code></a>()</p></td>
+<td><p>Builds the node by instantiating all interfaces from descriptions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.check" title="maize.core.node.Node.check"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check</span></code></a>()</p></td>
+<td><p>Checks if the node was built correctly.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.check_dependencies" title="maize.core.node.Node.check_dependencies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_dependencies</span></code></a>()</p></td>
+<td><p>Check if all node dependencies are met by running the <cite>prepare</cite> method</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.check_parameters" title="maize.core.node.Node.check_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_parameters</span></code></a>()</p></td>
+<td><p>Check if all required node parameters are set</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.cleanup" title="maize.core.node.Node.cleanup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cleanup</span></code></a>()</p></td>
+<td><p>Method run on component shutdown in the main process.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.execute" title="maize.core.node.Node.execute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">execute</span></code></a>()</p></td>
+<td><p>This is the main entrypoint for node execution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.get_available_nodes" title="maize.core.node.Node.get_available_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_available_nodes</span></code></a>()</p></td>
+<td><p>Returns all available and registered nodes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.get_inputs" title="maize.core.node.Node.get_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inputs</span></code></a>()</p></td>
+<td><p>Returns all inputs available to the node.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.get_interfaces" title="maize.core.node.Node.get_interfaces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_interfaces</span></code></a>([kind])</p></td>
+<td><p>Returns all interfaces available to the node.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.get_node_class" title="maize.core.node.Node.get_node_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_node_class</span></code></a>(name)</p></td>
+<td><p>Returns the node class corresponding to the given name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.get_outputs" title="maize.core.node.Node.get_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_outputs</span></code></a>()</p></td>
+<td><p>Returns all outputs available to the node.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.get_parameters" title="maize.core.node.Node.get_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameters</span></code></a>()</p></td>
+<td><p>Returns all parameters available to the node.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.get_summary_line" title="maize.core.node.Node.get_summary_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_summary_line</span></code></a>()</p></td>
+<td><p>Provides a one-line summary of the node.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.ports_active" title="maize.core.node.Node.ports_active"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ports_active</span></code></a>()</p></td>
+<td><p>Check if all required ports are active.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.prepare" title="maize.core.node.Node.prepare"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare</span></code></a>()</p></td>
+<td><p>Prepares the execution environment for <cite>run</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.run" title="maize.core.node.Node.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>()</p></td>
+<td><p>This is the main high-level node execution point.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.run_command" title="maize.core.node.Node.run_command"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_command</span></code></a>(command[, validators, verbose, ...])</p></td>
+<td><p>Runs an external command.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.run_multi" title="maize.core.node.Node.run_multi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_multi</span></code></a>(commands[, working_dirs, ...])</p></td>
+<td><p>Runs multiple commands in parallel.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.send_update" title="maize.core.node.Node.send_update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">send_update</span></code></a>()</p></td>
+<td><p>Send a status update to the main process.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.serialized_summary" title="maize.core.node.Node.serialized_summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">serialized_summary</span></code></a>()</p></td>
+<td><p>Provides a serialized representation of the component type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.setup_directories" title="maize.core.node.Node.setup_directories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup_directories</span></code></a>([parent_path])</p></td>
+<td><p>Sets up the required directories.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.shutdown" title="maize.core.node.Node.shutdown"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shutdown</span></code></a>()</p></td>
+<td><p>Shuts down the component gracefully.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.update_parameters" title="maize.core.node.Node.update_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_parameters</span></code></a>(**kwargs)</p></td>
+<td><p>Update component parameters.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Attributes</p>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.all_parameters" title="maize.core.node.Node.all_parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">all_parameters</span></code></a></p></td>
+<td><p>Returns all settable parameters and unconnected inputs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.batch_options" title="maize.core.node.Node.batch_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batch_options</span></code></a></p></td>
+<td><p>If given, will run commands on the batch system instead of locally</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.commands" title="maize.core.node.Node.commands"><code class="xref py py-obj docutils literal notranslate"><span class="pre">commands</span></code></a></p></td>
+<td><p>Custom paths to any commands</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.component_path" title="maize.core.node.Node.component_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component_path</span></code></a></p></td>
+<td><p>Provides the full path to the component as a tuple of names.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.datatype" title="maize.core.node.Node.datatype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">datatype</span></code></a></p></td>
+<td><p>The component datatype if it's generic.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.modules" title="maize.core.node.Node.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a></p></td>
+<td><p>Modules to load in addition to ones defined in the configuration</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.n_inbound" title="maize.core.node.Node.n_inbound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_inbound</span></code></a></p></td>
+<td><p>Returns the number of items waiting to be received</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.n_outbound" title="maize.core.node.Node.n_outbound"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_outbound</span></code></a></p></td>
+<td><p>Returns the number of items waiting to be sent</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.node_config" title="maize.core.node.Node.node_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">node_config</span></code></a></p></td>
+<td><p>Provides the configuration of the current node</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.parents" title="maize.core.node.Node.parents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parents</span></code></a></p></td>
+<td><p>Provides all parent components.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.ports" title="maize.core.node.Node.ports"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ports</span></code></a></p></td>
+<td><p>Provides a convenience iterator for all inputs and outputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.python" title="maize.core.node.Node.python"><code class="xref py py-obj docutils literal notranslate"><span class="pre">python</span></code></a></p></td>
+<td><p>The path to the python executable to use for this node, allows custom environments</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.required_callables" title="maize.core.node.Node.required_callables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_callables</span></code></a></p></td>
+<td><p>List of external commandline programs that are required for running the component.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.required_packages" title="maize.core.node.Node.required_packages"><code class="xref py py-obj docutils literal notranslate"><span class="pre">required_packages</span></code></a></p></td>
+<td><p>List of required python packages</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.root" title="maize.core.node.Node.root"><code class="xref py py-obj docutils literal notranslate"><span class="pre">root</span></code></a></p></td>
+<td><p>Provides the root workflow or graph instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.scripts" title="maize.core.node.Node.scripts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scripts</span></code></a></p></td>
+<td><p>Additional script specifications require to run.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.status" title="maize.core.node.Node.status"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status</span></code></a></p></td>
+<td><p>Current status of the component.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.logger" title="maize.core.node.Node.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></a></p></td>
+<td><p>Python logger for both the build and run procedures.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.run_timer" title="maize.core.node.Node.run_timer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_timer</span></code></a></p></td>
+<td><p>Timer for the run duration, without waiting for resources or other nodes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#maize.core.node.Node.full_timer" title="maize.core.node.Node.full_timer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">full_timer</span></code></a></p></td>
+<td><p>Timer for the full duration, including waiting for resources or other nodes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#maize.core.node.Node.work_dir" title="maize.core.node.Node.work_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">work_dir</span></code></a></p></td>
+<td><p>Working directory for the component.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">signal</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_signals</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="maize.core.node.Node.all_parameters">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">all_parameters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="maize.core.interface.Input.html#maize.core.interface.Input" title="maize.core.interface.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="maize.core.interface.MultiInput.html#maize.core.interface.MultiInput" title="maize.core.interface.MultiInput"><span class="pre">MultiInput</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="maize.core.interface.Parameter.html#maize.core.interface.Parameter" title="maize.core.interface.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#maize.core.node.Node.all_parameters" title="Link to this definition">#</a></dt>
+<dd><p>Returns all settable parameters and unconnected inputs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.as_dict">
+<span class="sig-name descname"><span class="pre">as_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#maize.core.node.Node.as_dict" title="Link to this definition">#</a></dt>
+<dd><p>Provides a non-recursive dictionary view of the component.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.batch_options">
+<span class="sig-name descname"><span class="pre">batch_options</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="maize.core.interface.Parameter.html#maize.core.interface.Parameter" title="maize.core.interface.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="maize.utilities.execution.JobResourceConfig.html#maize.utilities.execution.JobResourceConfig" title="maize.utilities.execution.JobResourceConfig"><span class="pre">JobResourceConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#maize.core.node.Node.batch_options" title="Link to this definition">#</a></dt>
+<dd><p>If given, will run commands on the batch system instead of locally</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.build">
+<span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.build"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.build" title="Link to this definition">#</a></dt>
+<dd><p>Builds the node by instantiating all interfaces from descriptions.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">inp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_input</span><span class="p">(</span>
+<span class="gp">... </span>            <span class="s2">&quot;inp&quot;</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;pdb&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Example input&quot;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_parameter</span><span class="p">(</span><span class="s2">&quot;param&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.check">
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.check" title="Link to this definition">#</a></dt>
+<dd><p>Checks if the node was built correctly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="maize.core.node.NodeBuildException.html#maize.core.node.NodeBuildException" title="maize.core.node.NodeBuildException"><strong>NodeBuildException</strong></a> – If the node didn’t declare at least one port</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.check_dependencies">
+<span class="sig-name descname"><span class="pre">check_dependencies</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.check_dependencies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.check_dependencies" title="Link to this definition">#</a></dt>
+<dd><p>Check if all node dependencies are met by running the <cite>prepare</cite> method</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="maize.core.node.NodeBuildException.html#maize.core.node.NodeBuildException" title="maize.core.node.NodeBuildException"><strong>NodeBuildException</strong></a> – If required callables were not found</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ImportError" title="(in Python v3.11)"><strong>ImportError</strong></a> – If required python packages were not found</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.check_parameters">
+<span class="sig-name descname"><span class="pre">check_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.check_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.check_parameters" title="Link to this definition">#</a></dt>
+<dd><p>Check if all required node parameters are set</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="maize.core.node.NodeBuildException.html#maize.core.node.NodeBuildException" title="maize.core.node.NodeBuildException"><strong>NodeBuildException</strong></a> – If parameters were not set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.cleanup">
+<span class="sig-name descname"><span class="pre">cleanup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.cleanup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.cleanup" title="Link to this definition">#</a></dt>
+<dd><p>Method run on component shutdown in the main process.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.commands">
+<span class="sig-name descname"><span class="pre">commands</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="maize.core.interface.Parameter.html#maize.core.interface.Parameter" title="maize.core.interface.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">Path</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#maize.core.node.Node.commands" title="Link to this definition">#</a></dt>
+<dd><p>Custom paths to any commands</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maize.core.node.Node.component_path">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">component_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#maize.core.node.Node.component_path" title="Link to this definition">#</a></dt>
+<dd><p>Provides the full path to the component as a tuple of names.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.datatype">
+<span class="sig-name descname"><span class="pre">datatype</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span></em><a class="headerlink" href="#maize.core.node.Node.datatype" title="Link to this definition">#</a></dt>
+<dd><p>The component datatype if it’s generic.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.execute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.execute" title="Link to this definition">#</a></dt>
+<dd><p>This is the main entrypoint for node execution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyboardInterrupt" title="(in Python v3.11)"><strong>KeyboardInterrupt</strong></a> – If the underlying process gets interrupted or receives <code class="docutils literal notranslate"><span class="pre">SIGINT</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.full_timer">
+<span class="sig-name descname"><span class="pre">full_timer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="maize.utilities.utilities.Timer.html#maize.utilities.utilities.Timer" title="maize.utilities.utilities.Timer"><span class="pre">Timer</span></a></em><a class="headerlink" href="#maize.core.node.Node.full_timer" title="Link to this definition">#</a></dt>
+<dd><p>Timer for the full duration, including waiting for resources or other nodes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.get_available_nodes">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_available_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="maize.core.component.Component.html#maize.core.component.Component" title="maize.core.component.Component"><span class="pre">Component</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#maize.core.node.Node.get_available_nodes" title="Link to this definition">#</a></dt>
+<dd><p>Returns all available and registered nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>All available node names</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)">set</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.get_inputs">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_inputs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#maize.core.node.Node.get_inputs" title="Link to this definition">#</a></dt>
+<dd><p>Returns all inputs available to the node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.get_interfaces">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_interfaces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.11)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'input'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'output'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'parameter'</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#maize.core.node.Node.get_interfaces" title="Link to this definition">#</a></dt>
+<dd><p>Returns all interfaces available to the node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kind</strong> – Kind of interface to retrieve</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Interface names</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)">set</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.get_node_class">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_node_class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.11)"><span class="pre">type</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="maize.core.component.Component.html#maize.core.component.Component" title="maize.core.component.Component"><span class="pre">Component</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#maize.core.node.Node.get_node_class" title="Link to this definition">#</a></dt>
+<dd><p>Returns the node class corresponding to the given name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of the component class to retrieve</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The retrieved component class, can be passed to <cite>add_node</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Type[<a class="reference internal" href="maize.core.component.Component.html#maize.core.component.Component" title="maize.core.component.Component">Component</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.get_outputs">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_outputs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#maize.core.node.Node.get_outputs" title="Link to this definition">#</a></dt>
+<dd><p>Returns all outputs available to the node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.get_parameters">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_parameters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.11)"><span class="pre">set</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#maize.core.node.Node.get_parameters" title="Link to this definition">#</a></dt>
+<dd><p>Returns all parameters available to the node.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.get_summary_line">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_summary_line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#maize.core.node.Node.get_summary_line" title="Link to this definition">#</a></dt>
+<dd><p>Provides a one-line summary of the node.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Logger" title="(in Python v3.11)"><span class="pre">logging.Logger</span></a></em><a class="headerlink" href="#maize.core.node.Node.logger" title="Link to this definition">#</a></dt>
+<dd><p>Python logger for both the build and run procedures.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.modules">
+<span class="sig-name descname"><span class="pre">modules</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="maize.core.interface.Parameter.html#maize.core.interface.Parameter" title="maize.core.interface.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#maize.core.node.Node.modules" title="Link to this definition">#</a></dt>
+<dd><p>Modules to load in addition to ones defined in the configuration</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maize.core.node.Node.n_inbound">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_inbound</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#maize.core.node.Node.n_inbound" title="Link to this definition">#</a></dt>
+<dd><p>Returns the number of items waiting to be received</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maize.core.node.Node.n_outbound">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_outbound</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></em><a class="headerlink" href="#maize.core.node.Node.n_outbound" title="Link to this definition">#</a></dt>
+<dd><p>Returns the number of items waiting to be sent</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maize.core.node.Node.node_config">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">node_config</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="maize.utilities.io.NodeConfig.html#maize.utilities.io.NodeConfig" title="maize.utilities.io.NodeConfig"><span class="pre">NodeConfig</span></a></em><a class="headerlink" href="#maize.core.node.Node.node_config" title="Link to this definition">#</a></dt>
+<dd><p>Provides the configuration of the current node</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maize.core.node.Node.parents">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parents</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="maize.core.component.Component.html#maize.core.component.Component" title="maize.core.component.Component"><span class="pre">Component</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></em><a class="headerlink" href="#maize.core.node.Node.parents" title="Link to this definition">#</a></dt>
+<dd><p>Provides all parent components.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maize.core.node.Node.ports">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ports</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="maize.core.interface.Port.html#maize.core.interface.Port" title="maize.core.interface.Port"><span class="pre">Port</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#maize.core.node.Node.ports" title="Link to this definition">#</a></dt>
+<dd><p>Provides a convenience iterator for all inputs and outputs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.ports_active">
+<span class="sig-name descname"><span class="pre">ports_active</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#maize.core.node.Node.ports_active" title="Link to this definition">#</a></dt>
+<dd><p>Check if all required ports are active.</p>
+<p>Can be overridden by the user to allow custom shutdown scenarios,
+for example in the case of complex inter-port dependencies. By
+default only checks if any mandatory ports are inactive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if all required ports are active, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.prepare">
+<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.prepare" title="Link to this definition">#</a></dt>
+<dd><p>Prepares the execution environment for <cite>run</cite>.</p>
+<p>Performs the following:</p>
+<ul class="simple">
+<li><p>Changing the python environment, if required</p></li>
+<li><p>Setting of environment variables</p></li>
+<li><p>Setting of parameters from the config</p></li>
+<li><p>Loading LMOD modules</p></li>
+<li><p>Importing python packages listed in <cite>required_packages</cite></p></li>
+<li><p>Checking if software in <cite>required_callables</cite> is available</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.python">
+<span class="sig-name descname"><span class="pre">python</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="maize.core.interface.FileParameter.html#maize.core.interface.FileParameter" title="maize.core.interface.FileParameter"><span class="pre">FileParameter</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">Path</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#maize.core.node.Node.python" title="Link to this definition">#</a></dt>
+<dd><p>The path to the python executable to use for this node, allows custom environments</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.required_callables">
+<span class="sig-name descname"><span class="pre">required_callables</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#maize.core.node.Node.required_callables" title="Link to this definition">#</a></dt>
+<dd><p>List of external commandline programs that are required for running the component.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.required_packages">
+<span class="sig-name descname"><span class="pre">required_packages</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ClassVar</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#maize.core.node.Node.required_packages" title="Link to this definition">#</a></dt>
+<dd><p>List of required python packages</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="maize.core.node.Node.root">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">root</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="maize.core.graph.Graph.html#maize.core.graph.Graph" title="maize.core.graph.Graph"><span class="pre">Graph</span></a></em><a class="headerlink" href="#maize.core.node.Node.root" title="Link to this definition">#</a></dt>
+<dd><p>Provides the root workflow or graph instance.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.run">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.run" title="Link to this definition">#</a></dt>
+<dd><p>This is the main high-level node execution point.</p>
+<p>It should be overridden by the user to provide custom node functionality,
+and should return normally at completion. Exception handling, log message passing,
+and channel management are handled by the wrapping <cite>execute</cite> method.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+<span class="gp">... </span>        <span class="n">new</span> <span class="o">=</span> <span class="n">val</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">value</span>
+<span class="gp">... </span>        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.run_command">
+<span class="sig-name descname"><span class="pre">run_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.11)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="maize.utilities.validation.Validator.html#maize.utilities.validation.Validator" title="maize.utilities.validation.Validator"><span class="pre">Validator</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_on_failure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">command_input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_execution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="maize.utilities.execution.JobResourceConfig.html#maize.utilities.execution.JobResourceConfig" title="maize.utilities.execution.JobResourceConfig"><span class="pre">JobResourceConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/subprocess.html#subprocess.CompletedProcess" title="(in Python v3.11)"><span class="pre">CompletedProcess</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.run_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.run_command" title="Link to this definition">#</a></dt>
+<dd><p>Runs an external command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>command</strong> – Command to run as a single string, or a list of strings</p></li>
+<li><p><strong>validators</strong> – One or more <cite>Validator</cite> instances that will
+be called on the result of the command.</p></li>
+<li><p><strong>verbose</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code> will also log any STDOUT or STDERR output</p></li>
+<li><p><strong>raise_on_failure</strong> – Whether to raise an exception when encountering a failure</p></li>
+<li><p><strong>command_input</strong> – Text string used as input for command</p></li>
+<li><p><strong>pre_execution</strong> – Command to run directly before the main one</p></li>
+<li><p><strong>batch_options</strong> – Job options for the batch system, if given,
+will attempt run on the batch system</p></li>
+<li><p><strong>timeout</strong> – Maximum runtime for the command in seconds, or unlimited if <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result of the execution, including STDOUT and STDERR</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/subprocess.html#subprocess.CompletedProcess" title="(in Python v3.11)">subprocess.CompletedProcess</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)">bytes</a>]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="maize.utilities.execution.ProcessError.html#maize.utilities.execution.ProcessError" title="maize.utilities.execution.ProcessError"><strong>ProcessError</strong></a> – If any of the validators failed or the returncode was not zero</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>To run a single command:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="s2">&quot;echo foo&quot;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">SuccessValidator</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p>To run on a batch system, if configured:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">(</span><span class="s2">&quot;echo foo&quot;</span><span class="p">,</span> <span class="n">batch_options</span><span class="o">=</span><span class="n">JobResourceConfig</span><span class="p">(</span><span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.run_multi">
+<span class="sig-name descname"><span class="pre">run_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.11)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dirs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.11)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">Path</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">command_inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.11)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence" title="(in Python v3.11)"><span class="pre">Sequence</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="maize.utilities.validation.Validator.html#maize.utilities.validation.Validator" title="maize.utilities.validation.Validator"><span class="pre">Validator</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raise_on_failure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_execution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="maize.utilities.execution.JobResourceConfig.html#maize.utilities.execution.JobResourceConfig" title="maize.utilities.execution.JobResourceConfig"><span class="pre">JobResourceConfig</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/subprocess.html#subprocess.CompletedProcess" title="(in Python v3.11)"><span class="pre">CompletedProcess</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.run_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.run_multi" title="Link to this definition">#</a></dt>
+<dd><p>Runs multiple commands in parallel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>commands</strong> – Commands to run as a list of strings, or a nested list of strings</p></li>
+<li><p><strong>working_dirs</strong> – Working directories for each command</p></li>
+<li><p><strong>command_inputs</strong> – Text string used as input for each command</p></li>
+<li><p><strong>validators</strong> – One or more <cite>Validator</cite> instances that will
+be called on the result of the command.</p></li>
+<li><p><strong>verbose</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code> will also log any STDOUT or STDERR output</p></li>
+<li><p><strong>raise_on_failure</strong> – Whether to raise an exception when encountering a failure</p></li>
+<li><p><strong>n_jobs</strong> – Number of processes to spawn at once, should generally be
+compatible with the number of available CPUs</p></li>
+<li><p><strong>pre_execution</strong> – Command to run directly before the main one</p></li>
+<li><p><strong>batch_options</strong> – Job options for the batch system, if given,
+will attempt run on the batch system</p></li>
+<li><p><strong>timeout</strong> – Maximum runtime for the command in seconds, or unlimited if <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Result of the execution, including STDOUT and STDERR</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a>[<a class="reference external" href="https://docs.python.org/3/library/subprocess.html#subprocess.CompletedProcess" title="(in Python v3.11)">subprocess.CompletedProcess</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.11)">bytes</a>]]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="maize.utilities.execution.ProcessError.html#maize.utilities.execution.ProcessError" title="maize.utilities.execution.ProcessError"><strong>ProcessError</strong></a> – If any of the validators failed or a returncode was not zero</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>To run multiple commands, but only two at a time:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">run_multi</span><span class="p">([</span><span class="s2">&quot;echo foo&quot;</span><span class="p">,</span> <span class="s2">&quot;echo bar&quot;</span><span class="p">,</span> <span class="s2">&quot;echo baz&quot;</span><span class="p">],</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To run on a batch system, if configured (note that batch settings are per-command):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="bp">self</span><span class="o">.</span><span class="n">run_command</span><span class="p">([</span><span class="s2">&quot;echo foo&quot;</span><span class="p">,</span> <span class="s2">&quot;echo bar&quot;</span><span class="p">],</span> <span class="n">batch_options</span><span class="o">=</span><span class="n">JobResourceConfig</span><span class="p">(</span><span class="n">nodes</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.run_timer">
+<span class="sig-name descname"><span class="pre">run_timer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="maize.utilities.utilities.Timer.html#maize.utilities.utilities.Timer" title="maize.utilities.utilities.Timer"><span class="pre">Timer</span></a></em><a class="headerlink" href="#maize.core.node.Node.run_timer" title="Link to this definition">#</a></dt>
+<dd><p>Timer for the run duration, without waiting for resources or other nodes.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.scripts">
+<span class="sig-name descname"><span class="pre">scripts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="maize.core.interface.Parameter.html#maize.core.interface.Parameter" title="maize.core.interface.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.11)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'interpreter'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'location'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">Path</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#maize.core.node.Node.scripts" title="Link to this definition">#</a></dt>
+<dd><p>Additional script specifications require to run.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">node</span><span class="o">.</span><span class="n">scripts</span><span class="o">.</span><span class="n">set</span><span class="p">({</span><span class="s2">&quot;interpreter&quot;</span><span class="p">:</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">python</span><span class="p">,</span> <span class="s2">&quot;script&quot;</span><span class="p">:</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">script</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.send_update">
+<span class="sig-name descname"><span class="pre">send_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#maize.core.node.Node.send_update" title="Link to this definition">#</a></dt>
+<dd><p>Send a status update to the main process.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.serialized_summary">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">serialized_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">_SerialType</span></span></span><a class="headerlink" href="#maize.core.node.Node.serialized_summary" title="Link to this definition">#</a></dt>
+<dd><p>Provides a serialized representation of the component type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Nested dictionary of the component type structure, including I/O and parameters.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)">str</a>, Any]</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Merge</span><span class="o">.</span><span class="n">serialized_summary</span><span class="p">()</span>
+<span class="go">{&quot;name&quot;: &quot;Merge&quot;, &quot;inputs&quot;: [{&quot;name&quot;: &quot;inp&quot;, ...}]}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.setup_directories">
+<span class="sig-name descname"><span class="pre">setup_directories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.setup_directories"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.setup_directories" title="Link to this definition">#</a></dt>
+<dd><p>Sets up the required directories.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.shutdown">
+<span class="sig-name descname"><span class="pre">shutdown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/maize/core/node.html#Node.shutdown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#maize.core.node.Node.shutdown" title="Link to this definition">#</a></dt>
+<dd><p>Shuts down the component gracefully.</p>
+<p>This should not be called by the user directly,
+as it is called at node shutdown by <cite>execute()</cite>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#maize.core.node.Node.status" title="Link to this definition">#</a></dt>
+<dd><p>Current status of the component.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="maize.core.node.Node.update_parameters">
+<span class="sig-name descname"><span class="pre">update_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span></span><a class="headerlink" href="#maize.core.node.Node.update_parameters" title="Link to this definition">#</a></dt>
+<dd><p>Update component parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – Name - value pairs supplied as keyword arguments</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="maize.core.node.Node.work_dir">
+<span class="sig-name descname"><span class="pre">work_dir</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><a class="headerlink" href="#maize.core.node.Node.work_dir" title="Link to this definition">#</a></dt>
+<dd><p>Working directory for the component.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="maize.core.node.NodeBuildException.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">NodeBuildException</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="maize.core.node.LoopedNode.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">LoopedNode</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Molecular AI group
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Node</a><ul>
+<li><a class="reference internal" href="#maize.core.node.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
+<li><a class="reference internal" href="#maize.core.node.Node.cpus"><code class="docutils literal notranslate"><span class="pre">Node.cpus</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.gpus"><code class="docutils literal notranslate"><span class="pre">Node.gpus</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.__init__"><code class="docutils literal notranslate"><span class="pre">Node.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.all_parameters"><code class="docutils literal notranslate"><span class="pre">Node.all_parameters</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.as_dict"><code class="docutils literal notranslate"><span class="pre">Node.as_dict()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.batch_options"><code class="docutils literal notranslate"><span class="pre">Node.batch_options</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.build"><code class="docutils literal notranslate"><span class="pre">Node.build()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.check"><code class="docutils literal notranslate"><span class="pre">Node.check()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.check_dependencies"><code class="docutils literal notranslate"><span class="pre">Node.check_dependencies()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.check_parameters"><code class="docutils literal notranslate"><span class="pre">Node.check_parameters()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.cleanup"><code class="docutils literal notranslate"><span class="pre">Node.cleanup()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.commands"><code class="docutils literal notranslate"><span class="pre">Node.commands</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.component_path"><code class="docutils literal notranslate"><span class="pre">Node.component_path</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.datatype"><code class="docutils literal notranslate"><span class="pre">Node.datatype</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.execute"><code class="docutils literal notranslate"><span class="pre">Node.execute()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.full_timer"><code class="docutils literal notranslate"><span class="pre">Node.full_timer</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.get_available_nodes"><code class="docutils literal notranslate"><span class="pre">Node.get_available_nodes()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.get_inputs"><code class="docutils literal notranslate"><span class="pre">Node.get_inputs()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.get_interfaces"><code class="docutils literal notranslate"><span class="pre">Node.get_interfaces()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.get_node_class"><code class="docutils literal notranslate"><span class="pre">Node.get_node_class()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.get_outputs"><code class="docutils literal notranslate"><span class="pre">Node.get_outputs()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.get_parameters"><code class="docutils literal notranslate"><span class="pre">Node.get_parameters()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.get_summary_line"><code class="docutils literal notranslate"><span class="pre">Node.get_summary_line()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.logger"><code class="docutils literal notranslate"><span class="pre">Node.logger</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.modules"><code class="docutils literal notranslate"><span class="pre">Node.modules</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.n_inbound"><code class="docutils literal notranslate"><span class="pre">Node.n_inbound</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.n_outbound"><code class="docutils literal notranslate"><span class="pre">Node.n_outbound</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.node_config"><code class="docutils literal notranslate"><span class="pre">Node.node_config</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.parents"><code class="docutils literal notranslate"><span class="pre">Node.parents</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.ports"><code class="docutils literal notranslate"><span class="pre">Node.ports</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.ports_active"><code class="docutils literal notranslate"><span class="pre">Node.ports_active()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.prepare"><code class="docutils literal notranslate"><span class="pre">Node.prepare()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.python"><code class="docutils literal notranslate"><span class="pre">Node.python</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.required_callables"><code class="docutils literal notranslate"><span class="pre">Node.required_callables</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.required_packages"><code class="docutils literal notranslate"><span class="pre">Node.required_packages</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.root"><code class="docutils literal notranslate"><span class="pre">Node.root</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.run"><code class="docutils literal notranslate"><span class="pre">Node.run()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.run_command"><code class="docutils literal notranslate"><span class="pre">Node.run_command()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.run_multi"><code class="docutils literal notranslate"><span class="pre">Node.run_multi()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.run_timer"><code class="docutils literal notranslate"><span class="pre">Node.run_timer</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.scripts"><code class="docutils literal notranslate"><span class="pre">Node.scripts</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.send_update"><code class="docutils literal notranslate"><span class="pre">Node.send_update()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.serialized_summary"><code class="docutils literal notranslate"><span class="pre">Node.serialized_summary()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.setup_directories"><code class="docutils literal notranslate"><span class="pre">Node.setup_directories()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.shutdown"><code class="docutils literal notranslate"><span class="pre">Node.shutdown()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.status"><code class="docutils literal notranslate"><span class="pre">Node.status</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.update_parameters"><code class="docutils literal notranslate"><span class="pre">Node.update_parameters()</span></code></a></li>
+<li><a class="reference internal" href="#maize.core.node.Node.work_dir"><code class="docutils literal notranslate"><span class="pre">Node.work_dir</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=c87aa342"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

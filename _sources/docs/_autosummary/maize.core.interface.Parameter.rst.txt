@@ -1,0 +1,43 @@
+Parameter
+=========
+
+.. currentmodule:: maize.core.interface
+
+.. autoclass:: Parameter
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Parameter.__init__
+      ~Parameter.build
+      ~Parameter.check
+      ~Parameter.set
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Parameter.changed
+      ~Parameter.is_default
+      ~Parameter.is_set
+      ~Parameter.path
+      ~Parameter.serialized
+      ~Parameter.value
+      ~Parameter.name
+      ~Parameter.parent
+      ~Parameter.datatype
+      ~Parameter.doc
+   
+   

@@ -1,0 +1,30 @@
+CommandRunnerPSIJ
+=================
+
+.. currentmodule:: maize.utilities.execution
+
+.. autoclass:: CommandRunnerPSIJ
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CommandRunnerPSIJ.__init__
+      ~CommandRunnerPSIJ.run
+      ~CommandRunnerPSIJ.run_only
+      ~CommandRunnerPSIJ.run_parallel
+      ~CommandRunnerPSIJ.run_validate
+      ~CommandRunnerPSIJ.validate
+   
+   
+
+   
+   
+   

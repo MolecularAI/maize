@@ -1,0 +1,6 @@
+create\_default\_parser
+=======================
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: create_default_parser

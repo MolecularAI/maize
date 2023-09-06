@@ -1,0 +1,6 @@
+change\_environment
+===================
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: change_environment

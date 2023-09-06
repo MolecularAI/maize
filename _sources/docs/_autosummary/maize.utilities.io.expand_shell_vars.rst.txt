@@ -1,0 +1,6 @@
+expand\_shell\_vars
+===================
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: expand_shell_vars

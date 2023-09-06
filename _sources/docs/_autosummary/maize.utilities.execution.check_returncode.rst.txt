@@ -1,0 +1,6 @@
+check\_returncode
+=================
+
+.. currentmodule:: maize.utilities.execution
+
+.. autofunction:: check_returncode

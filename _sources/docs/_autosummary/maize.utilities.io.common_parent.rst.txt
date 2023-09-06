@@ -1,0 +1,6 @@
+common\_parent
+==============
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: common_parent

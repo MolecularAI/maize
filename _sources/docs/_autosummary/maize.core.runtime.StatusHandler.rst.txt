@@ -1,0 +1,32 @@
+StatusHandler
+=============
+
+.. currentmodule:: maize.core.runtime
+
+.. autoclass:: StatusHandler
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StatusHandler.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~StatusHandler.public_name
+      ~StatusHandler.private_name
+   
+   

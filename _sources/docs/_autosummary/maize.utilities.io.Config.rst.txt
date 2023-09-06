@@ -1,0 +1,37 @@
+Config
+======
+
+.. currentmodule:: maize.utilities.io
+
+.. autoclass:: Config
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Config.__init__
+      ~Config.from_default
+      ~Config.update
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Config.scratch
+      ~Config.packages
+      ~Config.batch_config
+      ~Config.environment
+      ~Config.nodes
+   
+   

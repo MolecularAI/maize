@@ -1,0 +1,6 @@
+load\_file
+==========
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: load_file

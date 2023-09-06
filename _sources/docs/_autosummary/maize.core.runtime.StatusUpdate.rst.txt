@@ -1,0 +1,38 @@
+StatusUpdate
+============
+
+.. currentmodule:: maize.core.runtime
+
+.. autoclass:: StatusUpdate
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StatusUpdate.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~StatusUpdate.full_time
+      ~StatusUpdate.n_inbound
+      ~StatusUpdate.n_outbound
+      ~StatusUpdate.note
+      ~StatusUpdate.run_time
+      ~StatusUpdate.name
+      ~StatusUpdate.parents
+      ~StatusUpdate.status
+   
+   

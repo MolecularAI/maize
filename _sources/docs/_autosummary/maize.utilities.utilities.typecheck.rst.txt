@@ -1,0 +1,6 @@
+typecheck
+=========
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: typecheck

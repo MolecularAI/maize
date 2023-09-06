@@ -1,0 +1,34 @@
+macros
+======
+
+.. automodule:: maize.utilities.macros
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :template: custom-base.rst
+   
+      function_to_node
+      lambda_node
+      node_to_function
+      parallel
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

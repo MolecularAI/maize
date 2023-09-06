@@ -1,0 +1,38 @@
+TestRig
+=======
+
+.. currentmodule:: maize.utilities.testing
+
+.. autoclass:: TestRig
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TestRig.__init__
+      ~TestRig.run
+      ~TestRig.set_inputs
+      ~TestRig.set_parameters
+      ~TestRig.setup
+      ~TestRig.setup_run
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TestRig.inputs
+      ~TestRig.parameters
+      ~TestRig.node
+   
+   

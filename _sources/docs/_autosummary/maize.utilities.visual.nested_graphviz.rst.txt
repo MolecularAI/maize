@@ -1,0 +1,6 @@
+nested\_graphviz
+================
+
+.. currentmodule:: maize.utilities.visual
+
+.. autofunction:: nested_graphviz

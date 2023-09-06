@@ -1,0 +1,52 @@
+execution
+=========
+
+.. automodule:: maize.utilities.execution
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :template: custom-base.rst
+   
+      check_executable
+      check_returncode
+      run_single_process
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class.rst
+   
+      CommandRunner
+      CommandRunnerPSIJ
+      JobResourceConfig
+      ResourceManagerConfig
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:
+      :template: custom-base.rst
+   
+      ProcessError
+   
+   
+
+
+

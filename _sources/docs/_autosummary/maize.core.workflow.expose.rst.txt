@@ -1,0 +1,6 @@
+expose
+======
+
+.. currentmodule:: maize.core.workflow
+
+.. autofunction:: expose

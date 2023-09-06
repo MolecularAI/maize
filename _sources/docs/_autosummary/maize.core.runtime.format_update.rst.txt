@@ -1,0 +1,6 @@
+format\_update
+==============
+
+.. currentmodule:: maize.core.runtime
+
+.. autofunction:: format_update

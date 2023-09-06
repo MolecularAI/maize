@@ -1,0 +1,6 @@
+parse\_groups
+=============
+
+.. currentmodule:: maize.utilities.io
+
+.. autofunction:: parse_groups

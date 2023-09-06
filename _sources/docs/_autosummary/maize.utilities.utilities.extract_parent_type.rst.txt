@@ -1,0 +1,6 @@
+extract\_parent\_type
+=====================
+
+.. currentmodule:: maize.utilities.utilities
+
+.. autofunction:: extract_parent_type

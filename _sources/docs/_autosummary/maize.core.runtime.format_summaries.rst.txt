@@ -1,0 +1,6 @@
+format\_summaries
+=================
+
+.. currentmodule:: maize.core.runtime
+
+.. autofunction:: format_summaries

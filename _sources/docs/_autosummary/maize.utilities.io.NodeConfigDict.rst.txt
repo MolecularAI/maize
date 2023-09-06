@@ -1,0 +1,45 @@
+NodeConfigDict
+==============
+
+.. currentmodule:: maize.utilities.io
+
+.. autoclass:: NodeConfigDict
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~NodeConfigDict.__init__
+      ~NodeConfigDict.clear
+      ~NodeConfigDict.copy
+      ~NodeConfigDict.fromkeys
+      ~NodeConfigDict.get
+      ~NodeConfigDict.items
+      ~NodeConfigDict.keys
+      ~NodeConfigDict.pop
+      ~NodeConfigDict.popitem
+      ~NodeConfigDict.setdefault
+      ~NodeConfigDict.update
+      ~NodeConfigDict.values
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~NodeConfigDict.python
+      ~NodeConfigDict.modules
+      ~NodeConfigDict.scripts
+      ~NodeConfigDict.commands
+   
+   
