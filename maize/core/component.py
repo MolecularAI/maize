@@ -10,6 +10,8 @@ not be used directly. The workflow is internally represented as a tree, with the
 `Node` and represent atomic workflow steps. Nodes with branches are (Sub-)`Graph`s,
 as they contain multiple nodes, but expose the same interface that a would:
 
+.. code-block:: text
+
           Workflow
           /      \
       Subgraph   Node

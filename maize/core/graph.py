@@ -91,8 +91,6 @@ class Graph(Component, register=False):
         Dictionary of nodes or subgraphs part of the `Graph`
     channels
         Dictionary of channels part of the `Graph`
-    logger
-        Instance of `Logger` used for logging the graph building stage
 
     Raises
     ------
