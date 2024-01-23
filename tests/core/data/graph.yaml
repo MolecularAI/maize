@@ -1,0 +1,36 @@
+channels:
+- receiving:
+    m: inp
+  sending:
+    sg:
+      delay: out
+- receiving:
+    m: inp
+  sending:
+    b: out
+- receiving:
+    b: inp
+  sending:
+    m: out
+- receiving:
+    t: inp
+  sending:
+    b: out_final
+level: 20
+name: None
+nodes:
+- name: sg
+  type: SubGraph
+- name: b
+  type: B
+- name: m
+  type: Merge
+- name: t
+  type: Return
+parameters:
+- name: val
+  value: 42
+  map:
+    - sg:
+        ssg:
+          a: val
