@@ -1,0 +1,31 @@
+_data:
+- term:
+    inp: !!binary |
+      gARdlC4=
+_status:
+- a: READY
+- term: READY
+channels:
+- receiving:
+    term: inp
+  sending:
+    a: out
+description: null
+level: 20
+name: None
+nodes:
+- description: null
+  fail_ok: false
+  n_attempts: 1
+  name: a
+  parameters: {}
+  status: READY
+  type: A
+- description: null
+  fail_ok: false
+  n_attempts: 1
+  name: term
+  parameters: {}
+  status: READY
+  type: Return
+parameters: []

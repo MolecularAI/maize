@@ -1,0 +1,29 @@
+name: maize-dev
+channels:
+  - https://conda.anaconda.org/conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - toml>=0.10.2
+  - yaml>=0.2.5
+  - dill>=0.3.6
+  - networkx>=3.1
+  - numpy>=1.24.3, <2.0
+  - matplotlib>=3.7.1
+  - pytest>=7.3.1
+  - pytest-datadir>=1.4.1
+  - pytest-mock>=3.10.0
+  - pytest-cov>=5.0
+  - mypy>=1.2.0, <1.7
+  - pylint>=2.17.3
+  - sphinx>=6.2.0
+  - pandoc>=3.1.1
+  - graphviz>=8.0.3
+  - beartype>=0.13.1
+  - pip>=20.0
+  - pip:
+    - git+https://github.com/ExaWorks/psij-python.git@9e1a777
+    - graphviz>=0.20.1
+    - nbsphinx>=0.9.1
+    - furo>=2023.3.27
+    - pyyaml>=0.2.5
