@@ -5,6 +5,7 @@ from multiprocessing import get_context
 import os
 import subprocess
 import time
+import multiprocessing
 from typing import TYPE_CHECKING, TypeVar, Any
 
 from maize.core.runtime import Status
@@ -41,7 +42,10 @@ def cpu_count() -> int:
     the affinity to make it compatible with cluster management systems.
 
     """
-    return len(os.sched_getaffinity(0))
+    try:
+        return len(os.sched_getaffinity(0))
+    except AttributeError:
+        return multiprocessing.cpu_count()
 
 # Only reference to something like this that I've found is:
 # https://stackoverflow.com/questions/69366850/counting-semaphore-that-supports-multiple-acquires-in-an-atomic-call-how-would
