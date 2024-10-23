@@ -1,0 +1,23 @@
+name: Example
+level: DEBUG
+nodes:
+- name: sg
+  type: SubGraph
+- name: ex
+  type: Example
+- name: concat
+  type: ConcatAndPrint
+channels:
+- receiving:
+    concat: inp
+  sending:
+    sg: out
+- receiving:
+    concat: inp
+  sending:
+    ex: out
+parameters:
+- name: data
+  value: "World"
+  map:
+    - ex: data

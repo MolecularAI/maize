@@ -1,0 +1,82 @@
+_data:
+- sg:
+    ssg:
+      delay:
+        inp: !!binary |
+          gARdlC4=
+- sg:
+    delay:
+      inp: !!binary |
+        gARdlC4=
+- b:
+    inp: !!binary |
+      gARdlC4=
+- m:
+    inp: !!binary |
+      gARdlC4=
+- t:
+    inp: !!binary |
+      gARdlC4=
+_status:
+- sg:
+    ssg:
+      a: READY
+- sg:
+    ssg:
+      delay: READY
+- sg:
+    delay: READY
+- b: READY
+- m: READY
+- t: READY
+channels:
+- receiving:
+    m: inp
+  sending:
+    sg:
+      delay: out
+- receiving:
+    m: inp
+  sending:
+    b: out
+- receiving:
+    b: inp
+  sending:
+    m: out
+- receiving:
+    t: inp
+  sending:
+    b: out_final
+description: null
+level: 20
+name: None
+nodes:
+- description: null
+  fail_ok: false
+  n_attempts: 1
+  name: sg
+  parameters: {}
+  status: READY
+  type: SubGraph
+- description: null
+  fail_ok: false
+  n_attempts: 1
+  name: b
+  parameters: {}
+  status: READY
+  type: B
+- description: null
+  fail_ok: false
+  n_attempts: 1
+  name: m
+  parameters: {}
+  status: READY
+  type: Merge
+- description: null
+  fail_ok: false
+  n_attempts: 1
+  name: t
+  parameters: {}
+  status: READY
+  type: Return
+parameters: []
