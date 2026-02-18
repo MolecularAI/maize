@@ -1,0 +1,19 @@
+level = 20
+name = "None"
+parameters = []
+[[nodes]]
+name = "a"
+type = "A"
+status = "READY"
+
+[[nodes]]
+name = "term"
+type = "Return"
+status = "READY"
+
+[[channels]]
+
+[channels.sending]
+a = "out"
+[channels.receiving]
+term = "input"

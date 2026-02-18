@@ -1,0 +1,44 @@
+# maize global configuration file example
+
+# Where to save temporary files and all workflow directories
+scratch = "/tmp"
+
+# Additional packages to load
+packages = [
+    "maize.steps.mai"
+]
+
+# Environment variables to be set globally
+[environment]
+EXAMPLE = "VARIABLE"
+OTHER_EXAMPLE = "OTHER_VARIABLE"
+
+# Batch job system options
+[batch]
+system = "slurm"  # Can be one of {'cobalt', 'flux', 'local', 'lsf', 'pbspro', 'rp', 'slurm'}
+max_jobs = 100  # The maximum number of jobs that can be submitted by a node at once
+queue = "core"
+project = "your_project"
+launcher = "srun"  # The launcher to use for the command, usually one of {'srun', 'mpirun', 'mpiexec'}
+walltime = "24:00:00"  # Job walltime limit, shorter times may improve queueing times
+
+# The next sections configure nodes requiring specific executables,
+# here we are configuring the node defined as ``Example``:
+[example]
+python = "path/to/python"
+
+# Modules to load
+modules = ["program_module/1.0"]
+
+# Commands and their paths
+commands.other_program = "path/to/other_program"
+
+# You can also expand environment variables that might have been set by the module
+commands.another_program = "$MODULE_ENV_VAR/another_program"
+
+# Scripts that require a specific interpreter
+scripts.program.interpreter = "path/to/python"
+scripts.program.location = "path/to/program/or/folder"
+
+# Default parameter settings for this node
+parameters.value = 42

@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maize"
+description = "Graph-based workflow manager for computational chemistry"
+dynamic = ["version"]
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "AstraZeneca"}]
+maintainers = [{name = "Thomas Löhr", email = "thomas.lohr@astrazeneca.com"}]
+requires-python = ">=3.10"
+dependencies = [
+  "networkx>=3.1",
+  "dill>=0.3.6",
+  "numpy>=1.24.3",
+  "pyyaml>=0.2.5",
+  "toml>=0.10.2",
+  "matplotlib>=3.7.1",
+  "beartype>=0.13.1",
+  "psij-python @ git+https://github.com/ExaWorks/psij-python.git@9e1a777",
+  "mypy>=1.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.3.1",
+  "pytest-datadir>=1.4.1",
+  "pytest-mock>=3.10.0",
+  "pylint>=2.17.3",
+  "sphinx>=6.2.0",
+  "pandoc>=3.1.1",
+  "nbsphinx>=0.9.1",
+  "furo>=2023.3.27",
+]
+
+[project.scripts]
+maize = "maize.maize:main"
+
+[tool.setuptools.packages.find]
+include = ["maize*"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed", "../maize.toml"]
+
+[tool.setuptools.dynamic]
+version = {attr = "maize.maize.__version__"}
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "DEBUG"
+addopts = "-vv"
+markers = ["random: run randomised workflows"]
+
+[tool.coverage.report]
+exclude_also = [
+  "def __repr__",
+  "if TYPE_CHECKING:",
+  "if HAS_GRAPHVIZ:",
+  "def _repr_mimebundle_",
+  "@(abc\\.)?abstractmethod",
+  "assert_never"
+]
+
+[tool.mypy]
+# Note that exclude will not be honored by VS Code
+# https://github.com/microsoft/vscode-python/issues/16511
+exclude = 'tests/'
+follow_imports = "silent"
+ignore_missing_imports = true
+strict = true
+disable_error_code = "unused-ignore"
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+select = ["E", "F", "W", "UP", "SIM", "PTH", "PL", "NPY"]
+ignore = ["PLR", "PLW", "F401"]
+line-length = 100
+
+[tool.pylint.main]
+source-roots = "./maize/*"
+
+[tool.coverage.run]
+relative_files = true

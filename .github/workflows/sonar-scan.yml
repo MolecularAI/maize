@@ -1,0 +1,20 @@
+name: sonarqube
+on: [push, workflow_dispatch, pull_request]
+
+jobs:
+  coverage:
+    name: Coverage report
+    uses: ./.github/workflows/tests-quick.yml
+    with:
+      role: "sonar"
+
+  sonar_setup:
+    name: SonarQube submit
+    needs: coverage
+    uses: azu-enterprise/action-sonar-auto-enrol/.github/workflows/sonar-auto-enrol.yml@main
+    with: 
+      project_key: ${{ github.event.repository.name }}
+      sonarqube_url: "https://sonarqube.astrazeneca.com"
+      artifact_name: coverage-xml
+    secrets:
+      sq_token: ${{ secrets.SQ_TOKEN }}
